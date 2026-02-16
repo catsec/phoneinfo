@@ -378,8 +378,7 @@ Consider for high-security environments:
    - Use libraries like pyotp
 
 5. **Database Encryption**
-   - Already implemented via SQLCipher
-   - See [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) for details
+   - Consider adding SQLCipher for database encryption at rest
 
 ---
 

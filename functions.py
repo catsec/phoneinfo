@@ -3,16 +3,7 @@ import pandas as pd
 from datetime import datetime, timezone
 from fuzzywuzzy import fuzz
 
-# Try to use encrypted SQLite (SQLCipher), fallback to regular sqlite3
-try:
-    from pysqlcipher3 import dbapi2 as sqlite3
-    USE_ENCRYPTION = True
-    print("[Security] Database encryption: ENABLED (SQLCipher)")
-except ImportError:
-    import sqlite3
-    USE_ENCRYPTION = False
-    print("[WARNING] SQLCipher not installed. Database will be UNENCRYPTED!")
-    print("[WARNING] Install with: pip install pysqlcipher3")
+import sqlite3
 
 def apply_final_letter_rules(hebrew_name):
     """Replace the last letter of a Hebrew name with its final form, if applicable."""
@@ -496,20 +487,6 @@ def convert_to_international(phone_numbers):
 
 def init_db(db_name):
     conn = sqlite3.connect(db_name)
-
-    # Enable database encryption if SQLCipher is available
-    if USE_ENCRYPTION:
-        encryption_key = os.environ.get('DB_ENCRYPTION_KEY')
-        if not encryption_key:
-            print("[WARNING] DB_ENCRYPTION_KEY not set. Using default key (NOT SECURE for production!)")
-            encryption_key = 'INSECURE_DEFAULT_KEY_CHANGE_IN_PRODUCTION'
-
-        # Set encryption key
-        conn.execute(f"PRAGMA key = '{encryption_key}'")
-        # Use AES-256 encryption with optimal page size
-        conn.execute("PRAGMA cipher_page_size = 4096")
-        print(f"[Security] Database {db_name} is encrypted with SQLCipher AES-256")
-
     cursor = conn.cursor()
 
     # Migrate old api_data table to me_data if it exists

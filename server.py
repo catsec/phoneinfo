@@ -155,18 +155,6 @@ DATABASE = os.environ.get("DATABASE", "db/db.db")
 SERVER_HOST = os.environ.get("HOST", "0.0.0.0")
 SERVER_PORT = int(os.environ.get("PORT", "5001"))
 
-# Check if database migration/key rotation is needed
-from db_migration import check_and_migrate
-try:
-    migration_performed = check_and_migrate(DATABASE)
-    if migration_performed:
-        print("[Server] Database migration completed. Continuing startup...")
-except Exception as e:
-    print(f"[Server] CRITICAL: Database migration failed: {e}")
-    print("[Server] Server startup aborted. Fix the issue and restart.")
-    import sys
-    sys.exit(1)
-
 # Initialize database on startup
 _init_conn = init_db(DATABASE)
 init_nickname_table(_init_conn)
