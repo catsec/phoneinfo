@@ -15,9 +15,11 @@ A phone number lookup tool that queries the ME API to retrieve user profile info
 
 ### Using Pre-built Docker Image
 
+**Multi-platform support:** Linux (AMD64, ARM64, ARM/v7), macOS (Intel, Apple Silicon), Windows
+
 1. Pull the image from GitHub Container Registry:
    ```bash
-   docker pull ghcr.io/catsec/me:main
+   docker pull ghcr.io/catsec/phoneinfo:latest
    ```
 
 2. Run with your ME API credentials:
@@ -28,10 +30,16 @@ A phone number lookup tool that queries the ME API to retrieve user profile info
      -e ME_API_URL=https://app.mobile.me.app/business-api/search \
      -e ME_API_SID=your_sid \
      -e ME_API_TOKEN=your_token \
-     ghcr.io/catsec/me:main
+     ghcr.io/catsec/phoneinfo:latest
    ```
 
 3. Open http://localhost:5001 in your browser.
+
+**Available tags:**
+- `latest` - Latest build from master branch
+- `master` - Master branch builds
+- `v1.0.0` - Specific version tags
+- `sha-<commit>` - Specific commit builds
 
 ### Using Docker Compose (Build Locally)
 
