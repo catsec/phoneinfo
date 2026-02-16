@@ -8,8 +8,9 @@ bind = f"0.0.0.0:{os.environ.get('PORT', '5001')}"
 backlog = 64
 
 # Worker Processes
-workers = 2  # For 3 concurrent users, 2 workers is plenty
+workers = 1  # Single worker: PROCESSED_FILES dict must be shared across requests
 worker_class = "sync"  # sync workers are fine for this workload
+threads = 8  # Handle concurrent requests via threads
 worker_connections = 1000
 max_requests = 1000  # Restart workers after 1000 requests (prevents memory leaks)
 max_requests_jitter = 50

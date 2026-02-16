@@ -1,3 +1,4 @@
+import json
 import os
 import sqlite3
 import uuid
@@ -7,6 +8,7 @@ import secrets
 import pandas as pd
 import threading
 import time
+from io import BytesIO
 from flask import Flask, request, jsonify, g, render_template, send_file, session, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timezone, timedelta
@@ -38,6 +40,7 @@ from functions import (
     reset_failed_login_counter,
     update_last_login_datetime,
     update_user_flags,
+    delete_user,
     get_setting,
     set_setting,
 )
@@ -53,14 +56,14 @@ load_dotenv()
 PROCESSED_FILES = {}
 
 # File cleanup configuration
-FILE_EXPIRY_HOURS = 1  # Files older than 1 hour will be deleted
-CLEANUP_INTERVAL_MINUTES = 10  # Run cleanup every 10 minutes
+FILE_EXPIRY_MINUTES = 5  # Files older than 5 minutes will be deleted
+CLEANUP_INTERVAL_SECONDS = 60  # Run cleanup every 60 seconds
 
 def cleanup_old_files():
     """Background task to clean up old processed files."""
     while True:
         try:
-            time.sleep(CLEANUP_INTERVAL_MINUTES * 60)  # Sleep first, then clean
+            time.sleep(CLEANUP_INTERVAL_SECONDS)
 
             now = datetime.now()
             expired_files = []
@@ -68,7 +71,7 @@ def cleanup_old_files():
             # Find expired files
             for file_id, file_info in PROCESSED_FILES.items():
                 created_time = file_info.get("created")
-                if created_time and (now - created_time) > timedelta(hours=FILE_EXPIRY_HOURS):
+                if created_time and (now - created_time) > timedelta(minutes=FILE_EXPIRY_MINUTES):
                     expired_files.append(file_id)
 
             # Remove expired files
@@ -916,6 +919,32 @@ def web_users_reset_password():
 
     return jsonify({"success": True, "message": f"Password reset for user '{username}'. Account unlocked and login attempts cleared."})
 
+
+@app.route("/web/users/delete", methods=["POST"])
+@require_admin
+def web_users_delete():
+    """Delete a user (admin only). Cannot delete yourself."""
+    data = request.get_json() or {}
+    username = normalize_username(data.get("username", ""))
+
+    if not username:
+        return jsonify({"success": False, "error": "username is required"}), 400
+
+    current_user = get_logged_in_user()
+    if current_user and normalize_username(current_user.get("username", "")) == username:
+        return jsonify({"success": False, "error": "Cannot delete your own account"}), 400
+
+    db = get_db()
+    user = get_user_by_username(db, username)
+    if not user:
+        return jsonify({"success": False, "error": "User not found"}), 404
+
+    if not delete_user(db, username):
+        return jsonify({"success": False, "error": "Delete failed"}), 500
+
+    return jsonify({"success": True})
+
+
 @app.route("/")
 @app.route("/web")
 def web_index():
@@ -1705,20 +1734,30 @@ def web_process():
 
 @app.route("/web/download/<file_id>")
 def web_download(file_id):
-    """Download processed file - requires authentication."""
+    """Download processed file - requires authentication. File is deleted after download."""
     # Require user to be logged in
-    if 'user_id' not in session:
+    if 'username' not in session:
         return redirect(url_for('web_login_page'))
 
     if file_id not in PROCESSED_FILES:
         return jsonify({"error": "File not found"}), 404
 
-    file_info = PROCESSED_FILES[file_id]
-    if not os.path.exists(file_info["path"]):
+    file_info = PROCESSED_FILES.pop(file_id)
+    file_path = file_info["path"]
+
+    if not os.path.exists(file_path):
         return jsonify({"error": "File expired"}), 404
 
+    # Read into memory and delete file immediately
+    with open(file_path, "rb") as f:
+        data = BytesIO(f.read())
+    try:
+        os.remove(file_path)
+    except OSError:
+        pass
+
     return send_file(
-        file_info["path"],
+        data,
         as_attachment=True,
         download_name=file_info["original_name"],
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -1890,7 +1929,7 @@ def web_nicknames_upload():
 def web_nicknames_download():
     """Download current nicknames as JSON file - requires authentication."""
     # Require user to be logged in
-    if 'user_id' not in session:
+    if 'username' not in session:
         return redirect(url_for('web_login_page'))
 
     db = get_db()

@@ -603,6 +603,14 @@ def create_user(conn, username, seed, hashed_password, email="", admin_flag=0, a
     conn.commit()
 
 
+def delete_user(conn, username):
+    """Delete a user record."""
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM users WHERE username = ?", (username,))
+    conn.commit()
+    return cursor.rowcount > 0
+
+
 def get_user_by_username(conn, username):
     """Get user by username (normalized lowercase key expected)."""
     cursor = conn.cursor()

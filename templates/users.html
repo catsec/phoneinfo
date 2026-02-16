@@ -42,6 +42,7 @@
             display: inline-block;
         }
         .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .btn-danger { background: #dc3545; }
         .btn-muted { background: #757575; }
         .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
         .field label { display: block; margin-bottom: 6px; color: #555; font-size: 13px; }
@@ -101,8 +102,8 @@
             <form id="createUserForm">
                 <div class="grid">
                     <div class="field">
-                        <label for="username">Username</label>
-                        <input id="username" type="text" maxlength="64" required>
+                        <label for="username">Username or Email</label>
+                        <input id="username" type="text" maxlength="64" required placeholder="e.g. admin or user@mail.com">
                     </div>
                     <div class="field">
                         <label for="email">Email</label>
@@ -164,6 +165,7 @@
             return div.innerHTML;
         }
 
+        const currentUsername = {{ current_username | tojson }};
         const usersBody = document.getElementById('usersBody');
         const createUserForm = document.getElementById('createUserForm');
         const msgErr = document.getElementById('messageError');
@@ -212,6 +214,9 @@
                         <button class="btn ${isLocked ? 'btn-primary' : 'btn-muted'}" data-username="${escapeHTML(user.username)}" data-action="reset-password">
                             Reset Password
                         </button>
+                        ${user.username !== currentUsername ? `<button class="btn btn-danger" data-username="${escapeHTML(user.username)}" data-action="delete">
+                            Delete
+                        </button>` : ''}
                     </td>
                 `;
                 usersBody.appendChild(tr);
@@ -222,6 +227,25 @@
                     try {
                         const username = btn.getAttribute('data-username');
                         const action = btn.getAttribute('data-action');
+
+                        // Handle delete
+                        if (action === 'delete') {
+                            if (!confirm(`Are you sure you want to delete user "${username}"? This cannot be undone.`)) return;
+
+                            const response = await fetch('/web/users/delete', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ username })
+                            });
+                            const result = await response.json();
+                            if (!response.ok || !result.success) {
+                                throw new Error(result.error || 'Delete failed');
+                            }
+
+                            showSuccess('User deleted');
+                            await loadUsers();
+                            return;
+                        }
 
                         // Handle password reset
                         if (action === 'reset-password') {

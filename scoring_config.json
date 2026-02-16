@@ -12,8 +12,8 @@
     "match_types": {
         "_description": "Score assigned for each type of match (0-100). Higher = more confidence.",
         "exact": 100,
-        "nickname": 90,
-        "transliteration_exact": 95,
+        "nickname": 100,
+        "transliteration_exact": 100,
         "transliteration_fuzzy_high": 80,
         "fuzzy_high": 75,
         "fuzzy_medium": 50,

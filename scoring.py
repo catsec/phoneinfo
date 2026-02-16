@@ -472,7 +472,8 @@ class ScoreEngine:
         bonus = 0
         bonus_reasons = []
 
-        if (first_result["match_type"] == "exact" and last_result["match_type"] == "exact"):
+        exact_types = {"exact", "transliteration_exact", "nickname"}
+        if (first_result["match_type"] in exact_types and last_result["match_type"] in exact_types):
             b = bonuses.get("both_names_exact", 5)
             bonus += b
             bonus_reasons.append(f"+{b} both names exact match")
