@@ -1,0 +1,51 @@
+{
+    "_description": "PhoneInfo Scoring Configuration - Adjustable weights and thresholds for name matching",
+    "_version": "1.0",
+
+    "weights": {
+        "_description": "How much each name component contributes to the final score",
+        "last_name": 0.30,
+        "first_name": 0.70,
+        "_rationale": "First name match provides 70% baseline confidence. Last name adds additional 30% when it matches."
+    },
+
+    "match_types": {
+        "_description": "Score assigned for each type of match (0-100). Higher = more confidence.",
+        "exact": 100,
+        "nickname": 90,
+        "transliteration_exact": 95,
+        "transliteration_fuzzy_high": 80,
+        "fuzzy_high": 75,
+        "fuzzy_medium": 50,
+        "fuzzy_low": 25,
+        "no_match": 0
+    },
+
+    "fuzzy_thresholds": {
+        "_description": "fuzz.ratio thresholds for classifying fuzzy match quality",
+        "high": 75,
+        "medium": 60,
+        "low": 40
+    },
+
+    "risk_tiers": {
+        "_description": "Final score ranges mapped to risk decisions",
+        "high_confidence":   { "min": 85, "label": "HIGH",      "action": "Auto-approve - phone matches identity", "color": "green" },
+        "medium_confidence": { "min": 60, "label": "MEDIUM",    "action": "Manual review recommended",             "color": "yellow" },
+        "low_confidence":    { "min": 35, "label": "LOW",       "action": "Flag for investigation",                "color": "orange" },
+        "no_match":          { "min": 0,  "label": "VERY LOW",  "action": "High risk - likely not the phone owner","color": "red" }
+    },
+
+    "bonuses": {
+        "_description": "Additional adjustments applied on top of the base score",
+        "both_names_exact": 5,
+        "multi_api_agreement": 5,
+        "_rationale": "When both first and last match exactly, or when ME and SYNC agree, confidence increases beyond the weighted sum."
+    },
+
+    "penalties": {
+        "_description": "Score reductions for suspicious patterns",
+        "only_first_name_match": -10,
+        "_rationale": "First-name-only match (e.g., 'David' is very common) with no last name match is weak evidence."
+    }
+}

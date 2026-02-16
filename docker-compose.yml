@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  phoneinfo:
+    build: .
+    container_name: phoneinfo
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    env_file:
+      - .env
+    volumes:
+      # Persist database
+      - ./db:/app/db
+      # Optional: mount logs directory
+      # - ./logs:/app/logs
+    environment:
+      - DEBUG=false
+      - PRODUCTION=true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5001/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - phoneinfo-network
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: phoneinfo-tunnel
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+    networks:
+      - phoneinfo-network
+    depends_on:
+      - phoneinfo
+
+networks:
+  phoneinfo-network:
+    driver: bridge

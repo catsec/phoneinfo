@@ -1,0 +1,7558 @@
+{
+  "מיכאל": {
+    "hebrew": "מיכאל",
+    "english": [
+      "michael"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מייק": {
+    "hebrew": "מייק",
+    "english": [
+      "mike"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דוד": {
+    "hebrew": "דוד",
+    "english": [
+      "david"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דייב": {
+    "hebrew": "דייב",
+    "english": [
+      "dave"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דניאל": {
+    "hebrew": "דניאל",
+    "english": [
+      "daniel"
+    ],
+    "arabic": null,
+    "russian": [
+      "danielle"
+    ],
+    "russian_cyrillic": null
+  },
+  "דן": {
+    "hebrew": "דן",
+    "english": [
+      "dan"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דני": {
+    "hebrew": "דני",
+    "english": [
+      "danny"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "יעקב": {
+    "hebrew": "יעקב",
+    "english": [
+      "jacob"
+    ],
+    "arabic": null,
+    "russian": [
+      "yakov"
+    ],
+    "russian_cyrillic": [
+      "яков"
+    ]
+  },
+  "ג'ייק": {
+    "hebrew": "ג'ייק",
+    "english": [
+      "jake"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "יוסף": {
+    "hebrew": "יוסף",
+    "english": [
+      "joseph",
+      "yusuf",
+      "yousef"
+    ],
+    "arabic": [
+      "يوسف"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ו": {
+    "hebrew": "ג'ו",
+    "english": [
+      "joe"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ואי": {
+    "hebrew": "ג'ואי",
+    "english": [
+      "joey"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בנימין": {
+    "hebrew": "בנימין",
+    "english": [
+      "benjamin"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בן": {
+    "hebrew": "בן",
+    "english": [
+      "ben"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בני": {
+    "hebrew": "בני",
+    "english": [
+      "benny"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "שמואל": {
+    "hebrew": "שמואל",
+    "english": [
+      "samuel"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סם": {
+    "hebrew": "סם",
+    "english": [
+      "sam"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סמי": {
+    "hebrew": "סמי",
+    "english": [
+      "sammy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "יונתן": {
+    "hebrew": "יונתן",
+    "english": [
+      "jonathan"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ון": {
+    "hebrew": "ג'ון",
+    "english": [
+      "john"
+    ],
+    "arabic": null,
+    "russian": [
+      "jon",
+      "june"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'וני": {
+    "hebrew": "ג'וני",
+    "english": [
+      "johnny"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "יהושע": {
+    "hebrew": "יהושע",
+    "english": [
+      "joshua"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'וש": {
+    "hebrew": "ג'וש",
+    "english": [
+      "josh"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מתיו": {
+    "hebrew": "מתיו",
+    "english": [
+      "matthew"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מט": {
+    "hebrew": "מט",
+    "english": [
+      "matt"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אהרון": {
+    "hebrew": "אהרון",
+    "english": [
+      "aaron"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אברהם": {
+    "hebrew": "אברהם",
+    "english": [
+      "abraham"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אייב": {
+    "hebrew": "אייב",
+    "english": [
+      "abe"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אדם": {
+    "hebrew": "אדם",
+    "english": [
+      "adam"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "גבריאל": {
+    "hebrew": "גבריאל",
+    "english": [
+      "gabriel"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "גייב": {
+    "hebrew": "גייב",
+    "english": [
+      "gabe"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "רפאל": {
+    "hebrew": "רפאל",
+    "english": [
+      "raphael"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "נתן": {
+    "hebrew": "נתן",
+    "english": [
+      "nathan"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "נייט": {
+    "hebrew": "נייט",
+    "english": [
+      "nate"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "שמעון": {
+    "hebrew": "שמעון",
+    "english": [
+      "simon"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "יצחק": {
+    "hebrew": "יצחק",
+    "english": [
+      "isaac"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "נוח": {
+    "hebrew": "נוח",
+    "english": [
+      "noah"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אליהו": {
+    "hebrew": "אליהו",
+    "english": [
+      "elijah"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "כלב": {
+    "hebrew": "כלב",
+    "english": [
+      "caleb"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "לוי": {
+    "hebrew": "לוי",
+    "english": [
+      "levi"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אלי": {
+    "hebrew": "אלי",
+    "english": [
+      "eli"
+    ],
+    "arabic": null,
+    "russian": [
+      "eli",
+      "ellie"
+    ],
+    "russian_cyrillic": null
+  },
+  "אלכס": {
+    "hebrew": "אלכס",
+    "english": [
+      "alex"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אלכסנדר": {
+    "hebrew": "אלכסנדר",
+    "english": [
+      "alexander"
+    ],
+    "arabic": null,
+    "russian": [
+      "alexander",
+      "aleksandr"
+    ],
+    "russian_cyrillic": [
+      "александр"
+    ]
+  },
+  "אנדרו": {
+    "hebrew": "אנדרו",
+    "english": [
+      "andrew"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אנדי": {
+    "hebrew": "אנדי",
+    "english": [
+      "andy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אנתוני": {
+    "hebrew": "אנתוני",
+    "english": [
+      "anthony"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "טוני": {
+    "hebrew": "טוני",
+    "english": [
+      "tony"
+    ],
+    "arabic": null,
+    "russian": [
+      "toni"
+    ],
+    "russian_cyrillic": null
+  },
+  "פיטר": {
+    "hebrew": "פיטר",
+    "english": [
+      "peter"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "פיט": {
+    "hebrew": "פיט",
+    "english": [
+      "pete"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "פול": {
+    "hebrew": "פול",
+    "english": [
+      "paul"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מארק": {
+    "hebrew": "מארק",
+    "english": [
+      "mark"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'יימס": {
+    "hebrew": "ג'יימס",
+    "english": [
+      "james"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ים": {
+    "hebrew": "ג'ים",
+    "english": [
+      "jim"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ימי": {
+    "hebrew": "ג'ימי",
+    "english": [
+      "jimmy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'יימי": {
+    "hebrew": "ג'יימי",
+    "english": [
+      "jamie"
+    ],
+    "arabic": null,
+    "russian": [
+      "jaime",
+      "jamie"
+    ],
+    "russian_cyrillic": null
+  },
+  "וויליאם": {
+    "hebrew": "וויליאם",
+    "english": [
+      "william"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "וויל": {
+    "hebrew": "וויל",
+    "english": [
+      "will"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ביל": {
+    "hebrew": "ביל",
+    "english": [
+      "bill"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בילי": {
+    "hebrew": "בילי",
+    "english": [
+      "billy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "רוברט": {
+    "hebrew": "רוברט",
+    "english": [
+      "robert"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "רוב": {
+    "hebrew": "רוב",
+    "english": [
+      "rob"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בוב": {
+    "hebrew": "בוב",
+    "english": [
+      "bob"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בובי": {
+    "hebrew": "בובי",
+    "english": [
+      "bobby"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ריצ'רד": {
+    "hebrew": "ריצ'רד",
+    "english": [
+      "richard"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ריק": {
+    "hebrew": "ריק",
+    "english": [
+      "rick"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דיק": {
+    "hebrew": "דיק",
+    "english": [
+      "dick"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "תומס": {
+    "hebrew": "תומס",
+    "english": [
+      "thomas"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "טום": {
+    "hebrew": "טום",
+    "english": [
+      "tom"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "טומי": {
+    "hebrew": "טומי",
+    "english": [
+      "tommy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "צ'ארלס": {
+    "hebrew": "צ'ארלס",
+    "english": [
+      "charles"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "צ'רלי": {
+    "hebrew": "צ'רלי",
+    "english": [
+      "charlie"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "צ'אק": {
+    "hebrew": "צ'אק",
+    "english": [
+      "chuck"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ורג'": {
+    "hebrew": "ג'ורג'",
+    "english": [
+      "george"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אדוארד": {
+    "hebrew": "אדוארד",
+    "english": [
+      "edward"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אד": {
+    "hebrew": "אד",
+    "english": [
+      "ed"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אדי": {
+    "hebrew": "אדי",
+    "english": [
+      "eddie"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "הנרי": {
+    "hebrew": "הנרי",
+    "english": [
+      "henry"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סטיבן": {
+    "hebrew": "סטיבן",
+    "english": [
+      "steven"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סטיב": {
+    "hebrew": "סטיב",
+    "english": [
+      "steve"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סטפן": {
+    "hebrew": "סטפן",
+    "english": [
+      "stephen"
+    ],
+    "arabic": null,
+    "russian": [
+      "stepan"
+    ],
+    "russian_cyrillic": [
+      "степан"
+    ]
+  },
+  "קווין": {
+    "hebrew": "קווין",
+    "english": [
+      "kevin"
+    ],
+    "arabic": null,
+    "russian": [
+      "queen"
+    ],
+    "russian_cyrillic": null
+  },
+  "בריאן": {
+    "hebrew": "בריאן",
+    "english": [
+      "brian"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אריק": {
+    "hebrew": "אריק",
+    "english": [
+      "eric"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ייסון": {
+    "hebrew": "ג'ייסון",
+    "english": [
+      "jason"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ריאן": {
+    "hebrew": "ריאן",
+    "english": [
+      "ryan"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ניקולס": {
+    "hebrew": "ניקולס",
+    "english": [
+      "nicholas"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ניק": {
+    "hebrew": "ניק",
+    "english": [
+      "nick"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "כריסטופר": {
+    "hebrew": "כריסטופר",
+    "english": [
+      "christopher"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "כריס": {
+    "hebrew": "כריס",
+    "english": [
+      "chris"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "טימותי": {
+    "hebrew": "טימותי",
+    "english": [
+      "timothy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "טים": {
+    "hebrew": "טים",
+    "english": [
+      "tim"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'פרי": {
+    "hebrew": "ג'פרי",
+    "english": [
+      "jeffrey"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ף": {
+    "hebrew": "ג'ף",
+    "english": [
+      "jeff"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "פרנק": {
+    "hebrew": "פרנק",
+    "english": [
+      "frank"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דניס": {
+    "hebrew": "דניס",
+    "english": [
+      "dennis"
+    ],
+    "arabic": null,
+    "russian": [
+      "denise"
+    ],
+    "russian_cyrillic": null
+  },
+  "דונלד": {
+    "hebrew": "דונלד",
+    "english": [
+      "donald"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דון": {
+    "hebrew": "דון",
+    "english": [
+      "don"
+    ],
+    "arabic": null,
+    "russian": [
+      "dawn"
+    ],
+    "russian_cyrillic": null
+  },
+  "רונלד": {
+    "hebrew": "רונלד",
+    "english": [
+      "ronald"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "רון": {
+    "hebrew": "רון",
+    "english": [
+      "ron"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "פטריק": {
+    "hebrew": "פטריק",
+    "english": [
+      "patrick"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "פט": {
+    "hebrew": "פט",
+    "english": [
+      "pat"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "קנת": {
+    "hebrew": "קנת",
+    "english": [
+      "kenneth"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "קן": {
+    "hebrew": "קן",
+    "english": [
+      "ken"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סקוט": {
+    "hebrew": "סקוט",
+    "english": [
+      "scott"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ברנדון": {
+    "hebrew": "ברנדון",
+    "english": [
+      "brandon"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'סטין": {
+    "hebrew": "ג'סטין",
+    "english": [
+      "justin"
+    ],
+    "arabic": null,
+    "russian": [
+      "justine"
+    ],
+    "russian_cyrillic": null
+  },
+  "שון": {
+    "hebrew": "שון",
+    "english": [
+      "sean"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "שיין": {
+    "hebrew": "שיין",
+    "english": [
+      "shane"
+    ],
+    "arabic": null,
+    "russian": [
+      "shane"
+    ],
+    "russian_cyrillic": null
+  },
+  "קייל": {
+    "hebrew": "קייל",
+    "english": [
+      "kyle"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "טיילר": {
+    "hebrew": "טיילר",
+    "english": [
+      "tyler"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אוסטין": {
+    "hebrew": "אוסטין",
+    "english": [
+      "austin"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "קודי": {
+    "hebrew": "קודי",
+    "english": [
+      "cody"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דילן": {
+    "hebrew": "דילן",
+    "english": [
+      "dylan"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "לוגן": {
+    "hebrew": "לוגן",
+    "english": [
+      "logan"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "לוק": {
+    "hebrew": "לוק",
+    "english": [
+      "luke"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אוון": {
+    "hebrew": "אוון",
+    "english": [
+      "owen"
+    ],
+    "arabic": null,
+    "russian": [
+      "evan"
+    ],
+    "russian_cyrillic": null
+  },
+  "קונור": {
+    "hebrew": "קונור",
+    "english": [
+      "connor"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "האנטר": {
+    "hebrew": "האנטר",
+    "english": [
+      "hunter"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'קסון": {
+    "hebrew": "ג'קסון",
+    "english": [
+      "jackson"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ק": {
+    "hebrew": "ג'ק",
+    "english": [
+      "jack"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מייסון": {
+    "hebrew": "מייסון",
+    "english": [
+      "mason"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ליאם": {
+    "hebrew": "ליאם",
+    "english": [
+      "liam"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אוליבר": {
+    "hebrew": "אוליבר",
+    "english": [
+      "oliver"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "איתן": {
+    "hebrew": "איתן",
+    "english": [
+      "ethan"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "שרה": {
+    "hebrew": "שרה",
+    "english": [
+      "sarah",
+      "sara"
+    ],
+    "arabic": [
+      "سارة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "רחל": {
+    "hebrew": "רחל",
+    "english": [
+      "rachel"
+    ],
+    "arabic": null,
+    "russian": [
+      "rachael"
+    ],
+    "russian_cyrillic": null
+  },
+  "רבקה": {
+    "hebrew": "רבקה",
+    "english": [
+      "rebecca"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בקי": {
+    "hebrew": "בקי",
+    "english": [
+      "becky"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "חנה": {
+    "hebrew": "חנה",
+    "english": [
+      "hannah"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "לאה": {
+    "hebrew": "לאה",
+    "english": [
+      "leah"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מרים": {
+    "hebrew": "מרים",
+    "english": [
+      "miriam",
+      "maryam",
+      "mariam"
+    ],
+    "arabic": [
+      "مريم"
+    ],
+    "russian": [
+      "miriam"
+    ],
+    "russian_cyrillic": null
+  },
+  "נעמי": {
+    "hebrew": "נעמי",
+    "english": [
+      "naomi"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "רות": {
+    "hebrew": "רות",
+    "english": [
+      "ruth"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אסתר": {
+    "hebrew": "אסתר",
+    "english": [
+      "esther"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דבורה": {
+    "hebrew": "דבורה",
+    "english": [
+      "deborah"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דבי": {
+    "hebrew": "דבי",
+    "english": [
+      "debbie"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אביגיל": {
+    "hebrew": "אביגיל",
+    "english": [
+      "abigail"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אבי": {
+    "hebrew": "אבי",
+    "english": [
+      "abby"
+    ],
+    "arabic": null,
+    "russian": [
+      "abby"
+    ],
+    "russian_cyrillic": null
+  },
+  "אליזבת": {
+    "hebrew": "אליזבת",
+    "english": [
+      "elizabeth"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ליז": {
+    "hebrew": "ליז",
+    "english": [
+      "liz"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ליזי": {
+    "hebrew": "ליזי",
+    "english": [
+      "lizzy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בת'": {
+    "hebrew": "בת'",
+    "english": [
+      "beth"
+    ],
+    "arabic": null,
+    "russian": [
+      "beth"
+    ],
+    "russian_cyrillic": null
+  },
+  "אמה": {
+    "hebrew": "אמה",
+    "english": [
+      "emma"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אמילי": {
+    "hebrew": "אמילי",
+    "english": [
+      "emily"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ניפר": {
+    "hebrew": "ג'ניפר",
+    "english": [
+      "jennifer"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ן": {
+    "hebrew": "ג'ן",
+    "english": [
+      "jen"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ני": {
+    "hebrew": "ג'ני",
+    "english": [
+      "jenny"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'סיקה": {
+    "hebrew": "ג'סיקה",
+    "english": [
+      "jessica"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אמנדה": {
+    "hebrew": "אמנדה",
+    "english": [
+      "amanda"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מנדי": {
+    "hebrew": "מנדי",
+    "english": [
+      "mandy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אשלי": {
+    "hebrew": "אשלי",
+    "english": [
+      "ashley"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סטפני": {
+    "hebrew": "סטפני",
+    "english": [
+      "stephanie"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מליסה": {
+    "hebrew": "מליסה",
+    "english": [
+      "melissa"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מישל": {
+    "hebrew": "מישל",
+    "english": [
+      "michelle"
+    ],
+    "arabic": null,
+    "russian": [
+      "michele"
+    ],
+    "russian_cyrillic": null
+  },
+  "ניקול": {
+    "hebrew": "ניקול",
+    "english": [
+      "nicole"
+    ],
+    "arabic": null,
+    "russian": [
+      "nichole"
+    ],
+    "russian_cyrillic": null
+  },
+  "איימי": {
+    "hebrew": "איימי",
+    "english": [
+      "amy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אנג'לה": {
+    "hebrew": "אנג'לה",
+    "english": [
+      "angela"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אנג'י": {
+    "hebrew": "אנג'י",
+    "english": [
+      "angie"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "פטרישיה": {
+    "hebrew": "פטרישיה",
+    "english": [
+      "patricia"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "פטי": {
+    "hebrew": "פטי",
+    "english": [
+      "patty"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "לינדה": {
+    "hebrew": "לינדה",
+    "english": [
+      "linda"
+    ],
+    "arabic": null,
+    "russian": [
+      "lynda"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברברה": {
+    "hebrew": "ברברה",
+    "english": [
+      "barbara"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ברב": {
+    "hebrew": "ברב",
+    "english": [
+      "barb"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סוזן": {
+    "hebrew": "סוזן",
+    "english": [
+      "susan"
+    ],
+    "arabic": null,
+    "russian": [
+      "suzanne"
+    ],
+    "russian_cyrillic": null
+  },
+  "סו": {
+    "hebrew": "סו",
+    "english": [
+      "sue"
+    ],
+    "arabic": null,
+    "russian": [
+      "sue"
+    ],
+    "russian_cyrillic": null
+  },
+  "קארן": {
+    "hebrew": "קארן",
+    "english": [
+      "karen"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ננסי": {
+    "hebrew": "ננסי",
+    "english": [
+      "nancy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ליסה": {
+    "hebrew": "ליסה",
+    "english": [
+      "lisa"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בטי": {
+    "hebrew": "בטי",
+    "english": [
+      "betty"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דורותי": {
+    "hebrew": "דורותי",
+    "english": [
+      "dorothy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סנדרה": {
+    "hebrew": "סנדרה",
+    "english": [
+      "sandra"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סנדי": {
+    "hebrew": "סנדי",
+    "english": [
+      "sandy"
+    ],
+    "arabic": null,
+    "russian": [
+      "sandi"
+    ],
+    "russian_cyrillic": null
+  },
+  "קימברלי": {
+    "hebrew": "קימברלי",
+    "english": [
+      "kimberly"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "קים": {
+    "hebrew": "קים",
+    "english": [
+      "kim"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דונה": {
+    "hebrew": "דונה",
+    "english": [
+      "donna"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "קרול": {
+    "hebrew": "קרול",
+    "english": [
+      "carol"
+    ],
+    "arabic": null,
+    "russian": [
+      "carole"
+    ],
+    "russian_cyrillic": null
+  },
+  "לורה": {
+    "hebrew": "לורה",
+    "english": [
+      "laura"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "שרון": {
+    "hebrew": "שרון",
+    "english": [
+      "sharon"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סינתיה": {
+    "hebrew": "סינתיה",
+    "english": [
+      "cynthia"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סינדי": {
+    "hebrew": "סינדי",
+    "english": [
+      "cindy"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "קתלין": {
+    "hebrew": "קתלין",
+    "english": [
+      "kathleen"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "קתי": {
+    "hebrew": "קתי",
+    "english": [
+      "kathy"
+    ],
+    "arabic": null,
+    "russian": [
+      "cathy"
+    ],
+    "russian_cyrillic": null
+  },
+  "אנה": {
+    "hebrew": "אנה",
+    "english": [
+      "anna"
+    ],
+    "arabic": null,
+    "russian": [
+      "anna"
+    ],
+    "russian_cyrillic": [
+      "анна"
+    ]
+  },
+  "אן": {
+    "hebrew": "אן",
+    "english": [
+      "anne"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מריה": {
+    "hebrew": "מריה",
+    "english": [
+      "maria"
+    ],
+    "arabic": null,
+    "russian": [
+      "maria"
+    ],
+    "russian_cyrillic": [
+      "мария"
+    ]
+  },
+  "מרי": {
+    "hebrew": "מרי",
+    "english": [
+      "mary"
+    ],
+    "arabic": null,
+    "russian": [
+      "marie"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרגרט": {
+    "hebrew": "מרגרט",
+    "english": [
+      "margaret"
+    ],
+    "arabic": null,
+    "russian": [
+      "marguerite"
+    ],
+    "russian_cyrillic": null
+  },
+  "מגי": {
+    "hebrew": "מגי",
+    "english": [
+      "maggie"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מייגן": {
+    "hebrew": "מייגן",
+    "english": [
+      "megan"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "הלן": {
+    "hebrew": "הלן",
+    "english": [
+      "helen"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דיאן": {
+    "hebrew": "דיאן",
+    "english": [
+      "diane"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ולי": {
+    "hebrew": "ג'ולי",
+    "english": [
+      "julie"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ויס": {
+    "hebrew": "ג'ויס",
+    "english": [
+      "joyce"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ויקטוריה": {
+    "hebrew": "ויקטוריה",
+    "english": [
+      "victoria"
+    ],
+    "arabic": null,
+    "russian": [
+      "victoria"
+    ],
+    "russian_cyrillic": [
+      "виктория"
+    ]
+  },
+  "ויקי": {
+    "hebrew": "ויקי",
+    "english": [
+      "vicky"
+    ],
+    "arabic": null,
+    "russian": [
+      "vickie"
+    ],
+    "russian_cyrillic": null
+  },
+  "כריסטינה": {
+    "hebrew": "כריסטינה",
+    "english": [
+      "christina"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "כריסטין": {
+    "hebrew": "כריסטין",
+    "english": [
+      "christine"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "קלי": {
+    "hebrew": "קלי",
+    "english": [
+      "kelly"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "הת'ר": {
+    "hebrew": "הת'ר",
+    "english": [
+      "heather"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סמנתה": {
+    "hebrew": "סמנתה",
+    "english": [
+      "samantha"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "נטלי": {
+    "hebrew": "נטלי",
+    "english": [
+      "natalie"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אוליביה": {
+    "hebrew": "אוליביה",
+    "english": [
+      "olivia"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סופיה": {
+    "hebrew": "סופיה",
+    "english": [
+      "sophia"
+    ],
+    "arabic": null,
+    "russian": [
+      "sofia"
+    ],
+    "russian_cyrillic": [
+      "софия"
+    ]
+  },
+  "גרייס": {
+    "hebrew": "גרייס",
+    "english": [
+      "grace"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "קלואי": {
+    "hebrew": "קלואי",
+    "english": [
+      "chloe"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "זואי": {
+    "hebrew": "זואי",
+    "english": [
+      "zoe"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אווה": {
+    "hebrew": "אווה",
+    "english": [
+      "ava"
+    ],
+    "arabic": null,
+    "russian": [
+      "eva"
+    ],
+    "russian_cyrillic": null
+  },
+  "מיה": {
+    "hebrew": "מיה",
+    "english": [
+      "mia"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אלה": {
+    "hebrew": "אלה",
+    "english": [
+      "ella"
+    ],
+    "arabic": null,
+    "russian": [
+      "alla"
+    ],
+    "russian_cyrillic": [
+      "алла"
+    ]
+  },
+  "לילי": {
+    "hebrew": "לילי",
+    "english": [
+      "lily"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מדיסון": {
+    "hebrew": "מדיסון",
+    "english": [
+      "madison"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מדי": {
+    "hebrew": "מדי",
+    "english": [
+      "maddie"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אדיסון": {
+    "hebrew": "אדיסון",
+    "english": [
+      "addison"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אייברי": {
+    "hebrew": "אייברי",
+    "english": [
+      "avery"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ריילי": {
+    "hebrew": "ריילי",
+    "english": [
+      "riley"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "הארפר": {
+    "hebrew": "הארפר",
+    "english": [
+      "harper"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ברוקלין": {
+    "hebrew": "ברוקלין",
+    "english": [
+      "brooklyn"
+    ],
+    "arabic": null,
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מוחמד": {
+    "hebrew": "מוחמד",
+    "english": [
+      "muhammad",
+      "mohammed",
+      "mohamed"
+    ],
+    "arabic": [
+      "محمد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אחמד": {
+    "hebrew": "אחמד",
+    "english": [
+      "ahmad",
+      "ahmed"
+    ],
+    "arabic": [
+      "أحمد",
+      "احمد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "עלי": {
+    "hebrew": "עלי",
+    "english": [
+      "ali"
+    ],
+    "arabic": [
+      "علي",
+      "على"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "עומר": {
+    "hebrew": "עומר",
+    "english": [
+      "omar",
+      "umar"
+    ],
+    "arabic": [
+      "عمر"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "איברהים": {
+    "hebrew": "איברהים",
+    "english": [
+      "ibrahim"
+    ],
+    "arabic": [
+      "إبراهيم",
+      "ابراهيم"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ח'אלד": {
+    "hebrew": "ח'אלד",
+    "english": [
+      "khalid"
+    ],
+    "arabic": [
+      "خالد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "חסן": {
+    "hebrew": "חסן",
+    "english": [
+      "hassan"
+    ],
+    "arabic": [
+      "حسن"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "חוסיין": {
+    "hebrew": "חוסיין",
+    "english": [
+      "hussein"
+    ],
+    "arabic": [
+      "حسين"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "עבדאללה": {
+    "hebrew": "עבדאללה",
+    "english": [
+      "abdullah",
+      "abdallah"
+    ],
+    "arabic": [
+      "عبدالله",
+      "عبد الله"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סאלם": {
+    "hebrew": "סאלם",
+    "english": [
+      "salem"
+    ],
+    "arabic": [
+      "سالم"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סלים": {
+    "hebrew": "סלים",
+    "english": [
+      "salim"
+    ],
+    "arabic": [
+      "سلیم"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מנסור": {
+    "hebrew": "מנסור",
+    "english": [
+      "mansour"
+    ],
+    "arabic": [
+      "منصور"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מחמוד": {
+    "hebrew": "מחמוד",
+    "english": [
+      "mahmoud",
+      "mahmud"
+    ],
+    "arabic": [
+      "محمود"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "כרים": {
+    "hebrew": "כרים",
+    "english": [
+      "karim"
+    ],
+    "arabic": [
+      "كريم"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ראשד": {
+    "hebrew": "ראשד",
+    "english": [
+      "rashid"
+    ],
+    "arabic": [
+      "رشيد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סעיד": {
+    "hebrew": "סעיד",
+    "english": [
+      "said",
+      "saeed"
+    ],
+    "arabic": [
+      "سعيد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "טארק": {
+    "hebrew": "טארק",
+    "english": [
+      "tariq"
+    ],
+    "arabic": [
+      "طارق"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "וואליד": {
+    "hebrew": "וואליד",
+    "english": [
+      "walid"
+    ],
+    "arabic": [
+      "وليد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "פייסל": {
+    "hebrew": "פייסל",
+    "english": [
+      "faisal"
+    ],
+    "arabic": [
+      "فيصل"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'מאל": {
+    "hebrew": "ג'מאל",
+    "english": [
+      "jamal"
+    ],
+    "arabic": [
+      "جمال"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'מיל": {
+    "hebrew": "ג'מיל",
+    "english": [
+      "jamil"
+    ],
+    "arabic": [
+      "جميل"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "נאצר": {
+    "hebrew": "נאצר",
+    "english": [
+      "nasser"
+    ],
+    "arabic": [
+      "ناصر"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "עדנאן": {
+    "hebrew": "עדנאן",
+    "english": [
+      "adnan"
+    ],
+    "arabic": [
+      "عدنان"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "בלאל": {
+    "hebrew": "בלאל",
+    "english": [
+      "bilal"
+    ],
+    "arabic": [
+      "بلال"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "חמזה": {
+    "hebrew": "חמזה",
+    "english": [
+      "hamza"
+    ],
+    "arabic": [
+      "حمزة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "זיאד": {
+    "hebrew": "זיאד",
+    "english": [
+      "ziad"
+    ],
+    "arabic": [
+      "زياد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ראמי": {
+    "hebrew": "ראמי",
+    "english": [
+      "rami"
+    ],
+    "arabic": [
+      "رامي"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מג'יד": {
+    "hebrew": "מג'יד",
+    "english": [
+      "majid"
+    ],
+    "arabic": [
+      "ماجد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מאלק": {
+    "hebrew": "מאלק",
+    "english": [
+      "malik"
+    ],
+    "arabic": [
+      "مالك"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אמיר": {
+    "hebrew": "אמיר",
+    "english": [
+      "amir"
+    ],
+    "arabic": [
+      "أمير",
+      "امير"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "עזיז": {
+    "hebrew": "עזיז",
+    "english": [
+      "aziz"
+    ],
+    "arabic": [
+      "عزيز"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "באסל": {
+    "hebrew": "באסל",
+    "english": [
+      "basel",
+      "basil"
+    ],
+    "arabic": [
+      "باسل"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מרואן": {
+    "hebrew": "מרואן",
+    "english": [
+      "marwan"
+    ],
+    "arabic": [
+      "مروان"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מוסטפא": {
+    "hebrew": "מוסטפא",
+    "english": [
+      "mustafa"
+    ],
+    "arabic": [
+      "مصطفى"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "נביל": {
+    "hebrew": "נביל",
+    "english": [
+      "nabil"
+    ],
+    "arabic": [
+      "نبيل"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "רפיק": {
+    "hebrew": "רפיק",
+    "english": [
+      "rafiq"
+    ],
+    "arabic": [
+      "رفيق"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סאמי": {
+    "hebrew": "סאמי",
+    "english": [
+      "sami"
+    ],
+    "arabic": [
+      "سامي"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "תאמר": {
+    "hebrew": "תאמר",
+    "english": [
+      "tamer"
+    ],
+    "arabic": [
+      "تامر"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "יזיד": {
+    "hebrew": "יזיד",
+    "english": [
+      "yazid"
+    ],
+    "arabic": [
+      "يزيد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "זייד": {
+    "hebrew": "זייד",
+    "english": [
+      "zayd"
+    ],
+    "arabic": [
+      "زيد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "פאטמה": {
+    "hebrew": "פאטמה",
+    "english": [
+      "fatima",
+      "fatma"
+    ],
+    "arabic": [
+      "فاطمة",
+      "فاطمه"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "עאישה": {
+    "hebrew": "עאישה",
+    "english": [
+      "aisha",
+      "aysha"
+    ],
+    "arabic": [
+      "عائشة",
+      "عايشة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "זהרה": {
+    "hebrew": "זהרה",
+    "english": [
+      "zahra"
+    ],
+    "arabic": [
+      "زهراء",
+      "زهرة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "נור": {
+    "hebrew": "נור",
+    "english": [
+      "noor",
+      "nur"
+    ],
+    "arabic": [
+      "نور"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ליילה": {
+    "hebrew": "ליילה",
+    "english": [
+      "leila",
+      "layla",
+      "laila"
+    ],
+    "arabic": [
+      "ليلى",
+      "ليلا"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "חנאן": {
+    "hebrew": "חנאן",
+    "english": [
+      "hanan"
+    ],
+    "arabic": [
+      "حنان"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "חנא": {
+    "hebrew": "חנא",
+    "english": [
+      "hana"
+    ],
+    "arabic": [
+      "هناء"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אמינה": {
+    "hebrew": "אמינה",
+    "english": [
+      "amina"
+    ],
+    "arabic": [
+      "أمينة",
+      "امينة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אמירה": {
+    "hebrew": "אמירה",
+    "english": [
+      "amira"
+    ],
+    "arabic": [
+      "أميرة",
+      "اميرة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ראניה": {
+    "hebrew": "ראניה",
+    "english": [
+      "rania"
+    ],
+    "arabic": [
+      "رانيا"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "דינה": {
+    "hebrew": "דינה",
+    "english": [
+      "dina"
+    ],
+    "arabic": [
+      "دينا"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סלמה": {
+    "hebrew": "סלמה",
+    "english": [
+      "salma"
+    ],
+    "arabic": [
+      "سلمى"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "רנא": {
+    "hebrew": "רנא",
+    "english": [
+      "rana"
+    ],
+    "arabic": [
+      "رنا"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "לינא": {
+    "hebrew": "לינא",
+    "english": [
+      "lina"
+    ],
+    "arabic": [
+      "لينا"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מאיה": {
+    "hebrew": "מאיה",
+    "english": [
+      "maya"
+    ],
+    "arabic": [
+      "مايا"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "הודא": {
+    "hebrew": "הודא",
+    "english": [
+      "huda"
+    ],
+    "arabic": [
+      "هدى"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "נאדא": {
+    "hebrew": "נאדא",
+    "english": [
+      "nada"
+    ],
+    "arabic": [
+      "ندى"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "רים": {
+    "hebrew": "רים",
+    "english": [
+      "reem",
+      "rim"
+    ],
+    "arabic": [
+      "ريم"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סנא": {
+    "hebrew": "סנא",
+    "english": [
+      "sana"
+    ],
+    "arabic": [
+      "سناء",
+      "سنا"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "יאסמין": {
+    "hebrew": "יאסמין",
+    "english": [
+      "yasmin",
+      "yasmine"
+    ],
+    "arabic": [
+      "ياسمين"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "זיינב": {
+    "hebrew": "זיינב",
+    "english": [
+      "zainab"
+    ],
+    "arabic": [
+      "زينب"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ח'דיג'ה": {
+    "hebrew": "ח'דיג'ה",
+    "english": [
+      "khadija"
+    ],
+    "arabic": [
+      "خديجة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "היבה": {
+    "hebrew": "היבה",
+    "english": [
+      "hiba"
+    ],
+    "arabic": [
+      "هبة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "אימאן": {
+    "hebrew": "אימאן",
+    "english": [
+      "iman"
+    ],
+    "arabic": [
+      "إيمان",
+      "ايمان"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "ג'ומנה": {
+    "hebrew": "ג'ומנה",
+    "english": [
+      "jumana"
+    ],
+    "arabic": [
+      "جمانة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "כרימה": {
+    "hebrew": "כרימה",
+    "english": [
+      "karima"
+    ],
+    "arabic": [
+      "كريمة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "לטיפה": {
+    "hebrew": "לטיפה",
+    "english": [
+      "latifa"
+    ],
+    "arabic": [
+      "لطيفة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "לובנה": {
+    "hebrew": "לובנה",
+    "english": [
+      "lubna"
+    ],
+    "arabic": [
+      "لبنى"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מנאל": {
+    "hebrew": "מנאל",
+    "english": [
+      "manal"
+    ],
+    "arabic": [
+      "منال"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "מונה": {
+    "hebrew": "מונה",
+    "english": [
+      "mona"
+    ],
+    "arabic": [
+      "منى"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "נג'לה": {
+    "hebrew": "נג'לה",
+    "english": [
+      "najla"
+    ],
+    "arabic": [
+      "نجلاء"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סמר": {
+    "hebrew": "סמר",
+    "english": [
+      "samar"
+    ],
+    "arabic": [
+      "سمر"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סמירה": {
+    "hebrew": "סמירה",
+    "english": [
+      "samira"
+    ],
+    "arabic": [
+      "سميرة"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סוהא": {
+    "hebrew": "סוהא",
+    "english": [
+      "suha"
+    ],
+    "arabic": [
+      "سهى"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סומיה": {
+    "hebrew": "סומיה",
+    "english": [
+      "sumaya"
+    ],
+    "arabic": [
+      "سمية"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "וופא": {
+    "hebrew": "וופא",
+    "english": [
+      "wafa"
+    ],
+    "arabic": [
+      "وفاء"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "וידאד": {
+    "hebrew": "וידאד",
+    "english": [
+      "widad"
+    ],
+    "arabic": [
+      "وداد"
+    ],
+    "russian": null,
+    "russian_cyrillic": null
+  },
+  "סשה": {
+    "hebrew": "סשה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sasha"
+    ],
+    "russian_cyrillic": [
+      "саша"
+    ]
+  },
+  "אלכסיי": {
+    "hebrew": "אלכסיי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "alexei",
+      "alexey"
+    ],
+    "russian_cyrillic": [
+      "алексей"
+    ]
+  },
+  "אנדריי": {
+    "hebrew": "אנדריי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "andrei",
+      "andrey"
+    ],
+    "russian_cyrillic": [
+      "андрей"
+    ]
+  },
+  "אנטון": {
+    "hebrew": "אנטון",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "anton"
+    ],
+    "russian_cyrillic": [
+      "антон"
+    ]
+  },
+  "בוריס": {
+    "hebrew": "בוריס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "boris"
+    ],
+    "russian_cyrillic": [
+      "борис"
+    ]
+  },
+  "דמיטרי": {
+    "hebrew": "דמיטרי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "dmitri",
+      "dmitry"
+    ],
+    "russian_cyrillic": [
+      "дмитрий"
+    ]
+  },
+  "דימה": {
+    "hebrew": "דימה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "dima"
+    ],
+    "russian_cyrillic": [
+      "дима"
+    ]
+  },
+  "יבגני": {
+    "hebrew": "יבגני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "evgeny"
+    ],
+    "russian_cyrillic": [
+      "евгений"
+    ]
+  },
+  "ז'ניה": {
+    "hebrew": "ז'ניה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "zhenya"
+    ],
+    "russian_cyrillic": [
+      "женя"
+    ]
+  },
+  "גריגורי": {
+    "hebrew": "גריגורי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "grigory"
+    ],
+    "russian_cyrillic": [
+      "григорий"
+    ]
+  },
+  "גרישה": {
+    "hebrew": "גרישה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "grisha"
+    ],
+    "russian_cyrillic": [
+      "гриша"
+    ]
+  },
+  "איגור": {
+    "hebrew": "איגור",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "igor"
+    ],
+    "russian_cyrillic": [
+      "игорь"
+    ]
+  },
+  "איליה": {
+    "hebrew": "איליה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ilya"
+    ],
+    "russian_cyrillic": [
+      "илья"
+    ]
+  },
+  "איוון": {
+    "hebrew": "איוון",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ivan"
+    ],
+    "russian_cyrillic": [
+      "иван"
+    ]
+  },
+  "וניה": {
+    "hebrew": "וניה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vanya"
+    ],
+    "russian_cyrillic": [
+      "ваня"
+    ]
+  },
+  "קיריל": {
+    "hebrew": "קיריל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kirill"
+    ],
+    "russian_cyrillic": [
+      "кирилл"
+    ]
+  },
+  "קונסטנטין": {
+    "hebrew": "קונסטנטין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "konstantin"
+    ],
+    "russian_cyrillic": [
+      "константин"
+    ]
+  },
+  "קוסטיה": {
+    "hebrew": "קוסטיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kostya"
+    ],
+    "russian_cyrillic": [
+      "костя"
+    ]
+  },
+  "ליאוניד": {
+    "hebrew": "ליאוניד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "leonid"
+    ],
+    "russian_cyrillic": [
+      "леонид"
+    ]
+  },
+  "לב": {
+    "hebrew": "לב",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lev"
+    ],
+    "russian_cyrillic": [
+      "лев"
+    ]
+  },
+  "מקסים": {
+    "hebrew": "מקסים",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "maxim"
+    ],
+    "russian_cyrillic": [
+      "максим"
+    ]
+  },
+  "מקס": {
+    "hebrew": "מקס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "max"
+    ],
+    "russian_cyrillic": [
+      "макс"
+    ]
+  },
+  "מיכאיל": {
+    "hebrew": "מיכאיל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mikhail"
+    ],
+    "russian_cyrillic": [
+      "михаил"
+    ]
+  },
+  "מישה": {
+    "hebrew": "מישה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "misha"
+    ],
+    "russian_cyrillic": [
+      "миша"
+    ]
+  },
+  "ניקולאי": {
+    "hebrew": "ניקולאי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "nikolai"
+    ],
+    "russian_cyrillic": [
+      "николай"
+    ]
+  },
+  "קוליה": {
+    "hebrew": "קוליה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kolya"
+    ],
+    "russian_cyrillic": [
+      "коля"
+    ]
+  },
+  "אולג": {
+    "hebrew": "אולג",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "oleg"
+    ],
+    "russian_cyrillic": [
+      "олег"
+    ]
+  },
+  "פאבל": {
+    "hebrew": "פאבל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "pavel"
+    ],
+    "russian_cyrillic": [
+      "павел"
+    ]
+  },
+  "פשה": {
+    "hebrew": "פשה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "pasha"
+    ],
+    "russian_cyrillic": [
+      "паша"
+    ]
+  },
+  "רומן": {
+    "hebrew": "רומן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "roman"
+    ],
+    "russian_cyrillic": [
+      "роман"
+    ]
+  },
+  "רומה": {
+    "hebrew": "רומה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "roma"
+    ],
+    "russian_cyrillic": [
+      "рома"
+    ]
+  },
+  "סרגיי": {
+    "hebrew": "סרגיי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sergei",
+      "sergey"
+    ],
+    "russian_cyrillic": [
+      "сергей"
+    ]
+  },
+  "סריוז'ה": {
+    "hebrew": "סריוז'ה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "seryozha"
+    ],
+    "russian_cyrillic": [
+      "серёжа"
+    ]
+  },
+  "ודים": {
+    "hebrew": "ודים",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vadim"
+    ],
+    "russian_cyrillic": [
+      "вадим"
+    ]
+  },
+  "ולנטין": {
+    "hebrew": "ולנטין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "valentin"
+    ],
+    "russian_cyrillic": [
+      "валентин"
+    ]
+  },
+  "ולרי": {
+    "hebrew": "ולרי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "valery",
+      "valarie",
+      "valerie"
+    ],
+    "russian_cyrillic": [
+      "валерий"
+    ]
+  },
+  "ויקטור": {
+    "hebrew": "ויקטור",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "victor",
+      "viktor"
+    ],
+    "russian_cyrillic": [
+      "виктор"
+    ]
+  },
+  "ויטיה": {
+    "hebrew": "ויטיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vitya"
+    ],
+    "russian_cyrillic": [
+      "витя"
+    ]
+  },
+  "ולדימיר": {
+    "hebrew": "ולדימיר",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vladimir"
+    ],
+    "russian_cyrillic": [
+      "владимир"
+    ]
+  },
+  "ולודיה": {
+    "hebrew": "ולודיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "volodya"
+    ],
+    "russian_cyrillic": [
+      "володя"
+    ]
+  },
+  "יאשה": {
+    "hebrew": "יאשה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "yasha"
+    ],
+    "russian_cyrillic": [
+      "яша"
+    ]
+  },
+  "ירוסלב": {
+    "hebrew": "ירוסלב",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "yaroslav"
+    ],
+    "russian_cyrillic": [
+      "ярослав"
+    ]
+  },
+  "יורי": {
+    "hebrew": "יורי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "yuri"
+    ],
+    "russian_cyrillic": [
+      "юрий"
+    ]
+  },
+  "יורה": {
+    "hebrew": "יורה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "yura"
+    ],
+    "russian_cyrillic": [
+      "юра"
+    ]
+  },
+  "יוג'ין": {
+    "hebrew": "יוג'ין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "eugene"
+    ],
+    "russian_cyrillic": null
+  },
+  "אלכסנדרה": {
+    "hebrew": "אלכסנדרה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "alexandra",
+      "aleksandra"
+    ],
+    "russian_cyrillic": [
+      "александра"
+    ]
+  },
+  "אלינה": {
+    "hebrew": "אלינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "alina"
+    ],
+    "russian_cyrillic": [
+      "алина"
+    ]
+  },
+  "אנסטסיה": {
+    "hebrew": "אנסטסיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "anastasia"
+    ],
+    "russian_cyrillic": [
+      "анастасия"
+    ]
+  },
+  "נסטיה": {
+    "hebrew": "נסטיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "nastya"
+    ],
+    "russian_cyrillic": [
+      "настя"
+    ]
+  },
+  "אניה": {
+    "hebrew": "אניה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "anya"
+    ],
+    "russian_cyrillic": [
+      "аня"
+    ]
+  },
+  "דריה": {
+    "hebrew": "דריה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "daria"
+    ],
+    "russian_cyrillic": [
+      "дарья"
+    ]
+  },
+  "דשה": {
+    "hebrew": "דשה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "dasha"
+    ],
+    "russian_cyrillic": [
+      "даша"
+    ]
+  },
+  "אלנה": {
+    "hebrew": "אלנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "elena"
+    ],
+    "russian_cyrillic": [
+      "елена"
+    ]
+  },
+  "לנה": {
+    "hebrew": "לנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lena"
+    ],
+    "russian_cyrillic": [
+      "лена"
+    ]
+  },
+  "יקטרינה": {
+    "hebrew": "יקטרינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ekaterina"
+    ],
+    "russian_cyrillic": [
+      "екатерина"
+    ]
+  },
+  "קטיה": {
+    "hebrew": "קטיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "katya"
+    ],
+    "russian_cyrillic": [
+      "катя"
+    ]
+  },
+  "גלינה": {
+    "hebrew": "גלינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "galina"
+    ],
+    "russian_cyrillic": [
+      "галина"
+    ]
+  },
+  "גליה": {
+    "hebrew": "גליה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "galya"
+    ],
+    "russian_cyrillic": [
+      "галя"
+    ]
+  },
+  "אירינה": {
+    "hebrew": "אירינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "irina"
+    ],
+    "russian_cyrillic": [
+      "ирина"
+    ]
+  },
+  "אירה": {
+    "hebrew": "אירה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ira"
+    ],
+    "russian_cyrillic": [
+      "ира"
+    ]
+  },
+  "יוליה": {
+    "hebrew": "יוליה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "julia",
+      "yulia",
+      "yulya"
+    ],
+    "russian_cyrillic": [
+      "юлия",
+      "юля"
+    ]
+  },
+  "קסניה": {
+    "hebrew": "קסניה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ksenia"
+    ],
+    "russian_cyrillic": [
+      "ксения"
+    ]
+  },
+  "לריסה": {
+    "hebrew": "לריסה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "larisa"
+    ],
+    "russian_cyrillic": [
+      "лариса"
+    ]
+  },
+  "לרה": {
+    "hebrew": "לרה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lara"
+    ],
+    "russian_cyrillic": [
+      "лара"
+    ]
+  },
+  "לידיה": {
+    "hebrew": "לידיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lidia",
+      "lydia"
+    ],
+    "russian_cyrillic": [
+      "лидия"
+    ]
+  },
+  "לודמילה": {
+    "hebrew": "לודמילה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ludmila"
+    ],
+    "russian_cyrillic": [
+      "людмила"
+    ]
+  },
+  "לודה": {
+    "hebrew": "לודה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "luda"
+    ],
+    "russian_cyrillic": [
+      "люда"
+    ]
+  },
+  "מרינה": {
+    "hebrew": "מרינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marina"
+    ],
+    "russian_cyrillic": [
+      "марина"
+    ]
+  },
+  "מאשה": {
+    "hebrew": "מאשה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "masha"
+    ],
+    "russian_cyrillic": [
+      "маша"
+    ]
+  },
+  "נטליה": {
+    "hebrew": "נטליה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "natalia",
+      "natalya"
+    ],
+    "russian_cyrillic": [
+      "наталья"
+    ]
+  },
+  "נטשה": {
+    "hebrew": "נטשה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "natasha"
+    ],
+    "russian_cyrillic": [
+      "наташа"
+    ]
+  },
+  "נינה": {
+    "hebrew": "נינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "nina"
+    ],
+    "russian_cyrillic": [
+      "нина"
+    ]
+  },
+  "אוקסנה": {
+    "hebrew": "אוקסנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "oksana"
+    ],
+    "russian_cyrillic": [
+      "оксана"
+    ]
+  },
+  "אולגה": {
+    "hebrew": "אולגה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "olga"
+    ],
+    "russian_cyrillic": [
+      "ольга"
+    ]
+  },
+  "פולינה": {
+    "hebrew": "פולינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "polina"
+    ],
+    "russian_cyrillic": [
+      "полина"
+    ]
+  },
+  "ראיסה": {
+    "hebrew": "ראיסה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "raisa"
+    ],
+    "russian_cyrillic": [
+      "раиса"
+    ]
+  },
+  "רגינה": {
+    "hebrew": "רגינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "regina"
+    ],
+    "russian_cyrillic": [
+      "регина"
+    ]
+  },
+  "סוניה": {
+    "hebrew": "סוניה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sonya",
+      "sonia",
+      "sonja"
+    ],
+    "russian_cyrillic": [
+      "соня"
+    ]
+  },
+  "סבטלנה": {
+    "hebrew": "סבטלנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "svetlana"
+    ],
+    "russian_cyrillic": [
+      "светлана"
+    ]
+  },
+  "סבטה": {
+    "hebrew": "סבטה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sveta"
+    ],
+    "russian_cyrillic": [
+      "света"
+    ]
+  },
+  "תמרה": {
+    "hebrew": "תמרה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tamara"
+    ],
+    "russian_cyrillic": [
+      "тамара"
+    ]
+  },
+  "תומה": {
+    "hebrew": "תומה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "toma"
+    ],
+    "russian_cyrillic": [
+      "тома"
+    ]
+  },
+  "טטיאנה": {
+    "hebrew": "טטיאנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tatiana"
+    ],
+    "russian_cyrillic": [
+      "татьяна"
+    ]
+  },
+  "טניה": {
+    "hebrew": "טניה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tanya"
+    ],
+    "russian_cyrillic": [
+      "таня"
+    ]
+  },
+  "ולנטינה": {
+    "hebrew": "ולנטינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "valentina"
+    ],
+    "russian_cyrillic": [
+      "валентина"
+    ]
+  },
+  "וליה": {
+    "hebrew": "וליה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "valya"
+    ],
+    "russian_cyrillic": [
+      "валя"
+    ]
+  },
+  "ורוורה": {
+    "hebrew": "ורוורה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "varvara"
+    ],
+    "russian_cyrillic": [
+      "варвара"
+    ]
+  },
+  "וריה": {
+    "hebrew": "וריה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "varya"
+    ],
+    "russian_cyrillic": [
+      "варя"
+    ]
+  },
+  "וירה": {
+    "hebrew": "וירה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vera"
+    ],
+    "russian_cyrillic": [
+      "вера"
+    ]
+  },
+  "ויקה": {
+    "hebrew": "ויקה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vika"
+    ],
+    "russian_cyrillic": [
+      "вика"
+    ]
+  },
+  "יאנה": {
+    "hebrew": "יאנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "yana"
+    ],
+    "russian_cyrillic": [
+      "яна"
+    ]
+  },
+  "זינאידה": {
+    "hebrew": "זינאידה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "zinaida"
+    ],
+    "russian_cyrillic": [
+      "зинаида"
+    ]
+  },
+  "זינה": {
+    "hebrew": "זינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "zina"
+    ],
+    "russian_cyrillic": [
+      "зина"
+    ]
+  },
+  "ילנה": {
+    "hebrew": "ילנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "yelena"
+    ],
+    "russian_cyrillic": null
+  },
+  "בטסי": {
+    "hebrew": "בטסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "betsy"
+    ],
+    "russian_cyrillic": null
+  },
+  "נד": {
+    "hebrew": "נד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ned"
+    ],
+    "russian_cyrillic": null
+  },
+  "טד": {
+    "hebrew": "טד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ted"
+    ],
+    "russian_cyrillic": null
+  },
+  "ריי": {
+    "hebrew": "ריי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ray"
+    ],
+    "russian_cyrillic": null
+  },
+  "אל": {
+    "hebrew": "אל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "al"
+    ],
+    "russian_cyrillic": null
+  },
+  "ארט": {
+    "hebrew": "ארט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "art"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברני": {
+    "hebrew": "ברני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "barney"
+    ],
+    "russian_cyrillic": null
+  },
+  "בארט": {
+    "hebrew": "בארט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bart"
+    ],
+    "russian_cyrillic": null
+  },
+  "בו": {
+    "hebrew": "בו",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "beau"
+    ],
+    "russian_cyrillic": null
+  },
+  "בראד": {
+    "hebrew": "בראד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "brad"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברנט": {
+    "hebrew": "ברנט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "brent"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברט": {
+    "hebrew": "ברט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bret",
+      "brett"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברוק": {
+    "hebrew": "ברוק",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "brock"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברוס": {
+    "hebrew": "ברוס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bruce"
+    ],
+    "russian_cyrillic": null
+  },
+  "צ'אד": {
+    "hebrew": "צ'אד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "chad"
+    ],
+    "russian_cyrillic": null
+  },
+  "צ'ייס": {
+    "hebrew": "צ'ייס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "chase"
+    ],
+    "russian_cyrillic": null
+  },
+  "צ'יפ": {
+    "hebrew": "צ'יפ",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "chip"
+    ],
+    "russian_cyrillic": null
+  },
+  "קלינט": {
+    "hebrew": "קלינט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "clint"
+    ],
+    "russian_cyrillic": null
+  },
+  "קול": {
+    "hebrew": "קול",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "cole"
+    ],
+    "russian_cyrillic": null
+  },
+  "קרייג": {
+    "hebrew": "קרייג",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "craig"
+    ],
+    "russian_cyrillic": null
+  },
+  "קרטיס": {
+    "hebrew": "קרטיס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "curtis"
+    ],
+    "russian_cyrillic": null
+  },
+  "דייל": {
+    "hebrew": "דייל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "dale"
+    ],
+    "russian_cyrillic": null
+  },
+  "דיין": {
+    "hebrew": "דיין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "dane"
+    ],
+    "russian_cyrillic": null
+  },
+  "דין": {
+    "hebrew": "דין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "dean"
+    ],
+    "russian_cyrillic": null
+  },
+  "דרו": {
+    "hebrew": "דרו",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "drew"
+    ],
+    "russian_cyrillic": null
+  },
+  "דיוק": {
+    "hebrew": "דיוק",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "duke"
+    ],
+    "russian_cyrillic": null
+  },
+  "ארל": {
+    "hebrew": "ארל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "earl"
+    ],
+    "russian_cyrillic": null
+  },
+  "אליס": {
+    "hebrew": "אליס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ellis",
+      "alice"
+    ],
+    "russian_cyrillic": null
+  },
+  "פליקס": {
+    "hebrew": "פליקס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "felix"
+    ],
+    "russian_cyrillic": null
+  },
+  "פלויד": {
+    "hebrew": "פלויד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "floyd"
+    ],
+    "russian_cyrillic": null
+  },
+  "גארי": {
+    "hebrew": "גארי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "gary"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ין": {
+    "hebrew": "ג'ין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "gene",
+      "jean",
+      "jeanne"
+    ],
+    "russian_cyrillic": null
+  },
+  "גלן": {
+    "hebrew": "גלן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "glenn"
+    ],
+    "russian_cyrillic": null
+  },
+  "גרנט": {
+    "hebrew": "גרנט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "grant"
+    ],
+    "russian_cyrillic": null
+  },
+  "גרג": {
+    "hebrew": "גרג",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "greg"
+    ],
+    "russian_cyrillic": null
+  },
+  "גאי": {
+    "hebrew": "גאי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "guy"
+    ],
+    "russian_cyrillic": null
+  },
+  "האל": {
+    "hebrew": "האל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "hal"
+    ],
+    "russian_cyrillic": null
+  },
+  "האנק": {
+    "hebrew": "האנק",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "hank"
+    ],
+    "russian_cyrillic": null
+  },
+  "הארי": {
+    "hebrew": "הארי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "harry"
+    ],
+    "russian_cyrillic": null
+  },
+  "הארווי": {
+    "hebrew": "הארווי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "harvey"
+    ],
+    "russian_cyrillic": null
+  },
+  "האוורד": {
+    "hebrew": "האוורד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "howard"
+    ],
+    "russian_cyrillic": null
+  },
+  "יו": {
+    "hebrew": "יו",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "hugh"
+    ],
+    "russian_cyrillic": null
+  },
+  "איאן": {
+    "hebrew": "איאן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ian"
+    ],
+    "russian_cyrillic": null
+  },
+  "אירווינג": {
+    "hebrew": "אירווינג",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "irving"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'רמי": {
+    "hebrew": "ג'רמי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jeremy"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'רי": {
+    "hebrew": "ג'רי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jerry"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ואל": {
+    "hebrew": "ג'ואל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "joel"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ורדן": {
+    "hebrew": "ג'ורדן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jordan"
+    ],
+    "russian_cyrillic": null
+  },
+  "חואן": {
+    "hebrew": "חואן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "juan"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'וליאן": {
+    "hebrew": "ג'וליאן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "julian",
+      "julianne"
+    ],
+    "russian_cyrillic": null
+  },
+  "קארל": {
+    "hebrew": "קארל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "karl"
+    ],
+    "russian_cyrillic": null
+  },
+  "קית'": {
+    "hebrew": "קית'",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "keith"
+    ],
+    "russian_cyrillic": null
+  },
+  "לנס": {
+    "hebrew": "לנס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lance"
+    ],
+    "russian_cyrillic": null
+  },
+  "לארי": {
+    "hebrew": "לארי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "larry"
+    ],
+    "russian_cyrillic": null
+  },
+  "לי": {
+    "hebrew": "לי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lee",
+      "leigh"
+    ],
+    "russian_cyrillic": null
+  },
+  "ליאו": {
+    "hebrew": "ליאו",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "leo"
+    ],
+    "russian_cyrillic": null
+  },
+  "ליאון": {
+    "hebrew": "ליאון",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "leon"
+    ],
+    "russian_cyrillic": null
+  },
+  "לואיס": {
+    "hebrew": "לואיס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lewis",
+      "louis"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרקוס": {
+    "hebrew": "מרקוס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marcus"
+    ],
+    "russian_cyrillic": null
+  },
+  "מריו": {
+    "hebrew": "מריו",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mario"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרווין": {
+    "hebrew": "מרווין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marvin"
+    ],
+    "russian_cyrillic": null
+  },
+  "מוריס": {
+    "hebrew": "מוריס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "maurice",
+      "morris"
+    ],
+    "russian_cyrillic": null
+  },
+  "מיטשל": {
+    "hebrew": "מיטשל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mitchell"
+    ],
+    "russian_cyrillic": null
+  },
+  "מיטש": {
+    "hebrew": "מיטש",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mitch"
+    ],
+    "russian_cyrillic": null
+  },
+  "מאריי": {
+    "hebrew": "מאריי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "murray"
+    ],
+    "russian_cyrillic": null
+  },
+  "ניל": {
+    "hebrew": "ניל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "neil"
+    ],
+    "russian_cyrillic": null
+  },
+  "נורמן": {
+    "hebrew": "נורמן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "norman"
+    ],
+    "russian_cyrillic": null
+  },
+  "אוסקר": {
+    "hebrew": "אוסקר",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "oscar"
+    ],
+    "russian_cyrillic": null
+  },
+  "אוטיס": {
+    "hebrew": "אוטיס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "otis"
+    ],
+    "russian_cyrillic": null
+  },
+  "פיליפ": {
+    "hebrew": "פיליפ",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "philip"
+    ],
+    "russian_cyrillic": null
+  },
+  "פיל": {
+    "hebrew": "פיל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "phil"
+    ],
+    "russian_cyrillic": null
+  },
+  "ראלף": {
+    "hebrew": "ראלף",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ralph"
+    ],
+    "russian_cyrillic": null
+  },
+  "רנדל": {
+    "hebrew": "רנדל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "randall"
+    ],
+    "russian_cyrillic": null
+  },
+  "רנדי": {
+    "hebrew": "רנדי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "randy"
+    ],
+    "russian_cyrillic": null
+  },
+  "ריימונד": {
+    "hebrew": "ריימונד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "raymond"
+    ],
+    "russian_cyrillic": null
+  },
+  "רקס": {
+    "hebrew": "רקס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rex"
+    ],
+    "russian_cyrillic": null
+  },
+  "רודני": {
+    "hebrew": "רודני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rodney"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוג'ר": {
+    "hebrew": "רוג'ר",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "roger"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוס": {
+    "hebrew": "רוס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ross"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוי": {
+    "hebrew": "רוי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "roy"
+    ],
+    "russian_cyrillic": null
+  },
+  "ראסל": {
+    "hebrew": "ראסל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "russell"
+    ],
+    "russian_cyrillic": null
+  },
+  "ראס": {
+    "hebrew": "ראס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "russ"
+    ],
+    "russian_cyrillic": null
+  },
+  "סת'": {
+    "hebrew": "סת'",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "seth"
+    ],
+    "russian_cyrillic": null
+  },
+  "סידני": {
+    "hebrew": "סידני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sidney"
+    ],
+    "russian_cyrillic": null
+  },
+  "סיד": {
+    "hebrew": "סיד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sid"
+    ],
+    "russian_cyrillic": null
+  },
+  "ספנסר": {
+    "hebrew": "ספנסר",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "spencer"
+    ],
+    "russian_cyrillic": null
+  },
+  "סטנלי": {
+    "hebrew": "סטנלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "stanley"
+    ],
+    "russian_cyrillic": null
+  },
+  "סטן": {
+    "hebrew": "סטן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "stan"
+    ],
+    "russian_cyrillic": null
+  },
+  "סטיוארט": {
+    "hebrew": "סטיוארט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "stuart"
+    ],
+    "russian_cyrillic": null
+  },
+  "טרנס": {
+    "hebrew": "טרנס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "terrence"
+    ],
+    "russian_cyrillic": null
+  },
+  "טרי": {
+    "hebrew": "טרי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "terry",
+      "teri",
+      "terri"
+    ],
+    "russian_cyrillic": null
+  },
+  "טוד": {
+    "hebrew": "טוד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "todd"
+    ],
+    "russian_cyrillic": null
+  },
+  "טראוויס": {
+    "hebrew": "טראוויס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "travis"
+    ],
+    "russian_cyrillic": null
+  },
+  "טרוי": {
+    "hebrew": "טרוי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "troy"
+    ],
+    "russian_cyrillic": null
+  },
+  "ורנון": {
+    "hebrew": "ורנון",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vernon"
+    ],
+    "russian_cyrillic": null
+  },
+  "וינסנט": {
+    "hebrew": "וינסנט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vincent"
+    ],
+    "russian_cyrillic": null
+  },
+  "וינס": {
+    "hebrew": "וינס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vince"
+    ],
+    "russian_cyrillic": null
+  },
+  "וואלאס": {
+    "hebrew": "וואלאס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "wallace"
+    ],
+    "russian_cyrillic": null
+  },
+  "וולטר": {
+    "hebrew": "וולטר",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "walter"
+    ],
+    "russian_cyrillic": null
+  },
+  "וולט": {
+    "hebrew": "וולט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "walt"
+    ],
+    "russian_cyrillic": null
+  },
+  "וורן": {
+    "hebrew": "וורן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "warren"
+    ],
+    "russian_cyrillic": null
+  },
+  "וויין": {
+    "hebrew": "וויין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "wayne"
+    ],
+    "russian_cyrillic": null
+  },
+  "ווסלי": {
+    "hebrew": "ווסלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "wesley"
+    ],
+    "russian_cyrillic": null
+  },
+  "ווס": {
+    "hebrew": "ווס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "wes"
+    ],
+    "russian_cyrillic": null
+  },
+  "זכרי": {
+    "hebrew": "זכרי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "zachary"
+    ],
+    "russian_cyrillic": null
+  },
+  "זאק": {
+    "hebrew": "זאק",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "zach"
+    ],
+    "russian_cyrillic": null
+  },
+  "אדל": {
+    "hebrew": "אדל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "adele"
+    ],
+    "russian_cyrillic": null
+  },
+  "אדריאן": {
+    "hebrew": "אדריאן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "adrienne"
+    ],
+    "russian_cyrillic": null
+  },
+  "אגתה": {
+    "hebrew": "אגתה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "agatha"
+    ],
+    "russian_cyrillic": null
+  },
+  "אגנס": {
+    "hebrew": "אגנס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "agnes"
+    ],
+    "russian_cyrillic": null
+  },
+  "אלישיה": {
+    "hebrew": "אלישיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "alicia"
+    ],
+    "russian_cyrillic": null
+  },
+  "אליסון": {
+    "hebrew": "אליסון",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "alison"
+    ],
+    "russian_cyrillic": null
+  },
+  "אליסה": {
+    "hebrew": "אליסה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "alyssa"
+    ],
+    "russian_cyrillic": null
+  },
+  "אמבר": {
+    "hebrew": "אמבר",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "amber"
+    ],
+    "russian_cyrillic": null
+  },
+  "אנדריאה": {
+    "hebrew": "אנדריאה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "andrea"
+    ],
+    "russian_cyrillic": null
+  },
+  "אנג'ל": {
+    "hebrew": "אנג'ל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "angel"
+    ],
+    "russian_cyrillic": null
+  },
+  "אניטה": {
+    "hebrew": "אניטה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "anita"
+    ],
+    "russian_cyrillic": null
+  },
+  "אנט": {
+    "hebrew": "אנט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "annette"
+    ],
+    "russian_cyrillic": null
+  },
+  "אפריל": {
+    "hebrew": "אפריל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "april"
+    ],
+    "russian_cyrillic": null
+  },
+  "ארלין": {
+    "hebrew": "ארלין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "arlene"
+    ],
+    "russian_cyrillic": null
+  },
+  "אודרי": {
+    "hebrew": "אודרי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "audrey"
+    ],
+    "russian_cyrillic": null
+  },
+  "ביאטריס": {
+    "hebrew": "ביאטריס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "beatrice"
+    ],
+    "russian_cyrillic": null
+  },
+  "בלינדה": {
+    "hebrew": "בלינדה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "belinda"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברנדט": {
+    "hebrew": "ברנדט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bernadette"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברניס": {
+    "hebrew": "ברניס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bernice"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברתה": {
+    "hebrew": "ברתה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bertha"
+    ],
+    "russian_cyrillic": null
+  },
+  "בסי": {
+    "hebrew": "בסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bessie"
+    ],
+    "russian_cyrillic": null
+  },
+  "בוורלי": {
+    "hebrew": "בוורלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "beverley",
+      "beverly"
+    ],
+    "russian_cyrillic": null
+  },
+  "ביאנקה": {
+    "hebrew": "ביאנקה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bianca"
+    ],
+    "russian_cyrillic": null
+  },
+  "בוני": {
+    "hebrew": "בוני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bonnie"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברנדה": {
+    "hebrew": "ברנדה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "brenda"
+    ],
+    "russian_cyrillic": null
+  },
+  "ברידג'ט": {
+    "hebrew": "ברידג'ט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "bridget"
+    ],
+    "russian_cyrillic": null
+  },
+  "בריטני": {
+    "hebrew": "בריטני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "brittany"
+    ],
+    "russian_cyrillic": null
+  },
+  "קמיל": {
+    "hebrew": "קמיל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "camille"
+    ],
+    "russian_cyrillic": null
+  },
+  "קנדיס": {
+    "hebrew": "קנדיס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "candace"
+    ],
+    "russian_cyrillic": null
+  },
+  "קנדי": {
+    "hebrew": "קנדי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "candy"
+    ],
+    "russian_cyrillic": null
+  },
+  "קרלה": {
+    "hebrew": "קרלה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "carla"
+    ],
+    "russian_cyrillic": null
+  },
+  "כרמן": {
+    "hebrew": "כרמן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "carmen"
+    ],
+    "russian_cyrillic": null
+  },
+  "קרוליין": {
+    "hebrew": "קרוליין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "caroline"
+    ],
+    "russian_cyrillic": null
+  },
+  "קרי": {
+    "hebrew": "קרי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "carrie",
+      "kerri",
+      "kerry"
+    ],
+    "russian_cyrillic": null
+  },
+  "קסנדרה": {
+    "hebrew": "קסנדרה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "cassandra"
+    ],
+    "russian_cyrillic": null
+  },
+  "קסי": {
+    "hebrew": "קסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "cassie"
+    ],
+    "russian_cyrillic": null
+  },
+  "קתרין": {
+    "hebrew": "קתרין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "catherine"
+    ],
+    "russian_cyrillic": null
+  },
+  "ססיליה": {
+    "hebrew": "ססיליה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "cecilia"
+    ],
+    "russian_cyrillic": null
+  },
+  "סלסט": {
+    "hebrew": "סלסט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "celeste"
+    ],
+    "russian_cyrillic": null
+  },
+  "שרלין": {
+    "hebrew": "שרלין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "charlene"
+    ],
+    "russian_cyrillic": null
+  },
+  "שריל": {
+    "hebrew": "שריל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "cheryl",
+      "sheryl"
+    ],
+    "russian_cyrillic": null
+  },
+  "קלרה": {
+    "hebrew": "קלרה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "clara"
+    ],
+    "russian_cyrillic": null
+  },
+  "קלריסה": {
+    "hebrew": "קלריסה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "clarissa"
+    ],
+    "russian_cyrillic": null
+  },
+  "קלאודיה": {
+    "hebrew": "קלאודיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "claudia"
+    ],
+    "russian_cyrillic": null
+  },
+  "קולין": {
+    "hebrew": "קולין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "colleen"
+    ],
+    "russian_cyrillic": null
+  },
+  "קונסטנס": {
+    "hebrew": "קונסטנס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "constance"
+    ],
+    "russian_cyrillic": null
+  },
+  "קוני": {
+    "hebrew": "קוני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "connie"
+    ],
+    "russian_cyrillic": null
+  },
+  "קורטני": {
+    "hebrew": "קורטני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "courtney"
+    ],
+    "russian_cyrillic": null
+  },
+  "קריסטל": {
+    "hebrew": "קריסטל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "crystal",
+      "krystal"
+    ],
+    "russian_cyrillic": null
+  },
+  "דייזי": {
+    "hebrew": "דייזי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "daisy"
+    ],
+    "russian_cyrillic": null
+  },
+  "דנה": {
+    "hebrew": "דנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "dana"
+    ],
+    "russian_cyrillic": null
+  },
+  "דרלין": {
+    "hebrew": "דרלין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "darlene"
+    ],
+    "russian_cyrillic": null
+  },
+  "דיאנה": {
+    "hebrew": "דיאנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "deanna"
+    ],
+    "russian_cyrillic": null
+  },
+  "דברה": {
+    "hebrew": "דברה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "debra"
+    ],
+    "russian_cyrillic": null
+  },
+  "דלורס": {
+    "hebrew": "דלורס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "delores"
+    ],
+    "russian_cyrillic": null
+  },
+  "דזירה": {
+    "hebrew": "דזירה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "desiree"
+    ],
+    "russian_cyrillic": null
+  },
+  "דווין": {
+    "hebrew": "דווין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "devin"
+    ],
+    "russian_cyrillic": null
+  },
+  "דולורס": {
+    "hebrew": "דולורס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "dolores"
+    ],
+    "russian_cyrillic": null
+  },
+  "דורין": {
+    "hebrew": "דורין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "doreen"
+    ],
+    "russian_cyrillic": null
+  },
+  "דוריס": {
+    "hebrew": "דוריס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "doris"
+    ],
+    "russian_cyrillic": null
+  },
+  "אדית'": {
+    "hebrew": "אדית'",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "edith"
+    ],
+    "russian_cyrillic": null
+  },
+  "אדנה": {
+    "hebrew": "אדנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "edna"
+    ],
+    "russian_cyrillic": null
+  },
+  "איילין": {
+    "hebrew": "איילין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "eileen"
+    ],
+    "russian_cyrillic": null
+  },
+  "אליין": {
+    "hebrew": "אליין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "elaine"
+    ],
+    "russian_cyrillic": null
+  },
+  "אלינור": {
+    "hebrew": "אלינור",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "eleanor"
+    ],
+    "russian_cyrillic": null
+  },
+  "אליז": {
+    "hebrew": "אליז",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "elise"
+    ],
+    "russian_cyrillic": null
+  },
+  "אליזה": {
+    "hebrew": "אליזה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "eliza"
+    ],
+    "russian_cyrillic": null
+  },
+  "אלן": {
+    "hebrew": "אלן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ellen"
+    ],
+    "russian_cyrillic": null
+  },
+  "אלואיז": {
+    "hebrew": "אלואיז",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "eloise"
+    ],
+    "russian_cyrillic": null
+  },
+  "אלסי": {
+    "hebrew": "אלסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "elsie"
+    ],
+    "russian_cyrillic": null
+  },
+  "אלווירה": {
+    "hebrew": "אלווירה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "elvira"
+    ],
+    "russian_cyrillic": null
+  },
+  "אריקה": {
+    "hebrew": "אריקה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "erica"
+    ],
+    "russian_cyrillic": null
+  },
+  "ארין": {
+    "hebrew": "ארין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "erin"
+    ],
+    "russian_cyrillic": null
+  },
+  "ארנסטין": {
+    "hebrew": "ארנסטין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ernestine"
+    ],
+    "russian_cyrillic": null
+  },
+  "אסמרלדה": {
+    "hebrew": "אסמרלדה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "esmeralda"
+    ],
+    "russian_cyrillic": null
+  },
+  "את'ל": {
+    "hebrew": "את'ל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ethel"
+    ],
+    "russian_cyrillic": null
+  },
+  "יוניס": {
+    "hebrew": "יוניס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "eunice"
+    ],
+    "russian_cyrillic": null
+  },
+  "איב": {
+    "hebrew": "איב",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "eve"
+    ],
+    "russian_cyrillic": null
+  },
+  "אוולין": {
+    "hebrew": "אוולין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "evelyn"
+    ],
+    "russian_cyrillic": null
+  },
+  "פייט'": {
+    "hebrew": "פייט'",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "faith"
+    ],
+    "russian_cyrillic": null
+  },
+  "פיי": {
+    "hebrew": "פיי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "faye"
+    ],
+    "russian_cyrillic": null
+  },
+  "פליסיה": {
+    "hebrew": "פליסיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "felicia"
+    ],
+    "russian_cyrillic": null
+  },
+  "פיונה": {
+    "hebrew": "פיונה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "fiona"
+    ],
+    "russian_cyrillic": null
+  },
+  "פלורנס": {
+    "hebrew": "פלורנס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "florence"
+    ],
+    "russian_cyrillic": null
+  },
+  "פרנסס": {
+    "hebrew": "פרנסס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "frances"
+    ],
+    "russian_cyrillic": null
+  },
+  "פרנסין": {
+    "hebrew": "פרנסין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "francine"
+    ],
+    "russian_cyrillic": null
+  },
+  "גייל": {
+    "hebrew": "גייל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "gail"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ורג'יה": {
+    "hebrew": "ג'ורג'יה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "georgia"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'רלדין": {
+    "hebrew": "ג'רלדין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "geraldine"
+    ],
+    "russian_cyrillic": null
+  },
+  "גרטרוד": {
+    "hebrew": "גרטרוד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "gertrude"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ינה": {
+    "hebrew": "ג'ינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "gina"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ינג'ר": {
+    "hebrew": "ג'ינג'ר",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ginger"
+    ],
+    "russian_cyrillic": null
+  },
+  "גלדיס": {
+    "hebrew": "גלדיס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "gladys"
+    ],
+    "russian_cyrillic": null
+  },
+  "גלנדה": {
+    "hebrew": "גלנדה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "glenda"
+    ],
+    "russian_cyrillic": null
+  },
+  "גלוריה": {
+    "hebrew": "גלוריה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "gloria"
+    ],
+    "russian_cyrillic": null
+  },
+  "גוונדולין": {
+    "hebrew": "גוונדולין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "gwendolyn"
+    ],
+    "russian_cyrillic": null
+  },
+  "גוון": {
+    "hebrew": "גוון",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "gwen"
+    ],
+    "russian_cyrillic": null
+  },
+  "היילי": {
+    "hebrew": "היילי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "haley"
+    ],
+    "russian_cyrillic": null
+  },
+  "האלי": {
+    "hebrew": "האלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "halle"
+    ],
+    "russian_cyrillic": null
+  },
+  "הייזל": {
+    "hebrew": "הייזל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "hazel"
+    ],
+    "russian_cyrillic": null
+  },
+  "היידי": {
+    "hebrew": "היידי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "heidi"
+    ],
+    "russian_cyrillic": null
+  },
+  "הילרי": {
+    "hebrew": "הילרי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "hilary",
+      "hillary"
+    ],
+    "russian_cyrillic": null
+  },
+  "הולי": {
+    "hebrew": "הולי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "holly"
+    ],
+    "russian_cyrillic": null
+  },
+  "הופ": {
+    "hebrew": "הופ",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "hope"
+    ],
+    "russian_cyrillic": null
+  },
+  "אידה": {
+    "hebrew": "אידה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ida"
+    ],
+    "russian_cyrillic": null
+  },
+  "אינגריד": {
+    "hebrew": "אינגריד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ingrid"
+    ],
+    "russian_cyrillic": null
+  },
+  "איירין": {
+    "hebrew": "איירין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "irene"
+    ],
+    "russian_cyrillic": null
+  },
+  "איריס": {
+    "hebrew": "איריס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "iris"
+    ],
+    "russian_cyrillic": null
+  },
+  "איזבל": {
+    "hebrew": "איזבל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "isabel",
+      "isabelle"
+    ],
+    "russian_cyrillic": null
+  },
+  "אייבי": {
+    "hebrew": "אייבי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ivy"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'קי": {
+    "hebrew": "ג'קי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jackie"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'קלין": {
+    "hebrew": "ג'קלין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jacqueline"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ייד": {
+    "hebrew": "ג'ייד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jade"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'אנה": {
+    "hebrew": "ג'אנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jana"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'יין": {
+    "hebrew": "ג'יין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jane"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'נט": {
+    "hebrew": "ג'נט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "janet",
+      "jeanette"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ניס": {
+    "hebrew": "ג'ניס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "janice"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'נין": {
+    "hebrew": "ג'נין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "janine"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'סמין": {
+    "hebrew": "ג'סמין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jasmine"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'נה": {
+    "hebrew": "ג'נה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jenna"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'יל": {
+    "hebrew": "ג'יל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jill"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ואן": {
+    "hebrew": "ג'ואן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "joan",
+      "joann",
+      "joanne"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ואנה": {
+    "hebrew": "ג'ואנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "joanna"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'וסלין": {
+    "hebrew": "ג'וסלין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jocelyn"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ודי": {
+    "hebrew": "ג'ודי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "jodi",
+      "jodie",
+      "jody",
+      "judy"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'וזפין": {
+    "hebrew": "ג'וזפין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "josephine"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'וזי": {
+    "hebrew": "ג'וזי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "josie"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'וי": {
+    "hebrew": "ג'וי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "joy"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ודית'": {
+    "hebrew": "ג'ודית'",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "judith"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'ולייט": {
+    "hebrew": "ג'ולייט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "juliette"
+    ],
+    "russian_cyrillic": null
+  },
+  "קארה": {
+    "hebrew": "קארה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kara"
+    ],
+    "russian_cyrillic": null
+  },
+  "קיילה": {
+    "hebrew": "קיילה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kayla"
+    ],
+    "russian_cyrillic": null
+  },
+  "קלסי": {
+    "hebrew": "קלסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kelsey"
+    ],
+    "russian_cyrillic": null
+  },
+  "קנדרה": {
+    "hebrew": "קנדרה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kendra"
+    ],
+    "russian_cyrillic": null
+  },
+  "קניה": {
+    "hebrew": "קניה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kenya"
+    ],
+    "russian_cyrillic": null
+  },
+  "קירסטן": {
+    "hebrew": "קירסטן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kirsten"
+    ],
+    "russian_cyrillic": null
+  },
+  "קריסטה": {
+    "hebrew": "קריסטה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "krista"
+    ],
+    "russian_cyrillic": null
+  },
+  "קריסטן": {
+    "hebrew": "קריסטן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kristen"
+    ],
+    "russian_cyrillic": null
+  },
+  "קריסטין": {
+    "hebrew": "קריסטין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kristin",
+      "kristine"
+    ],
+    "russian_cyrillic": null
+  },
+  "קריסטינה": {
+    "hebrew": "קריסטינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kristina"
+    ],
+    "russian_cyrillic": null
+  },
+  "קיילי": {
+    "hebrew": "קיילי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "kylie"
+    ],
+    "russian_cyrillic": null
+  },
+  "לייסי": {
+    "hebrew": "לייסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lacy"
+    ],
+    "russian_cyrillic": null
+  },
+  "לקישה": {
+    "hebrew": "לקישה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lakisha"
+    ],
+    "russian_cyrillic": null
+  },
+  "לאנה": {
+    "hebrew": "לאנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lana"
+    ],
+    "russian_cyrillic": null
+  },
+  "לטויה": {
+    "hebrew": "לטויה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "latoya"
+    ],
+    "russian_cyrillic": null
+  },
+  "לורן": {
+    "hebrew": "לורן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lauren"
+    ],
+    "russian_cyrillic": null
+  },
+  "לורי": {
+    "hebrew": "לורי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "laurie",
+      "lori"
+    ],
+    "russian_cyrillic": null
+  },
+  "ליאן": {
+    "hebrew": "ליאן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "leanne"
+    ],
+    "russian_cyrillic": null
+  },
+  "לסלי": {
+    "hebrew": "לסלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "leslie"
+    ],
+    "russian_cyrillic": null
+  },
+  "לטישיה": {
+    "hebrew": "לטישיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "leticia"
+    ],
+    "russian_cyrillic": null
+  },
+  "ליליאן": {
+    "hebrew": "ליליאן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lillian"
+    ],
+    "russian_cyrillic": null
+  },
+  "לינדזי": {
+    "hebrew": "לינדזי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lindsay",
+      "lindsey"
+    ],
+    "russian_cyrillic": null
+  },
+  "לורטה": {
+    "hebrew": "לורטה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "loretta"
+    ],
+    "russian_cyrillic": null
+  },
+  "לורין": {
+    "hebrew": "לורין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lorraine"
+    ],
+    "russian_cyrillic": null
+  },
+  "לואיז": {
+    "hebrew": "לואיז",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "louise"
+    ],
+    "russian_cyrillic": null
+  },
+  "לוסיה": {
+    "hebrew": "לוסיה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lucia"
+    ],
+    "russian_cyrillic": null
+  },
+  "לוסיל": {
+    "hebrew": "לוסיל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lucille"
+    ],
+    "russian_cyrillic": null
+  },
+  "לוסי": {
+    "hebrew": "לוסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lucy"
+    ],
+    "russian_cyrillic": null
+  },
+  "לינט": {
+    "hebrew": "לינט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lynette"
+    ],
+    "russian_cyrillic": null
+  },
+  "לין": {
+    "hebrew": "לין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "lynn"
+    ],
+    "russian_cyrillic": null
+  },
+  "מייבל": {
+    "hebrew": "מייבל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mabel"
+    ],
+    "russian_cyrillic": null
+  },
+  "מדליין": {
+    "hebrew": "מדליין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "madeline"
+    ],
+    "russian_cyrillic": null
+  },
+  "מיי": {
+    "hebrew": "מיי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mae"
+    ],
+    "russian_cyrillic": null
+  },
+  "מלורי": {
+    "hebrew": "מלורי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mallory"
+    ],
+    "russian_cyrillic": null
+  },
+  "מיימי": {
+    "hebrew": "מיימי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mamie"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרסלה": {
+    "hebrew": "מרסלה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marcella"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרשה": {
+    "hebrew": "מרשה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marcia",
+      "marsha"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרסי": {
+    "hebrew": "מרסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marcy"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרגריטה": {
+    "hebrew": "מרגריטה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "margarita"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרג'": {
+    "hebrew": "מרג'",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marge"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרג'י": {
+    "hebrew": "מרג'י",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "margie"
+    ],
+    "russian_cyrillic": null
+  },
+  "מריאן": {
+    "hebrew": "מריאן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marianne"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרילין": {
+    "hebrew": "מרילין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marilyn"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרג'ורי": {
+    "hebrew": "מרג'ורי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marjorie"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרלין": {
+    "hebrew": "מרלין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marlene"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרתה": {
+    "hebrew": "מרתה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "martha"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרטי": {
+    "hebrew": "מרטי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "marti"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרטינה": {
+    "hebrew": "מרטינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "martina"
+    ],
+    "russian_cyrillic": null
+  },
+  "מטילדה": {
+    "hebrew": "מטילדה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "matilda"
+    ],
+    "russian_cyrillic": null
+  },
+  "מורין": {
+    "hebrew": "מורין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "maureen"
+    ],
+    "russian_cyrillic": null
+  },
+  "מקסין": {
+    "hebrew": "מקסין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "maxine"
+    ],
+    "russian_cyrillic": null
+  },
+  "מלאני": {
+    "hebrew": "מלאני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "melanie"
+    ],
+    "russian_cyrillic": null
+  },
+  "מלינדה": {
+    "hebrew": "מלינדה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "melinda"
+    ],
+    "russian_cyrillic": null
+  },
+  "מלודי": {
+    "hebrew": "מלודי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "melody"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרדית'": {
+    "hebrew": "מרדית'",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "meredith"
+    ],
+    "russian_cyrillic": null
+  },
+  "מרל": {
+    "hebrew": "מרל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "merle"
+    ],
+    "russian_cyrillic": null
+  },
+  "מילדרד": {
+    "hebrew": "מילדרד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mildred"
+    ],
+    "russian_cyrillic": null
+  },
+  "מיליסנט": {
+    "hebrew": "מיליסנט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "millicent"
+    ],
+    "russian_cyrillic": null
+  },
+  "מינדי": {
+    "hebrew": "מינדי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "mindy"
+    ],
+    "russian_cyrillic": null
+  },
+  "מיני": {
+    "hebrew": "מיני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "minnie"
+    ],
+    "russian_cyrillic": null
+  },
+  "מיסטי": {
+    "hebrew": "מיסטי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "misty"
+    ],
+    "russian_cyrillic": null
+  },
+  "מולי": {
+    "hebrew": "מולי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "molly"
+    ],
+    "russian_cyrillic": null
+  },
+  "מוניקה": {
+    "hebrew": "מוניקה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "monica"
+    ],
+    "russian_cyrillic": null
+  },
+  "מוניק": {
+    "hebrew": "מוניק",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "monique"
+    ],
+    "russian_cyrillic": null
+  },
+  "מוריאל": {
+    "hebrew": "מוריאל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "muriel"
+    ],
+    "russian_cyrillic": null
+  },
+  "מיירה": {
+    "hebrew": "מיירה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "myra"
+    ],
+    "russian_cyrillic": null
+  },
+  "מירנה": {
+    "hebrew": "מירנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "myrna"
+    ],
+    "russian_cyrillic": null
+  },
+  "מירטל": {
+    "hebrew": "מירטל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "myrtle"
+    ],
+    "russian_cyrillic": null
+  },
+  "נדין": {
+    "hebrew": "נדין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "nadine"
+    ],
+    "russian_cyrillic": null
+  },
+  "נלי": {
+    "hebrew": "נלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "nellie"
+    ],
+    "russian_cyrillic": null
+  },
+  "נטי": {
+    "hebrew": "נטי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "nettie"
+    ],
+    "russian_cyrillic": null
+  },
+  "נורה": {
+    "hebrew": "נורה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "nora"
+    ],
+    "russian_cyrillic": null
+  },
+  "נורמה": {
+    "hebrew": "נורמה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "norma"
+    ],
+    "russian_cyrillic": null
+  },
+  "אופל": {
+    "hebrew": "אופל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "opal"
+    ],
+    "russian_cyrillic": null
+  },
+  "פייג'": {
+    "hebrew": "פייג'",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "paige"
+    ],
+    "russian_cyrillic": null
+  },
+  "פאם": {
+    "hebrew": "פאם",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "pam"
+    ],
+    "russian_cyrillic": null
+  },
+  "פמלה": {
+    "hebrew": "פמלה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "pamela"
+    ],
+    "russian_cyrillic": null
+  },
+  "פולין": {
+    "hebrew": "פולין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "pauline"
+    ],
+    "russian_cyrillic": null
+  },
+  "פרל": {
+    "hebrew": "פרל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "pearl"
+    ],
+    "russian_cyrillic": null
+  },
+  "פגי": {
+    "hebrew": "פגי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "peggy"
+    ],
+    "russian_cyrillic": null
+  },
+  "פנלופה": {
+    "hebrew": "פנלופה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "penelope"
+    ],
+    "russian_cyrillic": null
+  },
+  "פני": {
+    "hebrew": "פני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "penny"
+    ],
+    "russian_cyrillic": null
+  },
+  "פיליס": {
+    "hebrew": "פיליס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "phyllis"
+    ],
+    "russian_cyrillic": null
+  },
+  "פריסילה": {
+    "hebrew": "פריסילה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      ""
+    ],
+    "russian_cyrillic": null
+  },
+  "פרודנס": {
+    "hebrew": "פרודנס",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "prudence"
+    ],
+    "russian_cyrillic": null
+  },
+  "רמונה": {
+    "hebrew": "רמונה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ramona"
+    ],
+    "russian_cyrillic": null
+  },
+  "רקל": {
+    "hebrew": "רקל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "raquel"
+    ],
+    "russian_cyrillic": null
+  },
+  "רנה": {
+    "hebrew": "רנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "renee"
+    ],
+    "russian_cyrillic": null
+  },
+  "רונדה": {
+    "hebrew": "רונדה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rhonda"
+    ],
+    "russian_cyrillic": null
+  },
+  "ריטה": {
+    "hebrew": "ריטה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rita"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוברטה": {
+    "hebrew": "רוברטה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "roberta"
+    ],
+    "russian_cyrillic": null
+  },
+  "רובין": {
+    "hebrew": "רובין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "robyn"
+    ],
+    "russian_cyrillic": null
+  },
+  "רושל": {
+    "hebrew": "רושל",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rochelle"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוזה": {
+    "hebrew": "רוזה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rosa"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוזלי": {
+    "hebrew": "רוזלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rosalie"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוזלינד": {
+    "hebrew": "רוזלינד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rosalind"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוזלין": {
+    "hebrew": "רוזלין",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rosalyn"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוזנה": {
+    "hebrew": "רוזנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rosanna"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוזאן": {
+    "hebrew": "רוזאן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rosanne",
+      "roseann"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוז": {
+    "hebrew": "רוז",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rose"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוזמרי": {
+    "hebrew": "רוזמרי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rosemarie",
+      "rosemary"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוזי": {
+    "hebrew": "רוזי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rosie"
+    ],
+    "russian_cyrillic": null
+  },
+  "רווינה": {
+    "hebrew": "רווינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "rowena"
+    ],
+    "russian_cyrillic": null
+  },
+  "רוקסן": {
+    "hebrew": "רוקסן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "roxanne"
+    ],
+    "russian_cyrillic": null
+  },
+  "רובי": {
+    "hebrew": "רובי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ruby"
+    ],
+    "russian_cyrillic": null
+  },
+  "סברינה": {
+    "hebrew": "סברינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sabrina"
+    ],
+    "russian_cyrillic": null
+  },
+  "סיידי": {
+    "hebrew": "סיידי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sadie"
+    ],
+    "russian_cyrillic": null
+  },
+  "סאלי": {
+    "hebrew": "סאלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sally",
+      "sallie"
+    ],
+    "russian_cyrillic": null
+  },
+  "שנה": {
+    "hebrew": "שנה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "shana"
+    ],
+    "russian_cyrillic": null
+  },
+  "שאנון": {
+    "hebrew": "שאנון",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "shannon"
+    ],
+    "russian_cyrillic": null
+  },
+  "שרי": {
+    "hebrew": "שרי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "shari",
+      "sheri",
+      "sherri",
+      "sherry"
+    ],
+    "russian_cyrillic": null
+  },
+  "שונה": {
+    "hebrew": "שונה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "shauna",
+      "shawna"
+    ],
+    "russian_cyrillic": null
+  },
+  "שינה": {
+    "hebrew": "שינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sheena"
+    ],
+    "russian_cyrillic": null
+  },
+  "שילה": {
+    "hebrew": "שילה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "sheila"
+    ],
+    "russian_cyrillic": null
+  },
+  "שלבי": {
+    "hebrew": "שלבי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "shelby"
+    ],
+    "russian_cyrillic": null
+  },
+  "שליה": {
+    "hebrew": "שליה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "shelia"
+    ],
+    "russian_cyrillic": null
+  },
+  "שלי": {
+    "hebrew": "שלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "shelley",
+      "shelly"
+    ],
+    "russian_cyrillic": null
+  },
+  "שירלי": {
+    "hebrew": "שירלי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "shirley"
+    ],
+    "russian_cyrillic": null
+  },
+  "סילביה": {
+    "hebrew": "סילביה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "silvia",
+      "sylvia"
+    ],
+    "russian_cyrillic": null
+  },
+  "סטייסי": {
+    "hebrew": "סטייסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "stacey",
+      "stacy"
+    ],
+    "russian_cyrillic": null
+  },
+  "סטלה": {
+    "hebrew": "סטלה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "stella"
+    ],
+    "russian_cyrillic": null
+  },
+  "סוזי": {
+    "hebrew": "סוזי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "susie",
+      "suzie"
+    ],
+    "russian_cyrillic": null
+  },
+  "טביתה": {
+    "hebrew": "טביתה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tabitha"
+    ],
+    "russian_cyrillic": null
+  },
+  "תמי": {
+    "hebrew": "תמי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tami",
+      "tammie",
+      "tammy"
+    ],
+    "russian_cyrillic": null
+  },
+  "טארה": {
+    "hebrew": "טארה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tara"
+    ],
+    "russian_cyrillic": null
+  },
+  "טשה": {
+    "hebrew": "טשה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tasha"
+    ],
+    "russian_cyrillic": null
+  },
+  "טיילור": {
+    "hebrew": "טיילור",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "taylor"
+    ],
+    "russian_cyrillic": null
+  },
+  "טסה": {
+    "hebrew": "טסה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tessa"
+    ],
+    "russian_cyrillic": null
+  },
+  "תלמה": {
+    "hebrew": "תלמה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "thelma"
+    ],
+    "russian_cyrillic": null
+  },
+  "תרזה": {
+    "hebrew": "תרזה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "theresa",
+      "teresa"
+    ],
+    "russian_cyrillic": null
+  },
+  "טיפני": {
+    "hebrew": "טיפני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tiffany"
+    ],
+    "russian_cyrillic": null
+  },
+  "טינה": {
+    "hebrew": "טינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tina"
+    ],
+    "russian_cyrillic": null
+  },
+  "טוניה": {
+    "hebrew": "טוניה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tonya"
+    ],
+    "russian_cyrillic": null
+  },
+  "טרייסי": {
+    "hebrew": "טרייסי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tracey",
+      "traci",
+      "tracie",
+      "tracy"
+    ],
+    "russian_cyrillic": null
+  },
+  "טרישה": {
+    "hebrew": "טרישה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "tricia",
+      "trisha"
+    ],
+    "russian_cyrillic": null
+  },
+  "טרינה": {
+    "hebrew": "טרינה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "trina"
+    ],
+    "russian_cyrillic": null
+  },
+  "טריש": {
+    "hebrew": "טריש",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "trish"
+    ],
+    "russian_cyrillic": null
+  },
+  "טרודי": {
+    "hebrew": "טרודי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "trudy"
+    ],
+    "russian_cyrillic": null
+  },
+  "אורסולה": {
+    "hebrew": "אורסולה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ursula"
+    ],
+    "russian_cyrillic": null
+  },
+  "ונסה": {
+    "hebrew": "ונסה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vanessa"
+    ],
+    "russian_cyrillic": null
+  },
+  "ולמה": {
+    "hebrew": "ולמה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "velma"
+    ],
+    "russian_cyrillic": null
+  },
+  "ורוניקה": {
+    "hebrew": "ורוניקה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "veronica"
+    ],
+    "russian_cyrillic": null
+  },
+  "ויולה": {
+    "hebrew": "ויולה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "viola"
+    ],
+    "russian_cyrillic": null
+  },
+  "ויולט": {
+    "hebrew": "ויולט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "violet"
+    ],
+    "russian_cyrillic": null
+  },
+  "וירג'יניה": {
+    "hebrew": "וירג'יניה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "virginia"
+    ],
+    "russian_cyrillic": null
+  },
+  "ג'יני": {
+    "hebrew": "ג'יני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "ginny"
+    ],
+    "russian_cyrillic": null
+  },
+  "ויויאן": {
+    "hebrew": "ויויאן",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "vivian"
+    ],
+    "russian_cyrillic": null
+  },
+  "וונדה": {
+    "hebrew": "וונדה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "wanda"
+    ],
+    "russian_cyrillic": null
+  },
+  "וונדי": {
+    "hebrew": "וונדי",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "wendy"
+    ],
+    "russian_cyrillic": null
+  },
+  "וויטני": {
+    "hebrew": "וויטני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "whitney"
+    ],
+    "russian_cyrillic": null
+  },
+  "וילמה": {
+    "hebrew": "וילמה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "wilma"
+    ],
+    "russian_cyrillic": null
+  },
+  "וויניפרד": {
+    "hebrew": "וויניפרד",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "winifred"
+    ],
+    "russian_cyrillic": null
+  },
+  "ויני": {
+    "hebrew": "ויני",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "winnie"
+    ],
+    "russian_cyrillic": null
+  },
+  "יולנדה": {
+    "hebrew": "יולנדה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "yolanda"
+    ],
+    "russian_cyrillic": null
+  },
+  "איווט": {
+    "hebrew": "איווט",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "yvette"
+    ],
+    "russian_cyrillic": null
+  },
+  "איבון": {
+    "hebrew": "איבון",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "yvonne"
+    ],
+    "russian_cyrillic": null
+  },
+  "זלמה": {
+    "hebrew": "זלמה",
+    "english": null,
+    "arabic": null,
+    "russian": [
+      "zelma"
+    ],
+    "russian_cyrillic": null
+  }
+}

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עריכת כינוי</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        h1 {
+            margin: 0 0 30px 0;
+            color: #333;
+            font-size: 28px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        .input-row {
+            display: flex;
+            gap: 12px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        input[type="text"].error {
+            border-color: #c62828;
+            background: #fff8f8;
+        }
+        .help-text {
+            font-size: 13px;
+            color: #888;
+            margin-top: 6px;
+        }
+        .error-text {
+            font-size: 13px;
+            color: #c62828;
+            margin-top: 6px;
+            display: none;
+        }
+        button {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn-success {
+            background: #2e7d32;
+            color: white;
+            width: 100%;
+        }
+        .btn-success:hover {
+            background: #1b5e20;
+        }
+        .btn-danger {
+            background: #c62828;
+            color: white;
+        }
+        .btn-danger:hover {
+            background: #b71c1c;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .nicknames-section {
+            display: none;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .nicknames-section.visible {
+            display: block;
+        }
+        .current-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 16px;
+        }
+        .nicknames-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            min-height: 80px;
+            resize: vertical;
+            direction: rtl;
+        }
+        .nicknames-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .result.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .result.error {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .buttons-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .buttons-row button {
+            flex: 1;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .new-badge {
+            display: inline-block;
+            background: #ff9800;
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/web/nicknames" class="back-link">חזרה לניהול כינויים</a>
+        {% if is_admin %}
+        <a href="/web/users" class="back-link" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">ניהול משתמשים</a>
+        {% endif %}
+
+        <h1>עריכת כינוי</h1>
+
+        <div class="form-group">
+            <label for="nameInput">שם רשמי</label>
+            <div class="input-row">
+                <input type="text" id="nameInput" placeholder="הזן שם רשמי...">
+                <button type="button" class="btn-primary" id="searchBtn">חפש</button>
+            </div>
+            <div class="help-text">הזן שם רשמי ולחץ Enter או על כפתור "חפש"</div>
+        </div>
+
+        <div class="nicknames-section" id="nicknamesSection">
+            <div class="current-name">
+                <span id="newBadge" class="new-badge" style="display:none;">חדש</span>
+                <span id="currentName"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="nicknamesInput">כינויים (מופרדים בפסיק)</label>
+                <textarea class="nicknames-input" id="nicknamesInput" placeholder="כינוי1, כינוי2, כינוי3..."></textarea>
+                <div class="help-text">הזן כינויים בעברית בלבד, מופרדים בפסיק</div>
+                <div class="error-text" id="errorText">ניתן להזין רק אותיות בעברית ופסיקים</div>
+            </div>
+
+            <div class="buttons-row">
+                <button type="button" class="btn-success" id="saveBtn">שמור</button>
+                <button type="button" class="btn-danger" id="deleteBtn">מחק</button>
+            </div>
+        </div>
+
+        <div class="result" id="result"></div>
+
+        <a href="/web/nicknames" class="back-link">חזרה לניהול כינויים</a>
+    </div>
+
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const nicknamesSection = document.getElementById('nicknamesSection');
+        const currentName = document.getElementById('currentName');
+        const newBadge = document.getElementById('newBadge');
+        const nicknamesInput = document.getElementById('nicknamesInput');
+        const saveBtn = document.getElementById('saveBtn');
+        const deleteBtn = document.getElementById('deleteBtn');
+        const result = document.getElementById('result');
+        const errorText = document.getElementById('errorText');
+
+        let isNewEntry = false;
+
+        // Hebrew letters and comma validation regex
+        const hebrewRegex = /^[\u0590-\u05FF\s,]*$/;
+
+        nameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchName();
+            }
+        });
+
+        searchBtn.addEventListener('click', searchName);
+
+        async function searchName() {
+            const name = nameInput.value.trim();
+            if (!name) {
+                showResult('יש להזין שם', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/web/nicknames/get?name=${encodeURIComponent(name)}`);
+                const data = await response.json();
+
+                currentName.textContent = name;
+                nicknamesSection.classList.add('visible');
+                result.style.display = 'none';
+                errorText.style.display = 'none';
+
+                if (data.found) {
+                    nicknamesInput.value = data.all_names;
+                    isNewEntry = false;
+                    newBadge.style.display = 'none';
+                    deleteBtn.style.display = 'block';
+                } else {
+                    nicknamesInput.value = '';
+                    isNewEntry = true;
+                    newBadge.style.display = 'inline-block';
+                    deleteBtn.style.display = 'none';
+                }
+
+                nicknamesInput.focus();
+
+            } catch (error) {
+                showResult('שגיאת חיבור: ' + error.message, 'error');
+            }
+        }
+
+        // Validate input on every change
+        nicknamesInput.addEventListener('input', function() {
+            const value = this.value;
+
+            // Allow only Hebrew letters, spaces, and commas
+            if (!hebrewRegex.test(value)) {
+                this.classList.add('error');
+                errorText.style.display = 'block';
+
+                // Remove invalid characters
+                this.value = value.replace(/[^\u0590-\u05FF\s,]/g, '');
+            } else {
+                this.classList.remove('error');
+                errorText.style.display = 'none';
+            }
+        });
+
+        saveBtn.addEventListener('click', async function() {
+            const name = currentName.textContent;
+            let nicknames = nicknamesInput.value.trim();
+
+            if (!nicknames) {
+                showResult('יש להזין לפחות כינוי אחד', 'error');
+                return;
+            }
+
+            // Clean up: remove extra spaces, normalize commas
+            nicknames = nicknames
+                .split(',')
+                .map(n => n.trim())
+                .filter(n => n.length > 0)
+                .join(',');
+
+            if (!nicknames) {
+                showResult('יש להזין לפחות כינוי אחד', 'error');
+                return;
+            }
+
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'שומר...';
+
+            try {
+                const response = await fetch('/web/nicknames/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        formal_name: name,
+                        all_names: nicknames
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showResult(isNewEntry ? 'הכינוי נוסף בהצלחה' : 'הכינוי עודכן בהצלחה', 'success');
+                    isNewEntry = false;
+                    newBadge.style.display = 'none';
+                    deleteBtn.style.display = 'block';
+                } else {
+                    showResult('שגיאה: ' + data.error, 'error');
+                }
+
+            } catch (error) {
+                showResult('שגיאת חיבור: ' + error.message, 'error');
+            }
+
+            saveBtn.disabled = false;
+            saveBtn.textContent = 'שמור';
+        });
+
+        deleteBtn.addEventListener('click', async function() {
+            const name = currentName.textContent;
+
+            if (!confirm(`האם למחוק את הכינויים של "${name}"?`)) {
+                return;
+            }
+
+            deleteBtn.disabled = true;
+            deleteBtn.textContent = 'מוחק...';
+
+            try {
+                const response = await fetch('/web/nicknames/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        formal_name: name
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showResult('הכינוי נמחק בהצלחה', 'success');
+                    nicknamesSection.classList.remove('visible');
+                    nameInput.value = '';
+                    nameInput.focus();
+                } else {
+                    showResult('שגיאה: ' + data.error, 'error');
+                }
+
+            } catch (error) {
+                showResult('שגיאת חיבור: ' + error.message, 'error');
+            }
+
+            deleteBtn.disabled = false;
+            deleteBtn.textContent = 'מחק';
+        });
+
+        function showResult(message, type) {
+            result.textContent = message;
+            result.className = 'result ' + type;
+            result.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

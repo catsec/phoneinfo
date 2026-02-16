@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# Database
+db/
+*.db
+*.db-shm
+*.db-wal
+
+# Environment Variables
+.env
+.env.local
+
+# Claude Code
+.claude/
+
+# Testing
+test/
+tests/
+*.test.py
+
+# Project Specific
+CLAUDE.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp

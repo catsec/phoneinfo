@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שאילתה בודדת</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            margin: 0 0 30px 0;
+            color: #333;
+            font-size: 28px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        input[type=text], input[type=number] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type=text]:focus, input[type=number]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .row {
+            display: flex;
+            gap: 16px;
+        }
+        .row .form-group {
+            flex: 1;
+        }
+        .help-text {
+            font-size: 13px;
+            color: #888;
+            margin-top: 6px;
+        }
+        .api-checkboxes {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .api-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .api-checkbox:hover:not(.disabled) {
+            background: #e8e8ff;
+        }
+        .api-checkbox.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .api-checkbox input[type=checkbox] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .api-checkbox.disabled input[type=checkbox] {
+            cursor: not-allowed;
+        }
+        .api-checkbox .api-name {
+            font-weight: 500;
+            color: #333;
+        }
+        .api-checkbox.disabled .api-name {
+            color: #999;
+        }
+        .api-checkbox .api-status {
+            font-size: 11px;
+            color: #888;
+            margin-right: 4px;
+        }
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        button {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .result {
+            display: none;
+            margin-top: 24px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .result.error {
+            background: #ffebee;
+        }
+        .result h3 {
+            margin: 0 0 16px 0;
+            color: #333;
+            font-size: 18px;
+        }
+        .result.error h3 {
+            color: #c62828;
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .result-item {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+        }
+        .result-item.full-width {
+            grid-column: 1 / -1;
+        }
+        .result-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+        .result-value {
+            font-size: 14px;
+            color: #333;
+            word-break: break-all;
+        }
+        .result-value.highlight {
+            font-size: 18px;
+            font-weight: 600;
+            color: #667eea;
+        }
+        .matching-score {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .matching-high { background: #c8e6c9; color: #2e7d32; }
+        .matching-medium { background: #fff9c4; color: #f57f17; }
+        .matching-low { background: #ffcdd2; color: #c62828; }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .back-link.top {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link top">חזרה לדף הראשי</a>
+        {% if is_admin %}
+        <a href="/web/users" class="back-link top" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">ניהול משתמשים</a>
+        {% endif %}
+
+        <h1>שאילתה בודדת</h1>
+
+        <form id="queryForm">
+            <div class="form-group">
+                <label for="phone">מספר טלפון</label>
+                <input type="text" id="phone" name="phone" placeholder="0501234567" required>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="firstName">שם פרטי (רשמי)</label>
+                    <input type="text" id="firstName" name="first_name" placeholder="ישראל">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">שם משפחה (רשמי)</label>
+                    <input type="text" id="lastName" name="last_name" placeholder="ישראלי">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>ממשקים</label>
+                <div class="api-checkboxes" id="apiCheckboxes">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>שימוש במטמון בלבד</label>
+                <div class="api-checkboxes">
+                    <label class="api-checkbox" id="meCacheLabel">
+                        <input type="checkbox" id="meCache" name="me_cache">
+                        <span class="api-name">ME</span>
+                    </label>
+                    <label class="api-checkbox" id="syncCacheLabel">
+                        <input type="checkbox" id="syncCache" name="sync_cache">
+                        <span class="api-name">SYNC</span>
+                    </label>
+                </div>
+                <div class="help-text">סימון = שימוש במטמון בלבד, ללא קריאה ל-API</div>
+            </div>
+
+            <div class="form-group">
+                <label for="refreshDays">ימי עדכון</label>
+                <input type="number" id="refreshDays" name="refresh_days" value="7" min="0">
+                <div class="help-text">
+                    0 = תמיד קריאה ל-API (אלא אם מטמון מסומן)<br>
+                    1+ = עדכון רשומות ישנות מ-N ימים
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn-primary" id="submitBtn">חפש</button>
+                <button type="button" class="btn-secondary" onclick="window.location.href='/'">חזרה לקבצים</button>
+            </div>
+        </form>
+
+        <div class="result" id="result">
+            <h3 id="resultTitle">תוצאות</h3>
+            <div class="result-grid" id="resultGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <a href="/" class="back-link">חזרה לדף הראשי</a>
+    </div>
+
+    <script>
+        // XSS Protection: Escape HTML special characters
+        function escapeHTML(str) {
+            if (str == null) return '';
+            const div = document.createElement('div');
+            div.textContent = String(str);
+            return div.innerHTML;
+        }
+
+        const form = document.getElementById('queryForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const result = document.getElementById('result');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultGrid = document.getElementById('resultGrid');
+        const apiCheckboxes = document.getElementById('apiCheckboxes');
+
+        // Cookie helper functions
+        function setCookie(name, value) {
+            // Set cookie with 10 year expiration (essentially permanent)
+            const expires = new Date(Date.now() + 10 * 365 * 24 * 60 * 60 * 1000).toUTCString();
+            document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires};path=/`;
+        }
+
+        function getCookie(name) {
+            const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            return match ? decodeURIComponent(match[2]) : null;
+        }
+
+        function savePreferences() {
+            // Save API selections
+            const selectedApis = [];
+            document.querySelectorAll('input[name="apis"]:checked').forEach(cb => {
+                selectedApis.push(cb.value);
+            });
+            setCookie('query_apis', selectedApis.join(','));
+
+            // Save cache checkboxes
+            const meCache = document.getElementById('meCache');
+            const syncCache = document.getElementById('syncCache');
+            setCookie('query_meCache', meCache && meCache.checked ? '1' : '0');
+            setCookie('query_syncCache', syncCache && syncCache.checked ? '1' : '0');
+
+            // Save refresh days
+            const refreshDays = document.getElementById('refreshDays').value;
+            setCookie('query_refreshDays', refreshDays);
+        }
+
+        function loadPreferences() {
+            // Load refresh days
+            const savedRefreshDays = getCookie('query_refreshDays');
+            if (savedRefreshDays !== null) {
+                document.getElementById('refreshDays').value = savedRefreshDays;
+            }
+
+            // Load cache checkboxes (static elements)
+            const savedMeCache = getCookie('query_meCache');
+            const savedSyncCache = getCookie('query_syncCache');
+            const meCache = document.getElementById('meCache');
+            const syncCache = document.getElementById('syncCache');
+            if (savedMeCache !== null && meCache) {
+                meCache.checked = savedMeCache === '1';
+            }
+            if (savedSyncCache !== null && syncCache) {
+                syncCache.checked = savedSyncCache === '1';
+            }
+
+            // Add change listeners
+            if (meCache) meCache.addEventListener('change', savePreferences);
+            if (syncCache) syncCache.addEventListener('change', savePreferences);
+            document.getElementById('refreshDays').addEventListener('change', savePreferences);
+        }
+
+        function applyApiPreferences() {
+            // Apply saved API selections
+            const savedApis = getCookie('query_apis');
+            if (savedApis !== null) {
+                const apisArray = savedApis.split(',');
+                document.querySelectorAll('input[name="apis"]').forEach(cb => {
+                    if (!cb.disabled) {
+                        cb.checked = apisArray.includes(cb.value);
+                    }
+                });
+            }
+
+            // Add change listeners to save preferences
+            document.querySelectorAll('input[name="apis"]').forEach(cb => {
+                cb.addEventListener('change', savePreferences);
+            });
+        }
+
+        // Load non-API preferences immediately
+        loadPreferences();
+
+        // Load available APIs on page load
+        async function loadApis() {
+            try {
+                const response = await fetch('/web/apis');
+                const data = await response.json();
+
+                apiCheckboxes.innerHTML = '';
+
+                for (const api of data.apis) {
+                    const label = document.createElement('label');
+                    label.className = 'api-checkbox' + (api.available ? '' : ' disabled');
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.name = 'apis';
+                    checkbox.value = api.name.toLowerCase();
+                    checkbox.disabled = !api.available;
+                    if (api.available) {
+                        checkbox.checked = true;
+                    }
+
+                    const nameSpan = document.createElement('span');
+                    nameSpan.className = 'api-name';
+                    nameSpan.textContent = api.name;
+
+                    label.appendChild(checkbox);
+                    label.appendChild(nameSpan);
+
+                    if (!api.available) {
+                        const statusSpan = document.createElement('span');
+                        statusSpan.className = 'api-status';
+                        statusSpan.textContent = '(לא מוגדר)';
+                        label.appendChild(statusSpan);
+                    }
+
+                    apiCheckboxes.appendChild(label);
+                }
+
+                // Apply saved preferences after APIs are loaded
+                applyApiPreferences();
+            } catch (error) {
+                console.error('Failed to load APIs:', error);
+            }
+        }
+
+        loadApis();
+
+        function getMatchingClass(score) {
+            if (score >= 70) return 'matching-high';
+            if (score >= 50) return 'matching-medium';
+            return 'matching-low';
+        }
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const phone = document.getElementById('phone').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const refreshDays = document.getElementById('refreshDays').value;
+            const meCache = document.getElementById('meCache').checked;
+            const syncCache = document.getElementById('syncCache').checked;
+
+            // Get selected APIs
+            const selectedApis = [];
+            document.querySelectorAll('input[name="apis"]:checked').forEach(cb => {
+                selectedApis.push(cb.value);
+            });
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'מחפש...';
+            result.style.display = 'none';
+
+            try {
+                const response = await fetch('/web/query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        phone: phone,
+                        first_name: firstName,
+                        last_name: lastName,
+                        me_cache_only: meCache,
+                        sync_cache_only: syncCache,
+                        refresh_days: parseInt(refreshDays),
+                        apis: selectedApis.join(',')
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    result.className = 'result';
+                    resultTitle.textContent = 'תוצאות';
+
+                    const r = data.result;
+                    const meScore = parseInt(r['me.matching'] || 0);
+                    const syncScore = parseInt(r['sync.matching'] || 0);
+
+                    // Check which APIs were selected
+                    const useME = selectedApis.includes('me');
+                    const useSYNC = selectedApis.includes('sync');
+
+                    // Build SYNC section only if SYNC was selected
+                    const syncSection = useSYNC ? `
+                        <div class="result-item">
+                            <div class="result-label">שם פרטי (SYNC)</div>
+                            <div class="result-value highlight">${escapeHTML(r['sync.first_name']) || '-'}</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">שם משפחה (SYNC)</div>
+                            <div class="result-value highlight">${escapeHTML(r['sync.last_name']) || '-'}</div>
+                        </div>
+                        <div class="result-item full-width">
+                            <div class="result-label">תעתיק לעברית (SYNC)</div>
+                            <div class="result-value">${escapeHTML(r['sync.translated']) || '-'}</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">ציון SYNC</div>
+                            <div class="result-value">
+                                <span class="matching-score ${getMatchingClass(syncScore)}">${syncScore}%</span>
+                            </div>
+                        </div>
+                    ` : '';
+
+                    // Build ME section only if ME was selected
+                    const meSection = useME ? `
+                        <div class="result-item">
+                            <div class="result-label">שם נפוץ (ME)</div>
+                            <div class="result-value highlight">${escapeHTML(r['me.common_name']) || '-'}</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">ציון ME</div>
+                            <div class="result-value">
+                                <span class="matching-score ${getMatchingClass(meScore)}">${meScore}%</span>
+                            </div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">שם פרטי (ME)</div>
+                            <div class="result-value">${escapeHTML(r['me.first_name']) || '-'}</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">שם משפחה (ME)</div>
+                            <div class="result-value">${escapeHTML(r['me.last_name']) || '-'}</div>
+                        </div>
+                        <div class="result-item full-width">
+                            <div class="result-label">תעתיק לעברית</div>
+                            <div class="result-value">${escapeHTML(r['me.translated']) || '-'}</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">מגדר</div>
+                            <div class="result-value">${escapeHTML(r['me.gender']) || '-'}</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">מאומת</div>
+                            <div class="result-value">${r['me.is_verified'] === 'True' ? 'כן' : 'לא'}</div>
+                        </div>
+                        <div class="result-item full-width">
+                            <div class="result-label">אימייל</div>
+                            <div class="result-value">${escapeHTML(r['me.email']) || '-'}</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">עוצמת תוצאה</div>
+                            <div class="result-value">${escapeHTML(r['me.result_strength']) || '-'}</div>
+                        </div>
+                    ` : '';
+
+                    resultGrid.innerHTML = `
+                        <div class="result-item">
+                            <div class="result-label">מספר טלפון</div>
+                            <div class="result-value">${escapeHTML(r.phone_number) || '-'}</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">שם מאנשי קשר</div>
+                            <div class="result-value">${escapeHTML(r.cal_name) || '-'}</div>
+                        </div>
+                        ${meSection}
+                        ${syncSection}
+                        <div class="result-item">
+                            <div class="result-label">מקור</div>
+                            <div class="result-value">${data.from_cache ? 'מטמון' : 'API'}</div>
+                        </div>
+                    `;
+                } else {
+                    result.className = 'result error';
+                    resultTitle.textContent = 'שגיאה';
+                    resultGrid.innerHTML = `<div class="result-item full-width"><div class="result-value">${escapeHTML(data.error)}</div></div>`;
+                }
+
+                result.style.display = 'block';
+
+            } catch (error) {
+                result.className = 'result error';
+                resultTitle.textContent = 'שגיאה';
+                resultGrid.innerHTML = `<div class="result-item full-width"><div class="result-value">שגיאת חיבור: ${escapeHTML(error.message)}</div></div>`;
+                result.style.display = 'block';
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'חפש';
+        });
+    </script>
+</body>
+</html>

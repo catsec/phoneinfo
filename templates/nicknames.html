@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול כינויים</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        h1 {
+            margin: 0 0 30px 0;
+            color: #333;
+            font-size: 28px;
+            text-align: center;
+        }
+        h2 {
+            margin: 30px 0 15px 0;
+            color: #444;
+            font-size: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        .file-input-button {
+            display: block;
+            padding: 16px 20px;
+            background: #f5f5f5;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            text-align: center;
+            color: #666;
+            transition: all 0.3s;
+        }
+        .file-input-wrapper:hover .file-input-button {
+            border-color: #667eea;
+            background: #f0f0ff;
+        }
+        .file-name {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #667eea;
+            font-weight: 500;
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .radio-option:hover {
+            background: #e8e8ff;
+        }
+        .radio-option input[type=radio] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .radio-option .radio-label {
+            font-weight: 500;
+            color: #333;
+        }
+        .radio-option .radio-desc {
+            font-size: 12px;
+            color: #666;
+            margin-top: 2px;
+        }
+        .help-text {
+            font-size: 13px;
+            color: #888;
+            margin-top: 6px;
+        }
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        button, .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+        .btn-success {
+            background: #2e7d32;
+            color: white;
+        }
+        .btn-success:hover {
+            background: #1b5e20;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .result {
+            display: none;
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .result.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .result.error {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .nicknames-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .nicknames-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: right;
+        }
+        .nicknames-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .nicknames-table tr:hover {
+            background: #f5f5f5;
+        }
+        .nicknames-table .formal-name {
+            font-weight: 600;
+            color: #333;
+            width: 120px;
+        }
+        .nicknames-table .all-names {
+            color: #666;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">חזרה לדף הראשי</a>
+        {% if is_admin %}
+        <a href="/web/users" class="back-link" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">ניהול משתמשים</a>
+        {% endif %}
+
+        <h1>ניהול כינויים</h1>
+
+        <h2>ייבוא כינויים</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>העלאת קובץ (Excel או CSV)</label>
+                <div class="file-input-wrapper">
+                    <div class="file-input-button">
+                        לחץ לבחירת קובץ או גרור לכאן
+                    </div>
+                    <input type="file" id="fileInput" name="file" accept=".xlsx,.csv">
+                </div>
+                <div class="file-name" id="fileName"></div>
+                <div class="help-text">
+                    פורמט נדרש: עמודה ראשונה - שם רשמי (formal_name), עמודה שניה - כינויים מופרדים בפסיק (all_names)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>מצב ייבוא</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="mode" value="add" checked>
+                        <div>
+                            <div class="radio-label">הוספה</div>
+                            <div class="radio-desc">הוסף כינויים חדשים לשמות קיימים</div>
+                        </div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="mode" value="overwrite">
+                        <div>
+                            <div class="radio-label">החלפה</div>
+                            <div class="radio-desc">החלף כינויים קיימים בכינויים מהקובץ</div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="btn-primary" id="uploadBtn">ייבא כינויים</button>
+                <a href="/web/nicknames/download" class="btn btn-success">הורד</a>
+                <a href="/web/nicknames/edit" class="btn btn-secondary">עריכה ידנית</a>
+            </div>
+        </form>
+
+        <div class="result" id="result"></div>
+
+        <h2>כינויים במערכת</h2>
+        <div class="stats" id="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="totalNames">0</div>
+                <div class="stat-label">שמות רשמיים</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="totalNicknames">0</div>
+                <div class="stat-label">כינויים</div>
+            </div>
+        </div>
+
+        <input type="text" class="search-box" id="searchBox" placeholder="חפש שם או כינוי...">
+
+        <div class="table-container">
+            <table class="nicknames-table">
+                <thead>
+                    <tr>
+                        <th>שם רשמי</th>
+                        <th>כינויים</th>
+                    </tr>
+                </thead>
+                <tbody id="nicknamesBody">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <a href="/" class="back-link">חזרה לדף הראשי</a>
+    </div>
+
+    <script>
+        // XSS Protection: Escape HTML special characters
+        function escapeHTML(str) {
+            if (str == null) return '';
+            const div = document.createElement('div');
+            div.textContent = String(str);
+            return div.innerHTML;
+        }
+
+        const form = document.getElementById('uploadForm');
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const result = document.getElementById('result');
+        const nicknamesBody = document.getElementById('nicknamesBody');
+        const searchBox = document.getElementById('searchBox');
+        const totalNames = document.getElementById('totalNames');
+        const totalNicknames = document.getElementById('totalNicknames');
+
+        let allNicknames = [];
+
+        fileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                fileName.textContent = this.files[0].name;
+            } else {
+                fileName.textContent = '';
+            }
+        });
+
+        async function loadNicknames() {
+            try {
+                const response = await fetch('/web/nicknames/list');
+                const data = await response.json();
+                allNicknames = data.nicknames;
+                totalNames.textContent = data.total_names;
+                totalNicknames.textContent = data.total_nicknames;
+                renderNicknames(allNicknames);
+            } catch (error) {
+                console.error('Failed to load nicknames:', error);
+            }
+        }
+
+        function renderNicknames(nicknames) {
+            nicknamesBody.innerHTML = '';
+            for (const item of nicknames) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="formal-name">${escapeHTML(item.formal_name)}</td>
+                    <td class="all-names">${escapeHTML(item.all_names)}</td>
+                `;
+                nicknamesBody.appendChild(tr);
+            }
+        }
+
+        searchBox.addEventListener('input', function() {
+            const query = this.value.trim().toLowerCase();
+            if (!query) {
+                renderNicknames(allNicknames);
+                return;
+            }
+            const filtered = allNicknames.filter(item =>
+                item.formal_name.toLowerCase().includes(query) ||
+                item.all_names.toLowerCase().includes(query)
+            );
+            renderNicknames(filtered);
+        });
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!fileInput.files.length) {
+                result.className = 'result error';
+                result.textContent = 'יש לבחור קובץ';
+                result.style.display = 'block';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('mode', document.querySelector('input[name="mode"]:checked').value);
+
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'מייבא...';
+            result.style.display = 'none';
+
+            try {
+                const response = await fetch('/web/nicknames/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    result.className = 'result success';
+                    result.textContent = `הייבוא הושלם! נוספו: ${data.added}, עודכנו: ${data.updated}, דולגו: ${data.skipped}`;
+                    loadNicknames();
+                    fileInput.value = '';
+                    fileName.textContent = '';
+                } else {
+                    result.className = 'result error';
+                    result.textContent = 'שגיאה: ' + data.error;
+                }
+                result.style.display = 'block';
+
+            } catch (error) {
+                result.className = 'result error';
+                result.textContent = 'שגיאת חיבור: ' + error.message;
+                result.style.display = 'block';
+            }
+
+            uploadBtn.disabled = false;
+            uploadBtn.textContent = 'ייבא כינויים';
+        });
+
+        // Load nicknames on page load
+        loadNicknames();
+    </script>
+</body>
+</html>
