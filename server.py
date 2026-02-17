@@ -18,6 +18,7 @@ from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, VerificationError
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from app_logger import log_event
 from functions import (
     init_db,
     init_nickname_table,
@@ -1009,6 +1010,11 @@ def web_query():
     try:
         db = get_db()
         from_cache = False
+        me_api_called = False
+        me_result_ok = ""
+        sync_api_called = False
+        sync_from_cache = False
+        sync_result_ok = ""
         result = {
             "phone_number": phone,
             "cal_name": cal_name,
@@ -1064,6 +1070,8 @@ def web_query():
         # Call ME API if needed and selected (not cache-only mode)
         if use_me and not from_cache and not me_cache_only:
             api_result = me_call_api(phone, API_URL, SID, TOKEN)
+            me_api_called = True
+            me_result_ok = "success" if api_result is not None else "fail"
 
             if api_result is None:
                 flattened_result = clean_data_for_db(me_flatten_user_data({}, prefix="me"))
@@ -1178,6 +1186,8 @@ def web_query():
                 else:
                     # Call SYNC API
                     sync_api_result = sync_call_api(phone, SYNC_API_URL, SYNC_API_TOKEN)
+                    sync_api_called = True
+                    sync_result_ok = "success" if sync_api_result else "fail"
                     if sync_api_result:
                         sync_flat = sync_flatten_user_data(sync_api_result, prefix="sync")
                     else:
@@ -1233,6 +1243,21 @@ def web_query():
                 result["sync.last_name"] = ""
                 result["sync.matching"] = 0
 
+        # Log the query event
+        current_user = get_logged_in_user()
+        log_event(
+            user=current_user.get("username", "") if current_user else "",
+            action="query",
+            phone=phone,
+            me_api_call=me_api_called,
+            sync_api_call=sync_api_called,
+            me_cache=from_cache,
+            sync_cache=sync_from_cache,
+            me_result=me_result_ok,
+            sync_result=sync_result_ok,
+            datetime_str=datetime.now(timezone.utc).isoformat(),
+        )
+
         return jsonify({
             "success": True,
             "result": result,
@@ -1263,6 +1288,7 @@ def web_process():
         return jsonify({"success": False, "error": "Invalid file type. Only .xlsx and .csv files are allowed"}), 400
 
     # Secure the filename
+    original_filename = file.filename
     filename = secure_filename(file.filename)
 
     # Get refresh_days (default 7)
@@ -1421,10 +1447,19 @@ def web_process():
 
         db = get_db()
 
+        # Get current user for logging
+        current_user = get_logged_in_user()
+        log_username = current_user.get("username", "") if current_user else ""
+
         # Process each validated row
         for row_data in valid_rows:
             phone = row_data["phone"]
             cal_name = row_data["cal_name"]
+            row_me_api_called = False
+            row_me_result = ""
+            row_sync_api_called = False
+            row_sync_from_cache = False
+            row_sync_result = ""
 
             result = {
                 "phone_number": phone,
@@ -1487,6 +1522,8 @@ def web_process():
                     elif not me_from_cache and not me_cache_only:
                         api_result = me_call_api(phone, API_URL, SID, TOKEN)
                         me_api_calls_count += 1
+                        row_me_api_called = True
+                        row_me_result = "success" if api_result is not None else "fail"
 
                         if api_result is None:
                             flattened_result = clean_data_for_db(me_flatten_user_data({}, prefix="me"))
@@ -1551,6 +1588,7 @@ def web_process():
                             result["sync.last_name"] = sync_db_result.get("last_name", "")
                             result["sync.api_call_time"] = sync_db_result.get("api_call_time", "")
                             sync_from_cache = True
+                            row_sync_from_cache = True
                             sync_from_cache_count += 1
                         else:
                             sync_db_result = None
@@ -1565,6 +1603,8 @@ def web_process():
                     elif not sync_from_cache and not sync_cache_only:
                         sync_api_result = sync_call_api(phone, SYNC_API_URL, SYNC_API_TOKEN)
                         sync_api_calls_count += 1
+                        row_sync_api_called = True
+                        row_sync_result = "success" if sync_api_result else "fail"
 
                         if sync_api_result:
                             sync_flat = sync_flatten_user_data(sync_api_result, prefix="sync")
@@ -1589,6 +1629,21 @@ def web_process():
                         })
 
                 results.append(result)
+
+                # Log each processed number
+                log_event(
+                    user=log_username,
+                    action="process_file",
+                    phone=phone,
+                    filename=original_filename,
+                    me_api_call=row_me_api_called,
+                    sync_api_call=row_sync_api_called,
+                    me_cache=me_from_cache,
+                    sync_cache=row_sync_from_cache,
+                    me_result=row_me_result,
+                    sync_result=row_sync_result,
+                    datetime_str=datetime.now(timezone.utc).isoformat(),
+                )
 
             except Exception as e:
                 result["me.common_name"] = f"ERROR: {e}" if use_me else ""
