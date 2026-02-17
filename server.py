@@ -4,18 +4,15 @@ import sqlite3
 import uuid
 import tempfile
 import re
-import secrets
+
 import pandas as pd
 import threading
 import time
 from io import BytesIO
-from flask import Flask, request, jsonify, g, render_template, send_file, session, redirect, url_for
+from flask import Flask, request, jsonify, g, render_template, send_file
 from werkzeug.utils import secure_filename
 from datetime import datetime, timezone, timedelta
-from functools import wraps
 from dotenv import load_dotenv
-from argon2 import PasswordHasher
-from argon2.exceptions import VerifyMismatchError, VerificationError
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from app_logger import log_event, log_audit
@@ -33,15 +30,6 @@ from functions import (
     clean_data_for_db,
     validate_phone_numbers,
     convert_to_international,
-    count_users,
-    create_user,
-    get_user_by_username,
-    list_users,
-    increment_failed_login,
-    reset_failed_login_counter,
-    update_last_login_datetime,
-    update_user_flags,
-    delete_user,
     get_setting,
     set_setting,
 )
@@ -99,14 +87,6 @@ cleanup_thread.start()
 
 app = Flask("phoneinfo")
 
-# Session cookie security configuration
-app.config['SESSION_COOKIE_HTTPONLY'] = True  # Prevent JavaScript access to session cookie
-app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # CSRF protection
-
-# Enable HTTPS-only cookies in production (Cloudflare Tunnel provides HTTPS)
-if os.environ.get('PRODUCTION', '').lower() == 'true':
-    app.config['SESSION_COOKIE_SECURE'] = True  # HTTPS-only cookies
-
 # Initialize rate limiter
 limiter = Limiter(
     app=app,
@@ -115,10 +95,6 @@ limiter = Limiter(
     storage_uri="memory://",
     strategy="fixed-window"
 )
-
-USERNAME_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9._@-]{0,63}$")
-SPECIAL_PATTERN = re.compile(r"[^A-Za-z0-9]")
-password_hasher = PasswordHasher()
 
 # File upload security
 ALLOWED_EXTENSIONS = {'xlsx', 'csv'}
@@ -166,20 +142,6 @@ load_nicknames_from_json(_init_conn)  # Load seed data if database is empty
 
 # Names are loaded from names.json on first use (see functions.py)
 
-# Initialize SECRET_KEY (env variable > database > generate new)
-if os.environ.get("SECRET_KEY"):
-    # Use environment variable if set (highest priority)
-    app.secret_key = os.environ.get("SECRET_KEY")
-else:
-    # Try to get from database
-    secret_key = get_setting(_init_conn, "SECRET_KEY")
-    if not secret_key:
-        # Generate new secret key and store it
-        secret_key = secrets.token_hex(32)
-        set_setting(_init_conn, "SECRET_KEY", secret_key)
-        print(f"Generated and stored new SECRET_KEY in database")
-    app.secret_key = secret_key
-
 _init_conn.close()
 
 
@@ -200,7 +162,7 @@ def add_security_headers(response):
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
 
     # Prevent caching of sensitive pages
-    if request.path.startswith('/web/') and request.path != '/web/login':
+    if request.path.startswith('/web/'):
         response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, private'
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
@@ -217,108 +179,19 @@ def get_db():
     return g.db
 
 
-def is_api_request_path(path):
-    return not path.startswith("/web") and path not in ["/"]
-
-
-def normalize_username(username):
-    return (username or "").strip().lower()
-
-
-def is_valid_username(username):
-    candidate = (username or "").strip()
-    if len(candidate) < 1 or len(candidate) > 64:
-        return False
-    return bool(USERNAME_PATTERN.fullmatch(candidate))
-
-
-def is_valid_password(password):
-    if not password or len(password) < 8:
-        return False
-    categories = 0
-    if re.search(r"[a-z]", password):
-        categories += 1
-    if re.search(r"[A-Z]", password):
-        categories += 1
-    if re.search(r"[0-9]", password):
-        categories += 1
-    if SPECIAL_PATTERN.search(password):
-        categories += 1
-    return categories >= 3
-
-
-def hash_password_with_seed(password, seed):
-    return password_hasher.hash(f"{password}{seed}")
-
-
-def verify_password_with_seed(password, seed, hashed_password):
-    try:
-        return password_hasher.verify(hashed_password, f"{password}{seed}")
-    except (VerifyMismatchError, VerificationError):
-        return False
-
-
-def get_logged_in_user():
-    username = session.get("username")
-    if not username:
-        return None
-    return get_user_by_username(get_db(), normalize_username(username))
-
-
-def require_admin(view_func):
-    @wraps(view_func)
-    def wrapper(*args, **kwargs):
-        user = get_logged_in_user()
-        if not user:
-            return redirect(url_for("web_login_page"))
-        if int(user.get("admin_flag", 0)) != 1:
-            return jsonify({"success": False, "error": "Admin access required"}), 403
-        return view_func(*args, **kwargs)
-
-    return wrapper
+def get_cf_user():
+    """Get authenticated user email from Cloudflare Access header."""
+    return request.headers.get("Cf-Access-Authenticated-User-Email")
 
 
 @app.before_request
-def enforce_authentication_flow():
+def enforce_cf_auth():
+    """Require Cloudflare Access authentication on all requests."""
     endpoint = request.endpoint or ""
-
-    exempt_endpoints = {
-        "static",
-        "health",
-        "web_login_page",
-        "web_login",
-        "web_logout",
-        "web_user_bootstrap_page",
-        "web_user_bootstrap_create",
-    }
-
-    if endpoint in exempt_endpoints:
+    if endpoint in {"static", "health"}:
         return None
-
-    user_total = count_users(get_db())
-    path = request.path or ""
-
-    if user_total == 0:
-        # First run: skip login and force user bootstrap page.
-        if endpoint not in {"web_user_bootstrap_page", "web_user_bootstrap_create", "health", "static"}:
-            if is_api_request_path(path):
-                return jsonify({"error": "No users configured. Complete first-run bootstrap at /web/users/bootstrap"}), 503
-            return redirect(url_for("web_user_bootstrap_page"))
-        return None
-
-    user = get_logged_in_user()
-    if not user:
-        if is_api_request_path(path):
-            return jsonify({"error": "Authentication required"}), 401
-        return redirect(url_for("web_login_page"))
-
-    if int(user.get("active_flag", 1)) != 1:
-        session.clear()
-        if is_api_request_path(path):
-            return jsonify({"error": "User inactive"}), 403
-        return redirect(url_for("web_login_page"))
-
-    return None
+    if not get_cf_user():
+        return jsonify({"error": "Access denied"}), 403
 
 
 @app.teardown_appcontext
@@ -678,342 +551,17 @@ def web_apis():
     return jsonify({"apis": apis})
 
 
-@app.route("/web/login")
-def web_login_page():
-    """Serve login page."""
-    if count_users(get_db()) == 0:
-        return redirect(url_for("web_user_bootstrap_page"))
-    if get_logged_in_user():
-        return redirect(url_for("web_index"))
-    return render_template("login.html")
-
-
-@app.route("/web/login", methods=["POST"])
-@limiter.limit("5 per minute")  # Max 5 login attempts per minute per IP
-def web_login():
-    """Authenticate user and create session."""
-    data = request.get_json() or {}
-    username_input = data.get("username", "")
-    password = data.get("password", "")
-
-    if not username_input or not password:
-        return jsonify({"success": False, "error": "Username and password are required"}), 400
-
-    username = normalize_username(username_input)
-    db = get_db()
-    user = get_user_by_username(db, username)
-
-    now = datetime.now(timezone.utc).isoformat()
-
-    if not user:
-        log_audit(user=username, action="login_failed", detail="unknown user", datetime_str=now)
-        return jsonify({"success": False, "error": "Invalid credentials"}), 401
-
-    if int(user.get("active_flag", 1)) != 1:
-        log_audit(user=username, action="login_failed", detail="inactive account", datetime_str=now)
-        return jsonify({"success": False, "error": "User is inactive"}), 403
-
-    # Check if account is locked due to failed login attempts
-    failed_logins = int(user.get("failed_login_counter", 0))
-    if failed_logins >= 5:
-        log_audit(user=username, action="login_locked", detail=f"attempt on locked account ({failed_logins} failures)", datetime_str=now)
-        return jsonify({"success": False, "error": "Account locked due to too many failed login attempts. Contact an administrator."}), 403
-
-    if not verify_password_with_seed(password, user.get("seed", ""), user.get("hashed_password", "")):
-        increment_failed_login(db, username)
-        remaining = 5 - (failed_logins + 1)
-        if remaining <= 0:
-            log_audit(user=username, action="login_locked", detail=f"account locked after {failed_logins + 1} failures", datetime_str=now)
-            return jsonify({"success": False, "error": "Account locked due to too many failed login attempts. Contact an administrator."}), 403
-        log_audit(user=username, action="login_failed", detail=f"bad password ({remaining} attempts remaining)", datetime_str=now)
-        return jsonify({"success": False, "error": f"Invalid credentials. {remaining} attempt(s) remaining before account lock."}), 401
-
-    reset_failed_login_counter(db, username)
-    update_last_login_datetime(db, username, datetime.now(timezone.utc).isoformat())
-
-    session["username"] = username
-    log_audit(user=username, action="login", detail="success", datetime_str=now)
-    return jsonify({"success": True, "redirect": "/"})
-
-
-@app.route("/web/logout", methods=["POST", "GET"])
-def web_logout():
-    """Clear user session."""
-    username = session.get("username", "")
-    log_audit(user=username, action="logout", datetime_str=datetime.now(timezone.utc).isoformat())
-    session.clear()
-    return redirect(url_for("web_login_page"))
-
-
-@app.route("/web/users/bootstrap")
-def web_user_bootstrap_page():
-    """First-run user bootstrap page."""
-    if count_users(get_db()) > 0:
-        if get_logged_in_user():
-            return redirect(url_for("web_index"))
-        return redirect(url_for("web_login_page"))
-    return render_template("user_bootstrap.html")
-
-
-@app.route("/web/users/bootstrap", methods=["POST"])
-def web_user_bootstrap_create():
-    """Create first admin user and start session."""
-    db = get_db()
-    if count_users(db) > 0:
-        return jsonify({"success": False, "error": "Bootstrap already completed"}), 409
-
-    data = request.get_json() or {}
-    username_input = data.get("username", "")
-    password = data.get("password", "")
-    email = (data.get("email", "") or "").strip()
-
-    if not is_valid_username(username_input):
-        return jsonify({"success": False, "error": "Invalid username format"}), 400
-
-    if not is_valid_password(password):
-        return jsonify({
-            "success": False,
-            "error": "Password must be at least 8 chars and include at least 3 of 4: lowercase, uppercase, digits, special chars",
-        }), 400
-
-    username = normalize_username(username_input)
-    seed = secrets.token_hex(16)
-    hashed_password = hash_password_with_seed(password, seed)
-
-    create_user(
-        db,
-        username=username,
-        seed=seed,
-        hashed_password=hashed_password,
-        email=email,
-        admin_flag=1,
-        active_flag=1,
-    )
-    update_last_login_datetime(db, username, datetime.now(timezone.utc).isoformat())
-
-    session["username"] = username
-    return jsonify({"success": True, "redirect": "/web/users"})
-
-
-@app.route("/web/users")
-@require_admin
-def web_users_page():
-    """Serve user management page."""
-    current_user = get_logged_in_user()
-    return render_template("users.html", current_username=current_user.get("username", ""))
-
-
-@app.route("/web/users/list")
-@require_admin
-def web_users_list():
-    """Return users for management screen."""
-    users = list_users(get_db())
-    normalized = []
-    for user in users:
-        normalized.append({
-            "username": user.get("username", ""),
-            "failed_login_counter": int(user.get("failed_login_counter", 0) or 0),
-            "last_login_datetime": user.get("last_login_datetime", ""),
-            "email": user.get("email", ""),
-            "admin_flag": int(user.get("admin_flag", 0) or 0),
-            "active_flag": int(user.get("active_flag", 1) or 1),
-        })
-    return jsonify({"users": normalized})
-
-
-@app.route("/web/users/create", methods=["POST"])
-@require_admin
-def web_users_create():
-    """Create additional user."""
-    data = request.get_json() or {}
-    username_input = data.get("username", "")
-    password = data.get("password", "")
-    email = (data.get("email", "") or "").strip()
-    admin_flag = 1 if bool(data.get("admin_flag", False)) else 0
-    active_flag = 1 if bool(data.get("active_flag", True)) else 0
-
-    if not is_valid_username(username_input):
-        return jsonify({"success": False, "error": "Invalid username format"}), 400
-
-    if not is_valid_password(password):
-        return jsonify({
-            "success": False,
-            "error": "Password must be at least 8 chars and include at least 3 of 4: lowercase, uppercase, digits, special chars",
-        }), 400
-
-    db = get_db()
-    username = normalize_username(username_input)
-
-    if get_user_by_username(db, username):
-        return jsonify({"success": False, "error": "Username already exists"}), 409
-
-    seed = secrets.token_hex(16)
-    hashed_password = hash_password_with_seed(password, seed)
-    create_user(
-        db,
-        username=username,
-        seed=seed,
-        hashed_password=hashed_password,
-        email=email,
-        admin_flag=admin_flag,
-        active_flag=active_flag,
-    )
-    current_user = get_logged_in_user()
-    log_audit(
-        user=current_user.get("username", "") if current_user else "",
-        action="user_create",
-        target_user=username,
-        detail=f"admin={admin_flag} active={active_flag}",
-        datetime_str=datetime.now(timezone.utc).isoformat(),
-    )
-    return jsonify({"success": True})
-
-
-@app.route("/web/users/update", methods=["POST"])
-@require_admin
-def web_users_update():
-    """Update user admin/active flags."""
-    data = request.get_json() or {}
-    username = normalize_username(data.get("username", ""))
-
-    if not username:
-        return jsonify({"success": False, "error": "username is required"}), 400
-
-    db = get_db()
-    user = get_user_by_username(db, username)
-    if not user:
-        return jsonify({"success": False, "error": "User not found"}), 404
-
-    admin_flag = data.get("admin_flag")
-    active_flag = data.get("active_flag")
-
-    admin_flag = None if admin_flag is None else (1 if bool(admin_flag) else 0)
-    active_flag = None if active_flag is None else (1 if bool(active_flag) else 0)
-
-    # Prevent disabling the last active admin account
-    if active_flag == 0 and int(user.get("admin_flag", 0)) == 1:
-        users = list_users(db)
-        active_admins = [u for u in users if int(u.get("admin_flag", 0)) == 1 and int(u.get("active_flag", 0)) == 1]
-        if len(active_admins) <= 1:
-            return jsonify({"success": False, "error": "Cannot deactivate the last active admin"}), 400
-
-    update_user_flags(db, username, admin_flag=admin_flag, active_flag=active_flag)
-
-    current_user = get_logged_in_user()
-    changes = []
-    if admin_flag is not None:
-        changes.append(f"admin={'yes' if admin_flag else 'no'}")
-    if active_flag is not None:
-        changes.append(f"active={'yes' if active_flag else 'no'}")
-    log_audit(
-        user=current_user.get("username", "") if current_user else "",
-        action="user_update",
-        target_user=username,
-        detail=", ".join(changes),
-        datetime_str=datetime.now(timezone.utc).isoformat(),
-    )
-    return jsonify({"success": True})
-
-
-@app.route("/web/users/reset-password", methods=["POST"])
-@require_admin
-@limiter.limit("10 per minute")  # Max 10 password resets per minute
-def web_users_reset_password():
-    """Reset user password (admin only)."""
-    data = request.get_json() or {}
-    username = normalize_username(data.get("username", ""))
-    new_password = data.get("password", "")
-
-    if not username:
-        return jsonify({"success": False, "error": "username is required"}), 400
-
-    if not new_password:
-        return jsonify({"success": False, "error": "password is required"}), 400
-
-    # Validate password strength
-    if not is_valid_password(new_password):
-        return jsonify({"success": False, "error": "Password must be at least 8 chars and include at least 3 of 4: lowercase, uppercase, digits, special chars"}), 400
-
-    db = get_db()
-    user = get_user_by_username(db, username)
-    if not user:
-        return jsonify({"success": False, "error": "User not found"}), 404
-
-    # Generate new seed and hash password
-    seed = secrets.token_hex(16)
-    hashed_password = hash_password_with_seed(new_password, seed)
-
-    # Update password, reset failed login counter, and ensure user is active
-    cursor = db.cursor()
-    cursor.execute(
-        """UPDATE users
-           SET seed = ?, hashed_password = ?, failed_login_counter = 0, active_flag = 1
-           WHERE username = ?""",
-        (seed, hashed_password, username)
-    )
-    db.commit()
-
-    current_user = get_logged_in_user()
-    was_locked = int(user.get("failed_login_counter", 0)) >= 5
-    detail = "password reset"
-    if was_locked:
-        detail += " + account unlocked"
-    log_audit(
-        user=current_user.get("username", "") if current_user else "",
-        action="password_reset",
-        target_user=username,
-        detail=detail,
-        datetime_str=datetime.now(timezone.utc).isoformat(),
-    )
-    return jsonify({"success": True, "message": f"Password reset for user '{username}'. Account unlocked and login attempts cleared."})
-
-
-@app.route("/web/users/delete", methods=["POST"])
-@require_admin
-def web_users_delete():
-    """Delete a user (admin only). Cannot delete yourself."""
-    data = request.get_json() or {}
-    username = normalize_username(data.get("username", ""))
-
-    if not username:
-        return jsonify({"success": False, "error": "username is required"}), 400
-
-    current_user = get_logged_in_user()
-    if current_user and normalize_username(current_user.get("username", "")) == username:
-        return jsonify({"success": False, "error": "Cannot delete your own account"}), 400
-
-    db = get_db()
-    user = get_user_by_username(db, username)
-    if not user:
-        return jsonify({"success": False, "error": "User not found"}), 404
-
-    if not delete_user(db, username):
-        return jsonify({"success": False, "error": "Delete failed"}), 500
-
-    log_audit(
-        user=current_user.get("username", "") if current_user else "",
-        action="user_delete",
-        target_user=username,
-        datetime_str=datetime.now(timezone.utc).isoformat(),
-    )
-    return jsonify({"success": True})
-
-
 @app.route("/")
 @app.route("/web")
 def web_index():
     """Serve the web interface."""
-    current_user = get_logged_in_user()
-    is_admin = int(current_user.get("admin_flag", 0)) == 1 if current_user else False
-    return render_template("index.html", is_admin=is_admin)
+    return render_template("index.html")
 
 
 @app.route("/web/query")
 def web_query_page():
     """Serve the single query interface."""
-    current_user = get_logged_in_user()
-    is_admin = int(current_user.get("admin_flag", 0)) == 1 if current_user else False
-    return render_template("query.html", is_admin=is_admin)
+    return render_template("query.html")
 
 
 @app.route("/web/query", methods=["POST"])
@@ -1297,9 +845,8 @@ def web_query():
                 result["sync.matching"] = 0
 
         # Log the query event
-        current_user = get_logged_in_user()
         log_event(
-            user=current_user.get("username", "") if current_user else "",
+            user=get_cf_user() or "",
             action="query",
             phone=phone,
             me_api_call=me_api_called,
@@ -1501,8 +1048,7 @@ def web_process():
         db = get_db()
 
         # Get current user for logging
-        current_user = get_logged_in_user()
-        log_username = current_user.get("username", "") if current_user else ""
+        log_username = get_cf_user() or ""
 
         # Process each validated row
         for row_data in valid_rows:
@@ -1842,11 +1388,7 @@ def web_process():
 
 @app.route("/web/download/<file_id>")
 def web_download(file_id):
-    """Download processed file - requires authentication. File is deleted after download."""
-    # Require user to be logged in
-    if 'username' not in session:
-        return redirect(url_for('web_login_page'))
-
+    """Download processed file. File is deleted after download."""
     if file_id not in PROCESSED_FILES:
         return jsonify({"error": "File not found"}), 404
 
@@ -1877,9 +1419,7 @@ def web_download(file_id):
 @app.route("/web/nicknames")
 def web_nicknames_page():
     """Serve the nicknames management page."""
-    current_user = get_logged_in_user()
-    is_admin = int(current_user.get("admin_flag", 0)) == 1 if current_user else False
-    return render_template("nicknames.html", is_admin=is_admin)
+    return render_template("nicknames.html")
 
 
 @app.route("/web/nicknames/list")
@@ -2035,11 +1575,7 @@ def web_nicknames_upload():
 
 @app.route("/web/nicknames/download")
 def web_nicknames_download():
-    """Download current nicknames as JSON file - requires authentication."""
-    # Require user to be logged in
-    if 'username' not in session:
-        return redirect(url_for('web_login_page'))
-
+    """Download current nicknames as JSON file."""
     db = get_db()
     cursor = db.cursor()
     cursor.execute("SELECT formal_name, all_names FROM nicknames ORDER BY formal_name")
@@ -2142,9 +1678,7 @@ def web_nicknames_restore():
 @app.route("/web/nicknames/edit")
 def web_nicknames_edit_page():
     """Serve the nickname edit page."""
-    current_user = get_logged_in_user()
-    is_admin = int(current_user.get("admin_flag", 0)) == 1 if current_user else False
-    return render_template("nickname_edit.html", is_admin=is_admin)
+    return render_template("nickname_edit.html")
 
 
 @app.route("/web/nicknames/get")
