@@ -19,6 +19,8 @@ services:
       timeout: 10s
       retries: 3
       start_period: 10s
+    labels:
+      - "autoheal=true"
     logging:
       driver: json-file
       options:
@@ -26,6 +28,16 @@ services:
         max-file: "3"
     networks:
       - phoneinfo-network
+
+  autoheal:
+    image: willfarrell/autoheal
+    container_name: phoneinfo-autoheal
+    restart: unless-stopped
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=autoheal
+      - AUTOHEAL_INTERVAL=30
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
   cloudflared:
     image: cloudflare/cloudflared:latest

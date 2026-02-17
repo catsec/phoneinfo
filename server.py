@@ -211,7 +211,9 @@ def add_security_headers(response):
 def get_db():
     """Get database connection for current request."""
     if 'db' not in g:
-        g.db = sqlite3.connect(DATABASE)
+        g.db = sqlite3.connect(DATABASE, timeout=10)
+        g.db.execute("PRAGMA journal_mode=WAL")
+        g.db.execute("PRAGMA busy_timeout=5000")
     return g.db
 
 
