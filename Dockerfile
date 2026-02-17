@@ -18,8 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Create database directory
-RUN mkdir -p db
+# Create database and logs directories
+RUN mkdir -p db logs
 
 # Expose port
 EXPOSE 5001

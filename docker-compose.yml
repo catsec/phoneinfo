@@ -1,7 +1,6 @@
 services:
   phoneinfo:
     image: ghcr.io/catsec/phoneinfo:latest
-    build: .
     container_name: phoneinfo
     restart: unless-stopped
     ports:
@@ -9,10 +8,8 @@ services:
     env_file:
       - .env
     volumes:
-      # Persist database
       - ./db:/app/db
-      # Optional: mount logs directory
-      # - ./logs:/app/logs
+      - ./logs:/app/logs
     environment:
       - DEBUG=false
       - PRODUCTION=true
@@ -22,6 +19,11 @@ services:
       timeout: 10s
       retries: 3
       start_period: 10s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     networks:
       - phoneinfo-network
 

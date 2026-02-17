@@ -19,10 +19,68 @@ graceful_timeout = 30
 keepalive = 5
 
 # Logging
-accesslog = "-"  # Log to stdout
-errorlog = "-"   # Log to stderr
 loglevel = "info"
+accesslog = "/app/logs/access.log"
+errorlog = "/app/logs/error.log"
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s'
+
+# Log rotation: daily files, configurable retention
+log_retention_days = int(os.environ.get('LOG_RETENTION_DAYS', '30'))
+
+logconfig_dict = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "default": {
+            "format": "%(asctime)s [%(levelname)s] %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        },
+        "access": {
+            "format": "%(message)s",
+        },
+    },
+    "handlers": {
+        "error_file": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": "/app/logs/error.log",
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": log_retention_days,
+            "formatter": "default",
+            "encoding": "utf-8",
+        },
+        "access_file": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "filename": "/app/logs/access.log",
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": log_retention_days,
+            "formatter": "access",
+            "encoding": "utf-8",
+        },
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "default",
+            "stream": "ext://sys.stdout",
+        },
+    },
+    "loggers": {
+        "gunicorn.error": {
+            "handlers": ["error_file", "console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "gunicorn.access": {
+            "handlers": ["access_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+    },
+    "root": {
+        "handlers": ["error_file", "console"],
+        "level": "INFO",
+    },
+}
 
 # Security
 limit_request_line = 4096
