@@ -5,28 +5,6 @@ from flask_limiter.util import get_remote_address
 
 load_dotenv()
 
-
-def get_env_value(env_var, required=True, default=""):
-    """Get config value from environment variable."""
-    value = os.environ.get(env_var, "").strip()
-    if value:
-        return value
-    if required:
-        raise RuntimeError(
-            f"Missing configuration: set {env_var} environment variable in .env file"
-        )
-    return default
-
-
-# API Configuration
-API_URL = get_env_value("ME_API_URL")
-SID = get_env_value("ME_API_SID")
-TOKEN = get_env_value("ME_API_TOKEN")
-
-# SYNC API Configuration
-SYNC_API_URL = get_env_value("SYNC_API_URL", required=False)
-SYNC_API_TOKEN = get_env_value("SYNC_API_TOKEN", required=False)
-
 # Database configuration
 DATABASE = os.environ.get("DATABASE", "db/db.db")
 

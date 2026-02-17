@@ -7,16 +7,13 @@ import tempfile
 import pandas as pd
 from io import BytesIO
 from flask import Blueprint, request, jsonify, render_template, send_file
-from werkzeug.utils import secure_filename
 from datetime import datetime, timezone
 from db import get_db
-from config import (
-    API_URL, SID, TOKEN, SYNC_API_URL, SYNC_API_TOKEN,
-    PROCESSED_FILES, allowed_file, get_cf_user,
-)
+from config import PROCESSED_FILES, allowed_file, get_cf_user
 from phone import validate_phone_numbers, convert_to_international
 from transliteration import is_hebrew
-from lookup import lookup_me, lookup_sync, translate_and_score_me, translate_and_score_sync
+from providers import get_provider, get_all_providers
+from lookup import lookup, translate_and_score
 from app_logger import log_event
 from input_validator import validate_file_size
 
@@ -27,8 +24,8 @@ web_bp = Blueprint("web", __name__)
 def web_apis():
     """Return list of available APIs."""
     apis = [
-        {"name": "ME", "available": bool(API_URL and SID and TOKEN)},
-        {"name": "SYNC", "available": bool(SYNC_API_URL and SYNC_API_TOKEN)},
+        {"name": p.display_name, "available": p.is_configured}
+        for p in get_all_providers()
     ]
     return jsonify({"apis": apis})
 
@@ -57,12 +54,13 @@ def web_query():
     first_name = data.get("first_name", "").strip()
     last_name = data.get("last_name", "").strip()
     refresh_days = data.get("refresh_days", 7)
-    me_cache_only = data.get("me_cache_only", False)
-    sync_cache_only = data.get("sync_cache_only", False)
     apis_str = data.get("apis", "me")
     selected_apis = [a.strip().lower() for a in apis_str.split(',') if a.strip()]
-    use_me = 'me' in selected_apis
-    use_sync = 'sync' in selected_apis
+
+    # Per-provider cache_only flags
+    cache_only_flags = {}
+    for api_name in selected_apis:
+        cache_only_flags[api_name] = data.get(f"{api_name}_cache_only", False)
 
     if not phone:
         return jsonify({"success": False, "error": "מספר טלפון נדרש"})
@@ -83,65 +81,56 @@ def web_query():
 
     try:
         db = get_db()
-        me_api_called = False
-        me_result_ok = ""
-        sync_api_called = False
-        sync_from_cache = False
-        sync_result_ok = ""
-        from_cache = False
-
         result = {"phone_number": phone, "cal_name": cal_name}
+        any_api_called = False
+        log_kwargs = {}
 
-        # ME lookup
-        if use_me:
-            me_data, me_api_called, from_cache = lookup_me(
-                db, phone, cal_name, refresh_days, me_cache_only, API_URL, SID, TOKEN
-            )
-            if me_api_called:
-                me_result_ok = "success" if me_data.get("me.common_name") else "fail"
-            result.update(me_data)
-            result["phone_number"] = phone
-            result["cal_name"] = cal_name
+        for api_name in selected_apis:
+            provider = get_provider(api_name)
+            if not provider or not provider.is_configured:
+                continue
 
-        # ME translate & score
-        if use_me:
-            translate_and_score_me(result, cal_name, db)
-
-        # SYNC lookup
-        if use_sync and SYNC_API_URL and SYNC_API_TOKEN:
             try:
-                sync_data, sync_api_called, sync_from_cache = lookup_sync(
-                    db, phone, cal_name, refresh_days, sync_cache_only, SYNC_API_URL, SYNC_API_TOKEN
+                provider_data, api_called, from_cache = lookup(
+                    provider, db, phone, cal_name, refresh_days,
+                    cache_only=cache_only_flags.get(api_name, False),
                 )
-                if sync_api_called:
-                    sync_result_ok = "success" if sync_data.get("sync.first_name") else "fail"
-                result.update(sync_data)
+                result.update(provider_data)
+                result["phone_number"] = phone
+                result["cal_name"] = cal_name
 
-                # SYNC translate & score
-                translate_and_score_sync(result, cal_name, db)
-            except Exception as sync_error:
-                result["sync.first_name"] = f"ERROR: {sync_error}"
-                result["sync.last_name"] = ""
-                result["sync.matching"] = 0
+                translate_and_score(provider, result, cal_name, db)
 
-        # Log
+                if api_called:
+                    any_api_called = True
+                    primary_key = provider.get_primary_name_key()
+                    log_kwargs[f"{api_name}_result"] = "success" if result.get(primary_key) else "fail"
+
+                log_kwargs[f"{api_name}_api_call"] = api_called
+                log_kwargs[f"{api_name}_cache"] = from_cache
+
+            except Exception as provider_error:
+                primary_key = provider.get_primary_name_key()
+                result[primary_key] = f"ERROR: {provider_error}"
+                result[f"{provider.name}.matching"] = 0
+
         log_event(
             user=get_cf_user() or "",
             action="query",
             phone=phone,
-            me_api_call=me_api_called,
-            sync_api_call=sync_api_called,
-            me_cache=from_cache,
-            sync_cache=sync_from_cache,
-            me_result=me_result_ok,
-            sync_result=sync_result_ok,
+            me_api_call=log_kwargs.get("me_api_call", False),
+            sync_api_call=log_kwargs.get("sync_api_call", False),
+            me_cache=log_kwargs.get("me_cache", False),
+            sync_cache=log_kwargs.get("sync_cache", False),
+            me_result=log_kwargs.get("me_result", ""),
+            sync_result=log_kwargs.get("sync_result", ""),
             datetime_str=datetime.now(timezone.utc).isoformat(),
         )
 
         return jsonify({
             "success": True,
             "result": result,
-            "from_cache": not me_api_called and not sync_api_called
+            "from_cache": not any_api_called,
         })
 
     except Exception as e:
@@ -168,23 +157,28 @@ def web_process():
     except ValueError:
         refresh_days = 7
 
-    me_cache_only = request.form.get('me_cache_only', '').lower() == 'true'
-    sync_cache_only = request.form.get('sync_cache_only', '').lower() == 'true'
-
     apis_str = request.form.get('apis', 'me')
     selected_apis = [a.strip().lower() for a in apis_str.split(',') if a.strip()]
     if not selected_apis:
         selected_apis = ['me']
 
-    use_me = 'me' in selected_apis
-    use_sync = 'sync' in selected_apis and SYNC_API_URL and SYNC_API_TOKEN
+    # Per-provider cache_only flags
+    cache_only_flags = {}
+    for api_name in selected_apis:
+        cache_only_flags[api_name] = request.form.get(f'{api_name}_cache_only', '').lower() == 'true'
 
-    if use_me and use_sync:
-        file_suffix = "_me_sync"
-    elif use_sync:
-        file_suffix = "_sync"
-    else:
-        file_suffix = "_me"
+    # Filter to configured providers only
+    active_providers = []
+    for api_name in selected_apis:
+        provider = get_provider(api_name)
+        if provider and provider.is_configured:
+            active_providers.append(provider)
+
+    if not active_providers:
+        return jsonify({"success": False, "error": "No configured API providers selected"})
+
+    # Build file suffix from active providers
+    file_suffix = "_" + "_".join(p.name for p in active_providers)
 
     try:
         # Validate file size
@@ -297,10 +291,8 @@ def web_process():
             row["phone"] = converted[0]
 
         results = []
-        me_from_cache_count = 0
-        me_api_calls_count = 0
-        sync_from_cache_count = 0
-        sync_api_calls_count = 0
+        cache_counts = {p.name: 0 for p in active_providers}
+        api_counts = {p.name: 0 for p in active_providers}
 
         db = get_db()
         log_username = get_cf_user() or ""
@@ -309,62 +301,39 @@ def web_process():
         for row_data in valid_rows:
             phone = row_data["phone"]
             cal_name = row_data["cal_name"]
-            row_me_api_called = False
-            row_me_result = ""
-            row_sync_api_called = False
-            row_sync_from_cache = False
-            row_sync_result = ""
-            me_from_cache = False
 
             result = {"phone_number": phone, "cal_name": cal_name}
+            row_log = {}
 
             try:
-                # ME lookup
-                if use_me:
-                    me_data, row_me_api_called, me_from_cache = lookup_me(
-                        db, phone, cal_name, refresh_days, me_cache_only, API_URL, SID, TOKEN
+                for provider in active_providers:
+                    pname = provider.name
+                    provider_data, api_called, from_cache = lookup(
+                        provider, db, phone, cal_name, refresh_days,
+                        cache_only=cache_only_flags.get(pname, False),
                     )
-                    if row_me_api_called:
-                        me_api_calls_count += 1
-                        row_me_result = "success" if me_data.get("me.common_name") else "fail"
-                    elif me_from_cache:
-                        me_from_cache_count += 1
 
-                    for key, value in me_data.items():
-                        result[key] = value
+                    if api_called:
+                        api_counts[pname] += 1
+                        primary_key = provider.get_primary_name_key()
+                        row_log[f"{pname}_result"] = "success" if provider_data.get(primary_key) else "fail"
+                    elif from_cache:
+                        cache_counts[pname] += 1
+
+                    result.update(provider_data)
                     result["phone_number"] = phone
                     result["cal_name"] = cal_name
 
-                # ME source indicator
-                if use_me:
-                    if row_me_api_called:
-                        result["me.source"] = "API"
-                    elif me_from_cache:
-                        result["me.source"] = "cache"
+                    # Source indicator
+                    if api_called:
+                        result[f"{pname}.source"] = "API"
+                    elif from_cache:
+                        result[f"{pname}.source"] = "cache"
                     else:
-                        result["me.source"] = "cache-only"
+                        result[f"{pname}.source"] = "cache-only"
 
-                # SYNC lookup
-                if use_sync:
-                    sync_data, row_sync_api_called, row_sync_from_cache = lookup_sync(
-                        db, phone, cal_name, refresh_days, sync_cache_only, SYNC_API_URL, SYNC_API_TOKEN
-                    )
-                    if row_sync_api_called:
-                        sync_api_calls_count += 1
-                        row_sync_result = "success" if sync_data.get("sync.first_name") else "fail"
-                    elif row_sync_from_cache:
-                        sync_from_cache_count += 1
-
-                    result.update(sync_data)
-
-                # SYNC source indicator
-                if use_sync:
-                    if row_sync_api_called:
-                        result["sync.source"] = "API"
-                    elif row_sync_from_cache:
-                        result["sync.source"] = "cache"
-                    else:
-                        result["sync.source"] = "cache-only"
+                    row_log[f"{pname}_api_call"] = api_called
+                    row_log[f"{pname}_cache"] = from_cache
 
                 results.append(result)
 
@@ -373,51 +342,33 @@ def web_process():
                     action="process_file",
                     phone=phone,
                     filename=original_filename,
-                    me_api_call=row_me_api_called,
-                    sync_api_call=row_sync_api_called,
-                    me_cache=me_from_cache,
-                    sync_cache=row_sync_from_cache,
-                    me_result=row_me_result,
-                    sync_result=row_sync_result,
+                    me_api_call=row_log.get("me_api_call", False),
+                    sync_api_call=row_log.get("sync_api_call", False),
+                    me_cache=row_log.get("me_cache", False),
+                    sync_cache=row_log.get("sync_cache", False),
+                    me_result=row_log.get("me_result", ""),
+                    sync_result=row_log.get("sync_result", ""),
                     datetime_str=datetime.now(timezone.utc).isoformat(),
                 )
 
             except Exception as e:
-                result["me.common_name"] = f"ERROR: {e}" if use_me else ""
-                result["sync.first_name"] = f"ERROR: {e}" if use_sync else ""
+                for provider in active_providers:
+                    primary_key = provider.get_primary_name_key()
+                    result[primary_key] = f"ERROR: {e}"
                 results.append(result)
 
         # Post-process: translations and matching scores
         for result in results:
             cal_name = str(result.get("cal_name", "") or "")
-
-            if use_me:
-                translate_and_score_me(result, cal_name, db)
-
-            if use_sync:
-                translate_and_score_sync(result, cal_name, db)
+            for provider in active_providers:
+                translate_and_score(provider, result, cal_name, db)
 
         # Create DataFrame and Excel
         result_df = pd.DataFrame(results).astype(str)
 
         desired_order = ["phone_number", "cal_name"]
-
-        if use_me:
-            desired_order.extend([
-                "me.common_name", "me.matching", "me.risk_tier", "me.translated",
-                "me.result_strength", "me.profile_name",
-                "me.first_name", "me.last_name", "me.email", "me.email_confirmed",
-                "me.profile_picture", "me.gender", "me.is_verified", "me.slogan",
-                "me.social.facebook", "me.social.twitter", "me.social.spotify",
-                "me.social.instagram", "me.social.linkedin", "me.social.pinterest",
-                "me.social.tiktok", "me.whitelist", "me.source", "me.api_call_time"
-            ])
-
-        if use_sync:
-            desired_order.extend([
-                "sync.first_name", "sync.last_name", "sync.matching", "sync.risk_tier", "sync.translated",
-                "sync.source", "sync.api_call_time"
-            ])
+        for provider in active_providers:
+            desired_order.extend(provider.excel_columns)
 
         existing_columns = [col for col in desired_order if col in result_df.columns]
         result_df = result_df.reindex(columns=existing_columns)
@@ -432,8 +383,8 @@ def web_process():
             "original_name": os.path.splitext(file.filename)[0] + file_suffix + ".xlsx"
         }
 
-        total_from_cache = me_from_cache_count + sync_from_cache_count
-        total_api_calls = me_api_calls_count + sync_api_calls_count
+        total_from_cache = sum(cache_counts.values())
+        total_api_calls = sum(api_counts.values())
 
         return jsonify({
             "success": True,
