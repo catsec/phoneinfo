@@ -652,6 +652,7 @@ def compare():
 
 
 @app.route("/health", methods=["GET"])
+@limiter.exempt
 def health():
     """Health check endpoint."""
     return jsonify({"status": "ok"})
