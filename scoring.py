@@ -26,12 +26,8 @@ Author: PhoneInfo / Cal Risk Department
 import json
 import os
 from fuzzywuzzy import fuzz
-from functions import (
-    transliterate_name,
-    is_hebrew,
-    detect_language,
-    get_all_nicknames_for_name,
-)
+from transliteration import transliterate_name, is_hebrew, detect_language
+from db import get_all_nicknames_for_name
 
 
 # ---------------------------------------------------------------------------
