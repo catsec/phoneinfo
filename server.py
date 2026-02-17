@@ -861,7 +861,7 @@ def web_query():
         return jsonify({
             "success": True,
             "result": result,
-            "from_cache": from_cache
+            "from_cache": not me_api_called and not sync_api_called
         })
 
     except Exception as e:
@@ -1158,6 +1158,15 @@ def web_process():
                         for key, value in flattened_result.items():
                             result[key] = value
 
+                # Set ME source indicator
+                if use_me:
+                    if row_me_api_called:
+                        result["me.source"] = "API"
+                    elif me_from_cache:
+                        result["me.source"] = "cache"
+                    else:
+                        result["me.source"] = "cache-only"
+
                 # === SYNC API Processing ===
                 if use_sync:
                     sync_from_cache = False
@@ -1226,6 +1235,15 @@ def web_process():
                             "website_domain": sync_flat.get("sync.website_domain", ""),
                             "company_domain": sync_flat.get("sync.company_domain", "")
                         })
+
+                # Set SYNC source indicator
+                if use_sync:
+                    if row_sync_api_called:
+                        result["sync.source"] = "API"
+                    elif row_sync_from_cache:
+                        result["sync.source"] = "cache"
+                    else:
+                        result["sync.source"] = "cache-only"
 
                 results.append(result)
 
@@ -1347,13 +1365,13 @@ def web_process():
                 "me.profile_picture", "me.gender", "me.is_verified", "me.slogan",
                 "me.social.facebook", "me.social.twitter", "me.social.spotify",
                 "me.social.instagram", "me.social.linkedin", "me.social.pinterest",
-                "me.social.tiktok", "me.whitelist", "me.api_call_time"
+                "me.social.tiktok", "me.whitelist", "me.source", "me.api_call_time"
             ])
 
         if use_sync:
             desired_order.extend([
                 "sync.first_name", "sync.last_name", "sync.matching", "sync.risk_tier", "sync.translated",
-                "sync.api_call_time"
+                "sync.source", "sync.api_call_time"
             ])
 
         existing_columns = [col for col in desired_order if col in result_df.columns]
