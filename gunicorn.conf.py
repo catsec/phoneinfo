@@ -25,7 +25,7 @@ errorlog = "/app/logs/error.log"
 access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s'
 
 # Log rotation: daily files, configurable retention
-log_retention_days = int(os.environ.get('LOG_RETENTION_DAYS', '30'))
+log_retention_days = int(os.environ.get('LOG_RETENTION_DAYS', '90'))
 
 logconfig_dict = {
     "version": 1,

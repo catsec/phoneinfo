@@ -18,7 +18,7 @@ from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError, VerificationError
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from app_logger import log_event
+from app_logger import log_event, log_audit
 from functions import (
     init_db,
     init_nickname_table,
@@ -700,34 +700,44 @@ def web_login():
     db = get_db()
     user = get_user_by_username(db, username)
 
+    now = datetime.now(timezone.utc).isoformat()
+
     if not user:
+        log_audit(user=username, action="login_failed", detail="unknown user", datetime_str=now)
         return jsonify({"success": False, "error": "Invalid credentials"}), 401
 
     if int(user.get("active_flag", 1)) != 1:
+        log_audit(user=username, action="login_failed", detail="inactive account", datetime_str=now)
         return jsonify({"success": False, "error": "User is inactive"}), 403
 
     # Check if account is locked due to failed login attempts
     failed_logins = int(user.get("failed_login_counter", 0))
     if failed_logins >= 5:
+        log_audit(user=username, action="login_locked", detail=f"attempt on locked account ({failed_logins} failures)", datetime_str=now)
         return jsonify({"success": False, "error": "Account locked due to too many failed login attempts. Contact an administrator."}), 403
 
     if not verify_password_with_seed(password, user.get("seed", ""), user.get("hashed_password", "")):
         increment_failed_login(db, username)
         remaining = 5 - (failed_logins + 1)
         if remaining <= 0:
+            log_audit(user=username, action="login_locked", detail=f"account locked after {failed_logins + 1} failures", datetime_str=now)
             return jsonify({"success": False, "error": "Account locked due to too many failed login attempts. Contact an administrator."}), 403
+        log_audit(user=username, action="login_failed", detail=f"bad password ({remaining} attempts remaining)", datetime_str=now)
         return jsonify({"success": False, "error": f"Invalid credentials. {remaining} attempt(s) remaining before account lock."}), 401
 
     reset_failed_login_counter(db, username)
     update_last_login_datetime(db, username, datetime.now(timezone.utc).isoformat())
 
     session["username"] = username
+    log_audit(user=username, action="login", detail="success", datetime_str=now)
     return jsonify({"success": True, "redirect": "/"})
 
 
 @app.route("/web/logout", methods=["POST", "GET"])
 def web_logout():
     """Clear user session."""
+    username = session.get("username", "")
+    log_audit(user=username, action="logout", datetime_str=datetime.now(timezone.utc).isoformat())
     session.clear()
     return redirect(url_for("web_login_page"))
 
@@ -845,6 +855,14 @@ def web_users_create():
         admin_flag=admin_flag,
         active_flag=active_flag,
     )
+    current_user = get_logged_in_user()
+    log_audit(
+        user=current_user.get("username", "") if current_user else "",
+        action="user_create",
+        target_user=username,
+        detail=f"admin={admin_flag} active={active_flag}",
+        datetime_str=datetime.now(timezone.utc).isoformat(),
+    )
     return jsonify({"success": True})
 
 
@@ -877,6 +895,20 @@ def web_users_update():
             return jsonify({"success": False, "error": "Cannot deactivate the last active admin"}), 400
 
     update_user_flags(db, username, admin_flag=admin_flag, active_flag=active_flag)
+
+    current_user = get_logged_in_user()
+    changes = []
+    if admin_flag is not None:
+        changes.append(f"admin={'yes' if admin_flag else 'no'}")
+    if active_flag is not None:
+        changes.append(f"active={'yes' if active_flag else 'no'}")
+    log_audit(
+        user=current_user.get("username", "") if current_user else "",
+        action="user_update",
+        target_user=username,
+        detail=", ".join(changes),
+        datetime_str=datetime.now(timezone.utc).isoformat(),
+    )
     return jsonify({"success": True})
 
 
@@ -918,6 +950,18 @@ def web_users_reset_password():
     )
     db.commit()
 
+    current_user = get_logged_in_user()
+    was_locked = int(user.get("failed_login_counter", 0)) >= 5
+    detail = "password reset"
+    if was_locked:
+        detail += " + account unlocked"
+    log_audit(
+        user=current_user.get("username", "") if current_user else "",
+        action="password_reset",
+        target_user=username,
+        detail=detail,
+        datetime_str=datetime.now(timezone.utc).isoformat(),
+    )
     return jsonify({"success": True, "message": f"Password reset for user '{username}'. Account unlocked and login attempts cleared."})
 
 
@@ -943,6 +987,12 @@ def web_users_delete():
     if not delete_user(db, username):
         return jsonify({"success": False, "error": "Delete failed"}), 500
 
+    log_audit(
+        user=current_user.get("username", "") if current_user else "",
+        action="user_delete",
+        target_user=username,
+        datetime_str=datetime.now(timezone.utc).isoformat(),
+    )
     return jsonify({"success": True})
 
 
