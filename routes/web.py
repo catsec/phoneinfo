@@ -234,6 +234,8 @@ def web_process():
             phone = str(phone).strip().replace('-', '').replace(' ', '').replace('+', '')
             if phone.startswith('05') or phone.startswith('07'):
                 return len(phone) >= 9 and len(phone) <= 10 and phone.isdigit()
+            if phone.startswith('5') or phone.startswith('7'):
+                return len(phone) == 9 and phone.isdigit()
             if phone.startswith('972'):
                 return len(phone) >= 11 and len(phone) <= 12 and phone.isdigit()
             return False
