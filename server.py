@@ -63,6 +63,7 @@ def enforce_cf_auth():
     if os.environ.get("DEBUG", "false").lower() == "true":
         return None
     if not get_cf_user():
+        app.logger.warning("CF auth failed: path=%s method=%s endpoint=%s", request.path, request.method, request.endpoint)
         return jsonify({"error": "Access denied"}), 403
 
 
