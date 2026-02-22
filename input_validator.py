@@ -4,15 +4,16 @@ Input validation and sanitization for all file imports.
 Prevents SQL injection, XSS, and other attacks.
 """
 
+import os
 import re
 import html
 from typing import Any, Dict, List, Optional
 
-# Maximum file size (50MB)
-MAX_FILE_SIZE = 50 * 1024 * 1024
+# Maximum file size
+MAX_FILE_SIZE = int(os.environ.get("MAX_FILE_SIZE_MB", "50")) * 1024 * 1024
 
 # Maximum rows per file
-MAX_ROWS = 100000
+MAX_ROWS = int(os.environ.get("MAX_ROWS", "100000"))
 
 # Maximum string length for text fields
 MAX_STRING_LENGTH = 1000

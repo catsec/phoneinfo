@@ -2,11 +2,12 @@ import csv
 import io
 import logging
 import os
-from logging.handlers import TimedRotatingFileHandler
+from logging.handlers import RotatingFileHandler
 
 
 LOG_DIR = os.environ.get("LOG_DIR", "logs")
-LOG_RETENTION_DAYS = int(os.environ.get("LOG_RETENTION_DAYS", "90"))
+LOG_MAX_BYTES = int(os.environ.get("LOG_MAX_BYTES", str(100 * 1024 * 1024)))  # 100 MB default
+LOG_BACKUP_COUNT = int(os.environ.get("LOG_BACKUP_COUNT", "5"))
 
 APP_HEADER = "datetime,user,action,filename,phone,me_api_call,sync_api_call,me_cache,sync_cache,me_result,sync_result"
 AUDIT_HEADER = "datetime,user,action,target_user,detail"
@@ -24,11 +25,10 @@ def _init_logger(name, filename, header):
     logger.setLevel(logging.INFO)
     logger.propagate = False
 
-    handler = TimedRotatingFileHandler(
+    handler = RotatingFileHandler(
         filename=log_path,
-        when="midnight",
-        interval=1,
-        backupCount=LOG_RETENTION_DAYS,
+        maxBytes=LOG_MAX_BYTES,
+        backupCount=LOG_BACKUP_COUNT,
         encoding="utf-8",
     )
     handler.setFormatter(logging.Formatter("%(message)s"))
