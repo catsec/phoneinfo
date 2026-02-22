@@ -13,5 +13,7 @@ def convert_to_international(phone_numbers):
         phone_str = str(phone).strip()
         if len(phone_str) == 10 and phone_str.startswith("0"):
             phone_str = "972" + phone_str[1:]
+        elif len(phone_str) == 9 and phone_str.startswith("5"):
+            phone_str = "972" + phone_str
         converted_numbers.append(phone_str)
     return converted_numbers
