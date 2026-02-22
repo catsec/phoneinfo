@@ -385,13 +385,14 @@ def web_process():
             result_columns.extend(provider.excel_columns)
         result_cols_df = result_df[[c for c in result_columns if c in result_df.columns]]
 
-        # Find first empty column in original data to insert results
-        insert_col = data.shape[1]
-        for col_idx in range(data.shape[1]):
+        # Find first empty column (starting from col 2) to insert results
+        insert_col = 2  # Default: right after phone + name
+        for col_idx in range(2, data.shape[1]):
             col_data = data.iloc[:, col_idx]
-            if col_data.isna().all() or (col_data.astype(str).str.strip() == '').all():
-                insert_col = col_idx
+            is_empty = col_data.isna().all() or (col_data.astype(str).str.strip().isin(['', 'nan', 'None'])).all()
+            if is_empty:
                 break
+            insert_col = col_idx + 1
 
         # Convert phone column to local format (0XX...)
         data.iloc[:, 0] = data.iloc[:, 0].apply(lambda x: convert_to_local(x) if pd.notna(x) else x)
