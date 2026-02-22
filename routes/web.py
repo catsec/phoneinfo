@@ -470,6 +470,14 @@ def web_process():
                 if val and val not in ("None", "nan", ""):
                     cell.fill = sand_fill
 
+        # Auto-fit column widths
+        for col in ws.columns:
+            max_len = 0
+            for cell in col:
+                val = str(cell.value or "")
+                max_len = max(max_len, len(val))
+            ws.column_dimensions[col[0].column_letter].width = max_len + 3
+
         wb.save(temp_path)
 
         PROCESSED_FILES[file_id] = {
