@@ -419,9 +419,15 @@ def web_process():
 
         # Style the Excel file
         from openpyxl import load_workbook
-        from openpyxl.styles import Font, PatternFill, Alignment
+        from openpyxl.styles import Font, PatternFill, Alignment, numbers
         wb = load_workbook(temp_path)
         ws = wb.active
+
+        # Force phone column (col A) to text format to preserve leading zero
+        for row in ws.iter_rows(min_row=2, max_row=ws.max_row, min_col=1, max_col=1):
+            for cell in row:
+                cell.number_format = numbers.FORMAT_TEXT
+                cell.value = str(cell.value) if cell.value is not None else ""
 
         # Blue headers with white text
         header_fill = PatternFill(start_color="1565C0", end_color="1565C0", fill_type="solid")

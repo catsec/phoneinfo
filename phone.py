@@ -7,10 +7,12 @@ def validate_phone_numbers(phone_numbers):
 
 
 def convert_to_local(phone):
-    """Convert international format (972XXXXXXXXX) to local Israeli format (0XXXXXXXXX)."""
-    phone_str = str(phone).strip()
+    """Convert any Israeli phone format to local format (0XXXXXXXXX)."""
+    phone_str = str(phone).strip().replace('-', '').replace(' ', '').replace('+', '')
     if phone_str.startswith("972") and len(phone_str) == 12:
         return "0" + phone_str[3:]
+    if len(phone_str) == 9 and (phone_str.startswith("5") or phone_str.startswith("7")):
+        return "0" + phone_str
     return phone_str
 
 
