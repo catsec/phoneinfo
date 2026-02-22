@@ -472,6 +472,14 @@
 
             const formData = new FormData(form);
 
+            // Replace file with ASCII filename to avoid Cloudflare blocking non-ASCII names
+            const originalFile = formData.get('file');
+            if (originalFile && originalFile.name) {
+                const ext = originalFile.name.split('.').pop();
+                formData.set('original_filename', originalFile.name);
+                formData.set('file', originalFile, 'upload.' + ext);
+            }
+
             // Get selected APIs
             const selectedApis = [];
             document.querySelectorAll('input[name="apis"]:checked').forEach(cb => {

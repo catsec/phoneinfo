@@ -145,7 +145,8 @@ def web_process():
     if not allowed_file(file.filename):
         return jsonify({"success": False, "error": "Invalid file type. Only .xlsx and .csv files are allowed"}), 400
 
-    original_filename = file.filename
+    # Use original filename if provided (JS renames to ASCII to bypass Cloudflare)
+    original_filename = request.form.get('original_filename') or file.filename
 
     try:
         refresh_days = int(request.form.get('refresh_days', 7))
