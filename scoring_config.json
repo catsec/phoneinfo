@@ -1,13 +1,9 @@
 {
-    "_description": "PhoneInfo Scoring Configuration - Adjustable weights and thresholds for name matching",
-    "_version": "1.0",
+    "_description": "PhoneInfo Scoring Configuration - Word-bag matching (no first/last distinction)",
+    "_version": "2.0",
 
-    "weights": {
-        "_description": "How much each name component contributes to the final score",
-        "last_name": 0.30,
-        "first_name": 0.70,
-        "_rationale": "First name match provides 70% baseline confidence. Last name adds additional 30% when it matches."
-    },
+    "word_match_threshold": 75,
+    "_threshold_description": "Minimum score for a word to count as matched. 2+ matched words → score 100.",
 
     "match_types": {
         "_description": "Score assigned for each type of match (0-100). Higher = more confidence.",
@@ -37,15 +33,7 @@
     },
 
     "bonuses": {
-        "_description": "Additional adjustments applied on top of the base score",
-        "both_names_exact": 5,
         "multi_api_agreement": 5,
-        "_rationale": "When both first and last match exactly, or when ME and SYNC agree, confidence increases beyond the weighted sum."
-    },
-
-    "penalties": {
-        "_description": "Score reductions for suspicious patterns",
-        "only_first_name_match": -10,
-        "_rationale": "First-name-only match (e.g., 'David' is very common) with no last name match is weak evidence."
+        "_rationale": "When ME and SYNC both score ≥60, confidence increases."
     }
 }
