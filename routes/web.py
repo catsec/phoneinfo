@@ -51,8 +51,7 @@ def web_query():
         return jsonify({"success": False, "error": "JSON body required"})
 
     phone = data.get("phone", "").strip()
-    first_name = data.get("first_name", "").strip()
-    last_name = data.get("last_name", "").strip()
+    cal_name = data.get("name", "").strip()
     refresh_days = data.get("refresh_days", 7)
     apis_str = data.get("apis", "me")
     selected_apis = [a.strip().lower() for a in apis_str.split(',') if a.strip()]
@@ -70,8 +69,6 @@ def web_query():
 
     if not validate_phone_numbers([phone]):
         return jsonify({"success": False, "error": "מספר טלפון לא תקין"})
-
-    cal_name = f"{first_name} {last_name}".strip()
 
     if not cal_name:
         return jsonify({"success": False, "error": "שם איש קשר נדרש"})
@@ -199,8 +196,8 @@ def web_process():
         if len(data) > 100000:
             return jsonify({"success": False, "error": f"File too large: {len(data)} rows (max 100,000)"}), 400
 
-        if data.shape[1] != 3:
-            return jsonify({"success": False, "error": f"הקובץ חייב להכיל בדיוק 3 עמודות (טלפון, שם פרטי, שם משפחה). נמצאו {data.shape[1]} עמודות"})
+        if data.shape[1] != 2:
+            return jsonify({"success": False, "error": f"הקובץ חייב להכיל בדיוק 2 עמודות (טלפון, שם). נמצאו {data.shape[1]} עמודות"})
 
         if len(data) == 0:
             return jsonify({"success": False, "error": "הקובץ ריק"})
@@ -248,32 +245,24 @@ def web_process():
             row_errors = []
 
             phone = str(row.iloc[0]).strip() if pd.notna(row.iloc[0]) else ""
-            first_name = clean_name(str(row.iloc[1])) if pd.notna(row.iloc[1]) else ""
-            last_name = clean_name(str(row.iloc[2])) if pd.notna(row.iloc[2]) else ""
+            cal_name = clean_name(str(row.iloc[1])) if pd.notna(row.iloc[1]) else ""
 
             if not phone:
                 row_errors.append(f"שורה {excel_row}, עמודה A: טלפון ריק")
             elif not is_valid_phone(phone):
                 row_errors.append(f"שורה {excel_row}, עמודה A: טלפון לא תקין '{phone}'")
 
-            if not first_name:
-                row_errors.append(f"שורה {excel_row}, עמודה B: שם פרטי ריק")
-            elif not is_hebrew(first_name):
-                row_errors.append(f"שורה {excel_row}, עמודה B: שם פרטי חייב להיות בעברית '{first_name}'")
-
-            if not last_name:
-                row_errors.append(f"שורה {excel_row}, עמודה C: שם משפחה ריק")
-            elif not is_hebrew(last_name):
-                row_errors.append(f"שורה {excel_row}, עמודה C: שם משפחה חייב להיות בעברית '{last_name}'")
+            if not cal_name:
+                row_errors.append(f"שורה {excel_row}, עמודה B: שם ריק")
+            elif not is_hebrew(cal_name):
+                row_errors.append(f"שורה {excel_row}, עמודה B: שם חייב להיות בעברית '{cal_name}'")
 
             if row_errors:
                 errors.extend(row_errors)
             else:
                 valid_rows.append({
                     "phone": phone,
-                    "first_name": first_name,
-                    "last_name": last_name,
-                    "cal_name": f"{first_name} {last_name}"
+                    "cal_name": cal_name,
                 })
 
         if errors:

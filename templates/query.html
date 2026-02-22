@@ -228,15 +228,9 @@
                 <input type="text" id="phone" name="phone" placeholder="0501234567" required>
             </div>
 
-            <div class="row">
-                <div class="form-group">
-                    <label for="firstName">שם פרטי (רשמי)</label>
-                    <input type="text" id="firstName" name="first_name" placeholder="ישראל">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">שם משפחה (רשמי)</label>
-                    <input type="text" id="lastName" name="last_name" placeholder="ישראלי">
-                </div>
+            <div class="form-group">
+                <label for="contactName">שם איש קשר</label>
+                <input type="text" id="contactName" name="contact_name" placeholder="ישראל ישראלי">
             </div>
 
             <div class="form-group">
@@ -436,8 +430,7 @@
             e.preventDefault();
 
             const phone = document.getElementById('phone').value;
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
+            const contactName = document.getElementById('contactName').value;
             const refreshDays = document.getElementById('refreshDays').value;
             const meCache = document.getElementById('meCache').checked;
             const syncCache = document.getElementById('syncCache').checked;
@@ -460,8 +453,7 @@
                     },
                     body: JSON.stringify({
                         phone: phone,
-                        first_name: firstName,
-                        last_name: lastName,
+                        name: contactName,
                         me_cache_only: meCache,
                         sync_cache_only: syncCache,
                         refresh_days: parseInt(refreshDays),
