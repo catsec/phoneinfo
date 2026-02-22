@@ -511,7 +511,7 @@
                     body: JSON.stringify({
                         file_data: fileBase64,
                         filename: file.name,
-                        refresh_days: parseInt(document.getElementById('refreshDays').value) || 7,
+                        refresh_days: parseInt(document.getElementById('refreshDays').value ?? 7),
                         apis: selectedApis.join(','),
                         me_cache_only: meCache && meCache.checked,
                         sync_cache_only: syncCache && syncCache.checked,
