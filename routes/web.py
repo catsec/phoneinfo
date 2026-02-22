@@ -194,17 +194,17 @@ def web_process():
         if len(data) > 100000:
             return jsonify({"success": False, "error": f"File too large: {len(data)} rows (max 100,000)"}), 400
 
-        if data.shape[1] != 2:
-            return jsonify({"success": False, "error": f"הקובץ חייב להכיל בדיוק 2 עמודות (טלפון, שם). נמצאו {data.shape[1]} עמודות"})
+        if data.shape[1] < 2:
+            return jsonify({"success": False, "error": f"הקובץ חייב להכיל לפחות 2 עמודות (טלפון, שם). נמצאו {data.shape[1]} עמודות"})
 
         if len(data) == 0:
             return jsonify({"success": False, "error": "הקובץ ריק"})
 
-        # Detect and remove header row
+        # Detect and remove header row (check first 2 columns only)
         first_row = data.iloc[0]
         header_indicators = ['phone', 'טלפון', 'מספר', 'first', 'last', 'שם', 'name', 'פרטי', 'משפחה']
         is_header = False
-        for cell in first_row:
+        for cell in first_row.iloc[:2]:
             cell_str = str(cell).lower().strip() if pd.notna(cell) else ""
             if any(indicator in cell_str for indicator in header_indicators):
                 is_header = True
@@ -352,19 +352,35 @@ def web_process():
             for provider in active_providers:
                 translate_and_score(provider, result, cal_name, db)
 
-        # Create DataFrame and Excel
+        # Build result columns
         result_df = pd.DataFrame(results).astype(str)
 
-        desired_order = ["phone_number", "cal_name"]
+        result_columns = []
         for provider in active_providers:
-            desired_order.extend(provider.excel_columns)
+            result_columns.extend(provider.excel_columns)
+        result_cols_df = result_df[[c for c in result_columns if c in result_df.columns]]
 
-        existing_columns = [col for col in desired_order if col in result_df.columns]
-        result_df = result_df.reindex(columns=existing_columns)
+        # Find first empty column in original data to insert results
+        insert_col = data.shape[1]
+        for col_idx in range(data.shape[1]):
+            col_data = data.iloc[:, col_idx]
+            if col_data.isna().all() or (col_data.astype(str).str.strip() == '').all():
+                insert_col = col_idx
+                break
+
+        # Build output: original columns up to insert point + results + remaining original columns
+        out_df = data.iloc[:, :insert_col].copy()
+        for col_name in result_cols_df.columns:
+            out_df[col_name] = result_cols_df[col_name].values
+        if insert_col < data.shape[1]:
+            for col_idx in range(insert_col, data.shape[1]):
+                orig_col = data.iloc[:, col_idx]
+                if not (orig_col.isna().all() or (orig_col.astype(str).str.strip() == '').all()):
+                    out_df[f"orig_{col_idx}"] = orig_col.values
 
         file_id = str(uuid.uuid4())
         temp_path = os.path.join(tempfile.gettempdir(), f"result_{file_id}.xlsx")
-        result_df.to_excel(temp_path, index=False, engine="openpyxl")
+        out_df.to_excel(temp_path, index=False, engine="openpyxl")
 
         PROCESSED_FILES[file_id] = {
             "path": temp_path,
