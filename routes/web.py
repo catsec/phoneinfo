@@ -135,33 +135,56 @@ def web_query():
 @web_bp.route("/web/process", methods=["POST"])
 def web_process():
     """Process uploaded file via web interface."""
-    if 'file' not in request.files:
-        return jsonify({"success": False, "error": "No file uploaded"})
+    import base64
 
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({"success": False, "error": "No file selected"})
-
-    if not allowed_file(file.filename):
-        return jsonify({"success": False, "error": "Invalid file type. Only .xlsx and .csv files are allowed"}), 400
-
-    # Use original filename if provided (JS renames to ASCII to bypass Cloudflare)
-    original_filename = request.form.get('original_filename') or file.filename
-
-    try:
-        refresh_days = int(request.form.get('refresh_days', 7))
-    except ValueError:
-        refresh_days = 7
-
-    apis_str = request.form.get('apis', 'me')
-    selected_apis = [a.strip().lower() for a in apis_str.split(',') if a.strip()]
-    if not selected_apis:
-        selected_apis = ['me']
-
-    # Per-provider cache_only flags
-    cache_only_flags = {}
-    for api_name in selected_apis:
-        cache_only_flags[api_name] = request.form.get(f'{api_name}_cache_only', '').lower() == 'true'
+    # Accept both JSON (base64 file) and multipart form data
+    if request.is_json:
+        json_data = request.get_json()
+        file_data_b64 = json_data.get("file_data")
+        if not file_data_b64:
+            return jsonify({"success": False, "error": "No file uploaded"})
+        original_filename = json_data.get("filename", "upload.xlsx")
+        if not allowed_file(original_filename):
+            return jsonify({"success": False, "error": "Invalid file type. Only .xlsx and .csv files are allowed"}), 400
+        file_bytes = base64.b64decode(file_data_b64)
+        validate_file_size(len(file_bytes))
+        file = BytesIO(file_bytes)
+        try:
+            refresh_days = int(json_data.get("refresh_days", 7))
+        except (ValueError, TypeError):
+            refresh_days = 7
+        apis_str = json_data.get("apis", "me")
+        selected_apis = [a.strip().lower() for a in apis_str.split(",") if a.strip()]
+        if not selected_apis:
+            selected_apis = ["me"]
+        cache_only_flags = {}
+        for api_name in selected_apis:
+            cache_only_flags[api_name] = bool(json_data.get(f"{api_name}_cache_only", False))
+    else:
+        if 'file' not in request.files:
+            return jsonify({"success": False, "error": "No file uploaded"})
+        uploaded = request.files['file']
+        if uploaded.filename == '':
+            return jsonify({"success": False, "error": "No file selected"})
+        if not allowed_file(uploaded.filename):
+            return jsonify({"success": False, "error": "Invalid file type. Only .xlsx and .csv files are allowed"}), 400
+        original_filename = request.form.get('original_filename') or uploaded.filename
+        uploaded.seek(0, 2)
+        file_size = uploaded.tell()
+        uploaded.seek(0)
+        validate_file_size(file_size)
+        file = uploaded
+        try:
+            refresh_days = int(request.form.get('refresh_days', 7))
+        except ValueError:
+            refresh_days = 7
+        apis_str = request.form.get('apis', 'me')
+        selected_apis = [a.strip().lower() for a in apis_str.split(',') if a.strip()]
+        if not selected_apis:
+            selected_apis = ['me']
+        cache_only_flags = {}
+        for api_name in selected_apis:
+            cache_only_flags[api_name] = request.form.get(f'{api_name}_cache_only', '').lower() == 'true'
 
     # Filter to configured providers only
     active_providers = []
@@ -177,14 +200,8 @@ def web_process():
     file_suffix = "_" + "_".join(p.name for p in active_providers)
 
     try:
-        # Validate file size
-        file.seek(0, 2)
-        file_size = file.tell()
-        file.seek(0)
-        validate_file_size(file_size)
-
         # Read file
-        filename = file.filename.lower()
+        filename = original_filename.lower()
         if filename.endswith('.csv'):
             data = pd.read_csv(file, dtype=str, header=None)
         elif filename.endswith('.xlsx'):
@@ -398,7 +415,7 @@ def web_process():
         PROCESSED_FILES[file_id] = {
             "path": temp_path,
             "created": datetime.now(),
-            "original_name": os.path.splitext(file.filename)[0] + file_suffix + ".xlsx"
+            "original_name": os.path.splitext(original_filename)[0] + file_suffix + ".xlsx"
         }
 
         total_from_cache = sum(cache_counts.values())

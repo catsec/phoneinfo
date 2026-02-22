@@ -470,14 +470,10 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const formData = new FormData(form);
-
-            // Replace file with ASCII filename to avoid Cloudflare blocking non-ASCII names
-            const originalFile = formData.get('file');
-            if (originalFile && originalFile.name) {
-                const ext = originalFile.name.split('.').pop();
-                formData.set('original_filename', originalFile.name);
-                formData.set('file', originalFile, 'upload.' + ext);
+            const fileInput = document.getElementById('file');
+            const file = fileInput.files[0];
+            if (!file) {
+                return;
             }
 
             // Get selected APIs
@@ -485,17 +481,10 @@
             document.querySelectorAll('input[name="apis"]:checked').forEach(cb => {
                 selectedApis.push(cb.value);
             });
-            formData.set('apis', selectedApis.join(','));
 
             // Get cache-only flags
             const meCache = document.getElementById('meCache');
             const syncCache = document.getElementById('syncCache');
-            if (meCache && meCache.checked) {
-                formData.set('me_cache_only', 'true');
-            }
-            if (syncCache && syncCache.checked) {
-                formData.set('sync_cache_only', 'true');
-            }
 
             // Reset UI
             result.style.display = 'none';
@@ -505,13 +494,29 @@
             submitBtn.disabled = true;
 
             try {
-                // Start processing
+                // Read file as base64 to send as JSON (avoids Cloudflare blocking multipart uploads)
+                progressFill.style.width = '10%';
+                const fileBase64 = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+
                 progressFill.style.width = '20%';
                 progressText.textContent = 'מעבד מספרי טלפון...';
 
                 const response = await fetch('/web/process', {
                     method: 'POST',
-                    body: formData
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        file_data: fileBase64,
+                        filename: file.name,
+                        refresh_days: parseInt(document.getElementById('refreshDays').value) || 7,
+                        apis: selectedApis.join(','),
+                        me_cache_only: meCache && meCache.checked,
+                        sync_cache_only: syncCache && syncCache.checked,
+                    })
                 });
 
                 if (!response.ok) {
