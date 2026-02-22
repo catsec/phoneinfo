@@ -6,6 +6,14 @@ def validate_phone_numbers(phone_numbers):
     return True
 
 
+def convert_to_local(phone):
+    """Convert international format (972XXXXXXXXX) to local Israeli format (0XXXXXXXXX)."""
+    phone_str = str(phone).strip()
+    if phone_str.startswith("972") and len(phone_str) == 12:
+        return "0" + phone_str[3:]
+    return phone_str
+
+
 def convert_to_international(phone_numbers):
     """Convert local Israeli phone numbers to international format."""
     converted_numbers = []

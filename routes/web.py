@@ -10,7 +10,7 @@ from flask import Blueprint, request, jsonify, render_template, send_file
 from datetime import datetime, timezone
 from db import get_db
 from config import PROCESSED_FILES, allowed_file, get_cf_user
-from phone import validate_phone_numbers, convert_to_international
+from phone import validate_phone_numbers, convert_to_international, convert_to_local
 from transliteration import is_hebrew
 from providers import get_provider, get_all_providers
 from lookup import lookup, translate_and_score
@@ -392,6 +392,9 @@ def web_process():
                 insert_col = col_idx
                 break
 
+        # Convert phone column to local format (0XX...)
+        data.iloc[:, 0] = data.iloc[:, 0].apply(lambda x: convert_to_local(x) if pd.notna(x) else x)
+
         # Build output: original columns up to insert point + results + remaining original columns
         out_df = data.iloc[:, :insert_col].copy()
         # Rename original columns using saved headers
@@ -476,7 +479,7 @@ def web_process():
             for cell in col:
                 val = str(cell.value or "")
                 max_len = max(max_len, len(val))
-            ws.column_dimensions[col[0].column_letter].width = max_len + 1
+            ws.column_dimensions[col[0].column_letter].width = max_len
 
         wb.save(temp_path)
 
