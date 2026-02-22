@@ -393,6 +393,7 @@
         async function loadApis() {
             try {
                 const response = await fetch('/web/apis');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
 
                 apiCheckboxes.innerHTML = '';
@@ -504,6 +505,17 @@
                     method: 'POST',
                     body: formData
                 });
+
+                if (!response.ok) {
+                    const text = await response.text();
+                    try {
+                        const err = JSON.parse(text);
+                        throw new Error(err.error || `HTTP ${response.status}`);
+                    } catch (e) {
+                        if (e.message.startsWith('HTTP ') || !e.message.startsWith('Unexpected')) throw e;
+                        throw new Error(`שגיאת שרת (${response.status})`);
+                    }
+                }
 
                 progressFill.style.width = '90%';
 

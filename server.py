@@ -28,6 +28,16 @@ app.register_blueprint(web_bp)
 app.register_blueprint(nicknames_bp)
 
 
+# Ensure API routes always return JSON, never HTML error pages
+@app.errorhandler(Exception)
+def handle_exception(e):
+    """Return JSON for all unhandled exceptions."""
+    from werkzeug.exceptions import HTTPException
+    if isinstance(e, HTTPException):
+        return jsonify({"error": e.description}), e.code
+    return jsonify({"error": str(e)}), 500
+
+
 # Security headers middleware
 @app.after_request
 def add_security_headers(response):
@@ -49,6 +59,8 @@ def add_security_headers(response):
 def enforce_cf_auth():
     """Require Cloudflare Access authentication on all requests."""
     if request.endpoint == "static" or request.path == "/health":
+        return None
+    if os.environ.get("DEBUG", "false").lower() == "true":
         return None
     if not get_cf_user():
         return jsonify({"error": "Access denied"}), 403
