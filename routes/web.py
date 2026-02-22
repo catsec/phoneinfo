@@ -231,12 +231,13 @@ def web_process():
                 is_header = True
                 break
 
-        # Save or generate headers
+        # Save or generate headers — first two columns always fixed
         if is_header:
             original_headers = [str(cell).strip() if pd.notna(cell) else "" for cell in first_row]
         else:
-            # Generate default headers: phone, cal_name, then empty for extra columns
-            original_headers = ["phone", "cal_name"] + [""] * (data.shape[1] - 2)
+            original_headers = [""] * data.shape[1]
+        original_headers[0] = "טלפון"
+        original_headers[1] = "שם לקוח"
         start_row = 1 if is_header else 0
         data = data.iloc[start_row:].reset_index(drop=True)
 
