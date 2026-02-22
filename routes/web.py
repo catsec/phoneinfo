@@ -70,10 +70,7 @@ def web_query():
     if not validate_phone_numbers([phone]):
         return jsonify({"success": False, "error": "מספר טלפון לא תקין"})
 
-    if not cal_name:
-        return jsonify({"success": False, "error": "שם איש קשר נדרש"})
-
-    if not is_hebrew(cal_name):
+    if cal_name and not is_hebrew(cal_name):
         return jsonify({"success": False, "error": "שם איש קשר חייב להיות בעברית"})
 
     try:
@@ -96,7 +93,8 @@ def web_query():
                 result["phone_number"] = phone
                 result["cal_name"] = cal_name
 
-                translate_and_score(provider, result, cal_name, db)
+                if cal_name:
+                    translate_and_score(provider, result, cal_name, db)
 
                 if api_called:
                     any_api_called = True
