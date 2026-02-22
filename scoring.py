@@ -244,7 +244,7 @@ class ScoreEngine:
         if matched_count >= 2:
             final_score = 100
         elif matched_count == 1:
-            final_score = 60
+            final_score = 75
         else:
             # No strong matches — use best available score
             final_score = max((m["score"] for m in word_results), default=0)
