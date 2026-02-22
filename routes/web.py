@@ -466,7 +466,8 @@ def web_process():
                         cell.fill, cell.font = red_fill, red_font
             for col_idx in translated_cols:
                 cell = row[col_idx - 1]
-                if cell.value and str(cell.value).strip():
+                val = str(cell.value or "").strip()
+                if val and val not in ("None", "nan", ""):
                     cell.fill = sand_fill
 
         wb.save(temp_path)
