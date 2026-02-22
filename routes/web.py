@@ -434,10 +434,13 @@ def web_process():
         red_fill = PatternFill(start_color="FFCDD2", end_color="FFCDD2", fill_type="solid")
         red_font = Font(color="C62828", bold=True)
 
-        # Find matching and risk_tier columns
+        # Find special columns
         col_map = {cell.value: cell.column for cell in ws[1] if cell.value}
         score_cols = [col_map[c] for c in col_map if c.endswith(".matching")]
         tier_cols = [col_map[c] for c in col_map if c.endswith(".risk_tier")]
+        translated_cols = [col_map[c] for c in col_map if c.endswith(".translated")]
+
+        sand_fill = PatternFill(start_color="F5DEB3", end_color="F5DEB3", fill_type="solid")
 
         for row in ws.iter_rows(min_row=2, max_row=ws.max_row):
             for col_idx in score_cols + tier_cols:
@@ -461,6 +464,10 @@ def web_process():
                         cell.fill, cell.font = yellow_fill, yellow_font
                     elif val >= 0:
                         cell.fill, cell.font = red_fill, red_font
+            for col_idx in translated_cols:
+                cell = row[col_idx - 1]
+                if cell.value and str(cell.value).strip():
+                    cell.fill = sand_fill
 
         wb.save(temp_path)
 
