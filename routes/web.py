@@ -412,6 +412,58 @@ def web_process():
         temp_path = os.path.join(tempfile.gettempdir(), f"result_{file_id}.xlsx")
         out_df.to_excel(temp_path, index=False, engine="openpyxl")
 
+        # Style the Excel file
+        from openpyxl import load_workbook
+        from openpyxl.styles import Font, PatternFill, Alignment
+        wb = load_workbook(temp_path)
+        ws = wb.active
+
+        # Blue headers with white text
+        header_fill = PatternFill(start_color="1565C0", end_color="1565C0", fill_type="solid")
+        header_font = Font(color="FFFFFF", bold=True, size=11)
+        for cell in ws[1]:
+            cell.fill = header_fill
+            cell.font = header_font
+            cell.alignment = Alignment(horizontal="center")
+
+        # Color matching score cells
+        green_fill = PatternFill(start_color="C8E6C9", end_color="C8E6C9", fill_type="solid")
+        green_font = Font(color="2E7D32", bold=True)
+        yellow_fill = PatternFill(start_color="FFF9C4", end_color="FFF9C4", fill_type="solid")
+        yellow_font = Font(color="F57F17", bold=True)
+        red_fill = PatternFill(start_color="FFCDD2", end_color="FFCDD2", fill_type="solid")
+        red_font = Font(color="C62828", bold=True)
+
+        # Find matching and risk_tier columns
+        col_map = {cell.value: cell.column for cell in ws[1] if cell.value}
+        score_cols = [col_map[c] for c in col_map if c.endswith(".matching")]
+        tier_cols = [col_map[c] for c in col_map if c.endswith(".risk_tier")]
+
+        for row in ws.iter_rows(min_row=2, max_row=ws.max_row):
+            for col_idx in score_cols + tier_cols:
+                cell = row[col_idx - 1]
+                try:
+                    val = int(float(str(cell.value or 0)))
+                except (ValueError, TypeError):
+                    val = -1
+                if col_idx in tier_cols:
+                    tier = str(cell.value or "").upper()
+                    if tier == "HIGH":
+                        cell.fill, cell.font = green_fill, green_font
+                    elif tier == "MEDIUM":
+                        cell.fill, cell.font = yellow_fill, yellow_font
+                    elif tier in ("LOW", "VERY LOW"):
+                        cell.fill, cell.font = red_fill, red_font
+                else:
+                    if val >= 70:
+                        cell.fill, cell.font = green_fill, green_font
+                    elif val >= 50:
+                        cell.fill, cell.font = yellow_fill, yellow_font
+                    elif val >= 0:
+                        cell.fill, cell.font = red_fill, red_font
+
+        wb.save(temp_path)
+
         PROCESSED_FILES[file_id] = {
             "path": temp_path,
             "created": datetime.now(),
