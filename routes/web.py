@@ -476,7 +476,7 @@ def web_process():
             for cell in col:
                 val = str(cell.value or "")
                 max_len = max(max_len, len(val))
-            ws.column_dimensions[col[0].column_letter].width = max_len + 3
+            ws.column_dimensions[col[0].column_letter].width = max_len + 1
 
         wb.save(temp_path)
 
