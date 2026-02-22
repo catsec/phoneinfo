@@ -213,6 +213,10 @@ def web_process():
                 is_header = True
                 break
 
+        # Save original headers before stripping
+        original_headers = None
+        if is_header:
+            original_headers = [str(cell).strip() if pd.notna(cell) else "" for cell in first_row]
         start_row = 1 if is_header else 0
         data = data.iloc[start_row:].reset_index(drop=True)
 
@@ -370,13 +374,19 @@ def web_process():
 
         # Build output: original columns up to insert point + results + remaining original columns
         out_df = data.iloc[:, :insert_col].copy()
+        # Rename original columns using saved headers
+        if original_headers:
+            for col_idx in range(insert_col):
+                if col_idx < len(original_headers) and original_headers[col_idx]:
+                    out_df.rename(columns={col_idx: original_headers[col_idx]}, inplace=True)
         for col_name in result_cols_df.columns:
             out_df[col_name] = result_cols_df[col_name].values
         if insert_col < data.shape[1]:
             for col_idx in range(insert_col, data.shape[1]):
                 orig_col = data.iloc[:, col_idx]
                 if not (orig_col.isna().all() or (orig_col.astype(str).str.strip() == '').all()):
-                    out_df[f"orig_{col_idx}"] = orig_col.values
+                    header = original_headers[col_idx] if original_headers and col_idx < len(original_headers) and original_headers[col_idx] else f"col_{col_idx}"
+                    out_df[header] = orig_col.values
 
         file_id = str(uuid.uuid4())
         temp_path = os.path.join(tempfile.gettempdir(), f"result_{file_id}.xlsx")
