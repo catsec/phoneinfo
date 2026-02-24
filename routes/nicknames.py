@@ -5,6 +5,7 @@ import os
 import tempfile
 
 import pandas as pd
+from io import BytesIO
 from flask import Blueprint, request, jsonify, render_template, send_file
 from werkzeug.utils import secure_filename
 from db import get_db
@@ -148,8 +149,8 @@ def web_nicknames_upload():
 
     except ValidationError as e:
         return jsonify({"success": False, "error": f"Validation error: {str(e)}"}), 400
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
+    except Exception:
+        return jsonify({"success": False, "error": "שגיאה בייבוא הקובץ"})
 
 
 @nicknames_bp.route("/web/nicknames/download")
@@ -167,12 +168,11 @@ def web_nicknames_download():
             'all_names': row[1]
         })
 
-    temp_path = os.path.join(tempfile.gettempdir(), "nicknames_export.json")
-    with open(temp_path, 'w', encoding='utf-8') as f:
-        json.dump(nicknames_data, f, ensure_ascii=False, indent=2)
+    # Write to BytesIO to avoid temp file race conditions
+    data = BytesIO(json.dumps(nicknames_data, ensure_ascii=False, indent=2).encode('utf-8'))
 
     return send_file(
-        temp_path,
+        data,
         as_attachment=True,
         download_name="nicknames.json",
         mimetype="application/json"
@@ -181,7 +181,7 @@ def web_nicknames_download():
 
 @nicknames_bp.route("/web/nicknames/backup", methods=["POST"])
 def web_nicknames_backup():
-    """Backup nicknames to local nicknames.xlsx file."""
+    """Backup nicknames to local nicknames.xlsx file in db directory."""
     try:
         db = get_db()
         cursor = db.cursor()
@@ -190,31 +190,36 @@ def web_nicknames_backup():
 
         df = pd.DataFrame(rows, columns=['formal_name', 'all_names'])
 
+        # Write backup to db directory (not project root)
         script_dir = os.path.dirname(os.path.abspath(__file__))
         project_dir = os.path.dirname(script_dir)
-        backup_path = os.path.join(project_dir, "nicknames.xlsx")
+        backup_dir = os.path.join(project_dir, "db")
+        os.makedirs(backup_dir, exist_ok=True)
+        backup_path = os.path.join(backup_dir, "nicknames_backup.xlsx")
         df.to_excel(backup_path, index=False, engine="openpyxl")
 
         return jsonify({
             "success": True,
-            "message": f"גיבוי נשמר בהצלחה",
+            "message": "גיבוי נשמר בהצלחה",
             "count": len(rows)
         })
 
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
+    except Exception:
+        return jsonify({"success": False, "error": "שגיאה בגיבוי"})
 
 
 @nicknames_bp.route("/web/nicknames/restore", methods=["POST"])
 def web_nicknames_restore():
-    """Restore nicknames from local nicknames.xlsx file."""
+    """Restore nicknames from local nicknames backup file."""
     try:
         script_dir = os.path.dirname(os.path.abspath(__file__))
         project_dir = os.path.dirname(script_dir)
-        backup_path = os.path.join(project_dir, "nicknames.xlsx")
-
+        # Check both old and new backup locations
+        backup_path = os.path.join(project_dir, "db", "nicknames_backup.xlsx")
         if not os.path.exists(backup_path):
-            return jsonify({"success": False, "error": "קובץ nicknames.xlsx לא נמצא"})
+            backup_path = os.path.join(project_dir, "nicknames.xlsx")
+        if not os.path.exists(backup_path):
+            return jsonify({"success": False, "error": "קובץ גיבוי לא נמצא"})
 
         df = pd.read_excel(backup_path, dtype=str)
 
@@ -248,8 +253,8 @@ def web_nicknames_restore():
             "count": count
         })
 
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
+    except Exception:
+        return jsonify({"success": False, "error": "שגיאה בשחזור"})
 
 
 @nicknames_bp.route("/web/nicknames/edit")
@@ -321,8 +326,8 @@ def web_nicknames_save():
 
         return jsonify({"success": True})
 
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
+    except Exception:
+        return jsonify({"success": False, "error": "שגיאה בשמירה"})
 
 
 @nicknames_bp.route("/web/nicknames/delete", methods=["POST"])
@@ -348,5 +353,5 @@ def web_nicknames_delete():
         else:
             return jsonify({"success": False, "error": "שם לא נמצא"})
 
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
+    except Exception:
+        return jsonify({"success": False, "error": "שגיאה במחיקה"})

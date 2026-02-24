@@ -9,7 +9,8 @@ from io import BytesIO
 from flask import Blueprint, request, jsonify, render_template, send_file
 from datetime import datetime, timezone
 from db import get_db
-from config import PROCESSED_FILES, allowed_file, get_cf_user
+from werkzeug.utils import secure_filename as _secure_filename
+from config import PROCESSED_FILES, processed_files_lock, allowed_file, get_cf_user
 from phone import validate_phone_numbers, convert_to_international, convert_to_local
 from transliteration import is_hebrew
 from providers import get_provider, get_all_providers
@@ -128,8 +129,8 @@ def web_query():
             "from_cache": not any_api_called,
         })
 
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
+    except Exception:
+        return jsonify({"success": False, "error": "שגיאה בעיבוד השאילתה"})
 
 
 @web_bp.route("/web/process", methods=["POST"])
@@ -492,11 +493,15 @@ def web_process():
 
         wb.save(temp_path)
 
-        PROCESSED_FILES[file_id] = {
-            "path": temp_path,
-            "created": datetime.now(),
-            "original_name": os.path.splitext(original_filename)[0] + file_suffix + ".xlsx"
-        }
+        # Sanitize download filename
+        safe_base = os.path.splitext(original_filename)[0] + file_suffix + ".xlsx"
+
+        with processed_files_lock:
+            PROCESSED_FILES[file_id] = {
+                "path": temp_path,
+                "created": datetime.now(),
+                "original_name": safe_base,
+            }
 
         total_from_cache = sum(cache_counts.values())
         total_api_calls = sum(api_counts.values())
@@ -509,17 +514,17 @@ def web_process():
             "api_calls": total_api_calls
         })
 
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)})
+    except Exception:
+        return jsonify({"success": False, "error": "שגיאה בעיבוד הקובץ"})
 
 
 @web_bp.route("/web/download/<file_id>")
 def web_download(file_id):
     """Download processed file. File is deleted after download."""
-    if file_id not in PROCESSED_FILES:
+    with processed_files_lock:
+        file_info = PROCESSED_FILES.pop(file_id, None)
+    if not file_info:
         return jsonify({"error": "File not found"}), 404
-
-    file_info = PROCESSED_FILES.pop(file_id)
     file_path = file_info["path"]
 
     if not os.path.exists(file_path):

@@ -4,8 +4,9 @@ import time
 from datetime import datetime, timedelta
 from flask import Flask, request, jsonify, g
 from config import (
-    DATABASE, SERVER_HOST, SERVER_PORT, PROCESSED_FILES,
+    DATABASE, SERVER_HOST, SERVER_PORT, PROCESSED_FILES, processed_files_lock,
     FILE_EXPIRY_MINUTES, CLEANUP_INTERVAL_SECONDS, limiter, get_cf_user,
+    MAX_FILE_SIZE,
 )
 from db import init_db, init_nickname_table, load_nicknames_from_json
 from routes.api import api_bp
@@ -20,6 +21,7 @@ _init_conn.close()
 
 # Create Flask app
 app = Flask("phoneinfo")
+app.config['MAX_CONTENT_LENGTH'] = int(MAX_FILE_SIZE * 1.4)  # base64 overhead
 limiter.init_app(app)
 
 # Register blueprints (no url_prefix — keep existing URLs)
@@ -35,7 +37,8 @@ def handle_exception(e):
     from werkzeug.exceptions import HTTPException
     if isinstance(e, HTTPException):
         return jsonify({"error": e.description}), e.code
-    return jsonify({"error": str(e)}), 500
+    app.logger.exception("Unhandled exception")
+    return jsonify({"error": "Internal server error"}), 500
 
 
 # Security headers middleware
@@ -44,8 +47,9 @@ def add_security_headers(response):
     """Add security headers to all responses."""
     response.headers['X-Frame-Options'] = 'DENY'
     response.headers['X-Content-Type-Options'] = 'nosniff'
-    response.headers['X-XSS-Protection'] = '1; mode=block'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
+    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
 
     if request.path.startswith('/web/'):
         response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, private'
@@ -60,7 +64,7 @@ def enforce_cf_auth():
     """Require Cloudflare Access authentication on all requests."""
     if request.endpoint == "static" or request.path == "/health":
         return None
-    if os.environ.get("DEBUG", "false").lower() == "true":
+    if os.environ.get("DISABLE_AUTH", "false").lower() == "true":
         return None
     if not get_cf_user():
         app.logger.warning("CF auth failed: path=%s method=%s endpoint=%s", request.path, request.method, request.endpoint)
@@ -85,27 +89,24 @@ def cleanup_old_files():
             now = datetime.now()
             expired_files = []
 
-            for file_id, file_info in PROCESSED_FILES.items():
-                created_time = file_info.get("created")
-                if created_time and (now - created_time) > timedelta(minutes=FILE_EXPIRY_MINUTES):
-                    expired_files.append(file_id)
+            with processed_files_lock:
+                for file_id, file_info in PROCESSED_FILES.items():
+                    created_time = file_info.get("created")
+                    if created_time and (now - created_time) > timedelta(minutes=FILE_EXPIRY_MINUTES):
+                        expired_files.append(file_id)
 
-            for file_id in expired_files:
-                file_info = PROCESSED_FILES.pop(file_id, None)
-                if file_info:
-                    file_path = file_info.get("path")
-                    if file_path and os.path.exists(file_path):
-                        try:
-                            os.remove(file_path)
-                            print(f"Cleaned up expired file: {file_id}")
-                        except Exception as e:
-                            print(f"Error deleting file {file_path}: {e}")
+                for file_id in expired_files:
+                    file_info = PROCESSED_FILES.pop(file_id, None)
+                    if file_info:
+                        file_path = file_info.get("path")
+                        if file_path and os.path.exists(file_path):
+                            try:
+                                os.remove(file_path)
+                            except Exception:
+                                pass
 
-            if expired_files:
-                print(f"Cleanup: Removed {len(expired_files)} expired file(s)")
-
-        except Exception as e:
-            print(f"Error in cleanup task: {e}")
+        except Exception:
+            pass
 
 
 cleanup_thread = threading.Thread(target=cleanup_old_files, daemon=True)
@@ -113,6 +114,8 @@ cleanup_thread.start()
 
 
 if __name__ == "__main__":
-    debug_mode = os.environ.get("DEBUG", "true").lower() == "true"
+    debug_mode = os.environ.get("DEBUG", "false").lower() == "true"
+    if debug_mode:
+        print("WARNING: Running in debug mode")
     print(f"Starting phoneinfo server on http://{SERVER_HOST}:{SERVER_PORT}")
     app.run(host=SERVER_HOST, port=SERVER_PORT, debug=debug_mode)

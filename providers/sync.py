@@ -26,19 +26,19 @@ class SyncProvider(BaseProvider):
     def call_api(self, phone: str):
         phone = phone.lstrip('+')
         payload = {"access_token": self._token, "phone_number": phone}
-        response = requests.post(self._api_url, json=payload)
+        response = requests.post(self._api_url, json=payload, timeout=(5, 30), allow_redirects=False)
 
         if response.status_code == 200:
             return response.json()
         elif response.status_code == 404:
             return None
         elif response.status_code == 400:
-            raise ValueError(f"Invalid phone number: {phone}")
+            raise ValueError("Invalid phone number")
         elif response.status_code == 403:
             raise ValueError("API rate limit or request limit reached")
         else:
             raise ValueError(
-                f"API call failed for phone number {phone} with status code {response.status_code}"
+                f"SYNC API call failed with status code {response.status_code}"
             )
 
     def flatten(self, api_result: dict) -> dict:

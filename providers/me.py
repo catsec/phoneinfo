@@ -48,14 +48,14 @@ class MEProvider(BaseProvider):
 
     def call_api(self, phone: str):
         url = f"{self._api_url}?phone_number={phone}&sid={self._sid}&token={self._token}"
-        response = requests.get(url)
+        response = requests.get(url, timeout=(5, 30))
         if response.status_code == 200:
             return response.json()
         elif response.status_code == 404:
             return None
         else:
             raise ValueError(
-                f"API call failed for phone number {phone} with status code {response.status_code}"
+                f"ME API call failed with status code {response.status_code}"
             )
 
     def flatten(self, api_result: dict) -> dict:

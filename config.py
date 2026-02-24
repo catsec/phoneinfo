@@ -1,7 +1,7 @@
 import os
+import threading
 from dotenv import load_dotenv
 from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
 
 load_dotenv()
 
@@ -16,18 +16,29 @@ SERVER_PORT = int(os.environ.get("PORT", "5001"))
 ALLOWED_EXTENSIONS = {'xlsx', 'csv'}
 MAX_FILE_SIZE = int(os.environ.get("MAX_FILE_SIZE_MB", "50")) * 1024 * 1024
 
-# Store processed files temporarily
+# Store processed files temporarily (thread-safe access via lock)
 PROCESSED_FILES = {}
+processed_files_lock = threading.Lock()
 
 # File cleanup configuration
 FILE_EXPIRY_MINUTES = int(os.environ.get("FILE_EXPIRY_MINUTES", "5"))
 CLEANUP_INTERVAL_SECONDS = int(os.environ.get("CLEANUP_INTERVAL_SECONDS", "60"))
 
-# Rate limiter (initialized without app — call limiter.init_app(app) in server.py)
+
+# Rate limiter key: use real client IP from Cloudflare header
+def _get_client_ip():
+    from flask import request
+    return (
+        request.headers.get("CF-Connecting-IP")
+        or request.headers.get("X-Forwarded-For", "").split(",")[0].strip()
+        or request.remote_addr
+    )
+
+
 _rate_day = os.environ.get("RATE_LIMIT_DAY", "200 per day")
 _rate_hour = os.environ.get("RATE_LIMIT_HOUR", "50 per hour")
 limiter = Limiter(
-    key_func=get_remote_address,
+    key_func=_get_client_ip,
     default_limits=[_rate_day, _rate_hour],
     storage_uri="memory://",
     strategy="fixed-window"

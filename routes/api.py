@@ -26,7 +26,7 @@ def lookup_api(provider_name):
     """
     provider = get_provider(provider_name)
     if not provider:
-        return jsonify({"error": f"Unknown provider: {provider_name}"}), 404
+        return jsonify({"error": "Unknown provider"}), 404
     if not provider.is_configured:
         return jsonify({"error": f"{provider.display_name} API not configured"}), 501
 
@@ -54,8 +54,8 @@ def lookup_api(provider_name):
         result["from_cache"] = from_cache
         return jsonify(result)
 
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        return jsonify({"error": "Lookup failed"}), 500
 
 
 # Backward compatibility aliases
