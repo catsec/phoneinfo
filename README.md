@@ -25,7 +25,7 @@ A phone number lookup tool that queries the ME API to retrieve user profile info
 2. Run with your ME API credentials:
    ```bash
    docker run -d \
-     -p 5001:5001 \
+     -p 5432:5432 \
      -v $(pwd)/db:/app/db \
      -e ME_API_URL=https://app.mobile.me.app/business-api/search \
      -e ME_API_SID=your_sid \
@@ -33,7 +33,7 @@ A phone number lookup tool that queries the ME API to retrieve user profile info
      ghcr.io/catsec/phoneinfo:latest
    ```
 
-3. Open http://localhost:5001 in your browser.
+3. Open http://localhost:5432 in your browser.
 
 **Available tags:**
 - `latest` - Latest build from master branch
@@ -53,7 +53,7 @@ A phone number lookup tool that queries the ME API to retrieve user profile info
    docker-compose up -d
    ```
 
-3. Open http://localhost:5001 in your browser.
+3. Open http://localhost:5432 in your browser.
 
 ### Manual Installation
 
@@ -86,7 +86,7 @@ Environment variables (set in `.env` file):
 | ME_API_TOKEN | Yes | - | ME API authentication token |
 | DATABASE | No | db/db.db | SQLite database path |
 | HOST | No | 0.0.0.0 | Server host |
-| PORT | No | 5001 | Server port |
+| PORT | No | 5432 | Server port |
 | DEBUG | No | true | Debug mode |
 
 ## Web Interface
@@ -204,7 +204,7 @@ For NFS mounts, add `no_root_squash` only if your security policy requires it; o
 
 ### Cloudflare Access
 
-The app authenticates users via the `Cf-Access-Authenticated-User-Email` header injected by Cloudflare Access. **Do not expose port 5001 directly to the internet** — traffic must flow through the Cloudflare tunnel. Verify your tunnel policy allows only authenticated users with approved email domains.
+The app authenticates users via the `Cf-Access-Authenticated-User-Email` header injected by Cloudflare Access. **Do not expose port 5432 directly to the internet** — traffic must flow through the Cloudflare tunnel. Verify your tunnel policy allows only authenticated users with approved email domains.
 
 ## License
 

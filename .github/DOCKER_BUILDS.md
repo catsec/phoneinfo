@@ -43,35 +43,35 @@ Images are automatically built and published when:
 ### Linux (AMD64/Intel)
 ```bash
 docker pull ghcr.io/catsec/phoneinfo:latest
-docker run -d -p 5001:5001 ghcr.io/catsec/phoneinfo:latest
+docker run -d -p 5432:5432 ghcr.io/catsec/phoneinfo:latest
 ```
 
 ### Linux (ARM64)
 ```bash
 # Raspberry Pi 4/5, AWS Graviton, etc.
 docker pull ghcr.io/catsec/phoneinfo:latest
-docker run -d -p 5001:5001 ghcr.io/catsec/phoneinfo:latest
+docker run -d -p 5432:5432 ghcr.io/catsec/phoneinfo:latest
 ```
 
 ### macOS (Intel)
 ```bash
 # Docker Desktop automatically uses linux/amd64
 docker pull ghcr.io/catsec/phoneinfo:latest
-docker run -d -p 5001:5001 ghcr.io/catsec/phoneinfo:latest
+docker run -d -p 5432:5432 ghcr.io/catsec/phoneinfo:latest
 ```
 
 ### macOS (Apple Silicon - M1/M2/M3)
 ```bash
 # Docker Desktop automatically uses linux/arm64
 docker pull ghcr.io/catsec/phoneinfo:latest
-docker run -d -p 5001:5001 ghcr.io/catsec/phoneinfo:latest
+docker run -d -p 5432:5432 ghcr.io/catsec/phoneinfo:latest
 ```
 
 ### Windows (Docker Desktop)
 ```powershell
 # Docker Desktop (WSL2) automatically uses linux/amd64
 docker pull ghcr.io/catsec/phoneinfo:latest
-docker run -d -p 5001:5001 ghcr.io/catsec/phoneinfo:latest
+docker run -d -p 5432:5432 ghcr.io/catsec/phoneinfo:latest
 ```
 
 ## Manual Multi-Platform Build
@@ -155,7 +155,7 @@ For personal access tokens, create one at https://github.com/settings/tokens wit
   run: |
     docker pull ghcr.io/catsec/phoneinfo:latest
     docker run -d \
-      -p 5001:5001 \
+      -p 5432:5432 \
       -e ME_API_URL=${{ secrets.ME_API_URL }} \
       -e ME_API_SID=${{ secrets.ME_API_SID }} \
       -e ME_API_TOKEN=${{ secrets.ME_API_TOKEN }} \
@@ -177,7 +177,7 @@ spec:
       - name: phoneinfo
         image: ghcr.io/catsec/phoneinfo:latest
         ports:
-        - containerPort: 5001
+        - containerPort: 5432
         env:
         - name: ME_API_URL
           valueFrom:

@@ -4,7 +4,7 @@
 import os
 
 # Server Socket
-bind = f"0.0.0.0:{os.environ.get('PORT', '5001')}"
+bind = f"0.0.0.0:{os.environ.get('PORT', '5432')}"
 backlog = int(os.environ.get("GUNICORN_BACKLOG", "64"))
 
 # Worker Processes

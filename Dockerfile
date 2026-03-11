@@ -28,11 +28,11 @@ RUN mkdir -p db logs && chown -R appuser:appgroup db logs
 USER appuser
 
 # Expose port
-EXPOSE 5001
+EXPOSE 5432
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:5001/health', timeout=5)" || exit 1
+    CMD python -c "import requests; requests.get('http://localhost:5432/health', timeout=5)" || exit 1
 
 # Run with Gunicorn
 CMD ["gunicorn", "-c", "gunicorn.conf.py", "server:app"]
