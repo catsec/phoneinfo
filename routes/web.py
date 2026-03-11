@@ -1,5 +1,8 @@
 """Web UI routes blueprint."""
 
+import base64 as _base64
+import binascii
+import logging
 import os
 import uuid
 import tempfile
@@ -11,7 +14,7 @@ from datetime import datetime, timezone
 from db import get_db
 from werkzeug.utils import secure_filename as _secure_filename
 from config import PROCESSED_FILES, processed_files_lock, allowed_file, get_cf_user
-from phone import validate_phone_numbers, convert_to_international, convert_to_local
+from phone import validate_phone_numbers, convert_to_international, convert_to_local, is_valid_israeli_phone
 from transliteration import is_hebrew
 from providers import get_provider, get_all_providers
 from lookup import lookup, translate_and_score
@@ -105,9 +108,9 @@ def web_query():
                 log_kwargs[f"{api_name}_api_call"] = api_called
                 log_kwargs[f"{api_name}_cache"] = from_cache
 
-            except Exception as provider_error:
+            except Exception:
                 primary_key = provider.get_primary_name_key()
-                result[primary_key] = f"ERROR: {provider_error}"
+                result[primary_key] = "ERROR: lookup failed"
                 result[f"{provider.name}.matching"] = 0
 
         log_event(
@@ -130,14 +133,32 @@ def web_query():
         })
 
     except Exception:
+        logging.getLogger(__name__).exception("Error processing query")
         return jsonify({"success": False, "error": "שגיאה בעיבוד השאילתה"})
+
+
+_XLSX_MAGIC = b'PK\x03\x04'
+
+
+def _check_magic_bytes(file_bytes: bytes, filename: str) -> bool:
+    """Validate file magic bytes match the declared extension."""
+    if filename.lower().endswith('.xlsx'):
+        return file_bytes[:4] == _XLSX_MAGIC
+    # CSV has no magic bytes — accept any readable content
+    return True
+
+
+def _sanitize_excel_value(value) -> str:
+    """Prevent formula injection: prefix formula-triggering characters."""
+    s = str(value) if value is not None else ""
+    if s and s[0] in ('=', '+', '-', '@', '\t', '\r'):
+        return "'" + s
+    return s
 
 
 @web_bp.route("/web/process", methods=["POST"])
 def web_process():
     """Process uploaded file via web interface."""
-    import base64
-
     # Accept both JSON (base64 file) and multipart form data
     if request.is_json:
         json_data = request.get_json()
@@ -147,8 +168,13 @@ def web_process():
         original_filename = json_data.get("filename", "upload.xlsx")
         if not allowed_file(original_filename):
             return jsonify({"success": False, "error": "Invalid file type. Only .xlsx and .csv files are allowed"}), 400
-        file_bytes = base64.b64decode(file_data_b64)
+        try:
+            file_bytes = _base64.b64decode(file_data_b64)
+        except binascii.Error:
+            return jsonify({"success": False, "error": "Invalid file encoding"}), 400
         validate_file_size(len(file_bytes))
+        if not _check_magic_bytes(file_bytes, original_filename):
+            return jsonify({"success": False, "error": "File content does not match its extension"}), 400
         file = BytesIO(file_bytes)
         try:
             refresh_days = int(json_data.get("refresh_days", 7))
@@ -174,6 +200,11 @@ def web_process():
         file_size = uploaded.tell()
         uploaded.seek(0)
         validate_file_size(file_size)
+        # Magic-byte check for multipart uploads
+        header = uploaded.read(4)
+        uploaded.seek(0)
+        if not _check_magic_bytes(header, original_filename):
+            return jsonify({"success": False, "error": "File content does not match its extension"}), 400
         file = uploaded
         try:
             refresh_days = int(request.form.get('refresh_days', 7))
@@ -254,18 +285,6 @@ def web_process():
                 return ""
             return name.replace("'", "").replace("\u2019", "").replace("`", "").strip()
 
-        def is_valid_phone(phone):
-            if not phone:
-                return False
-            phone = str(phone).strip().replace('-', '').replace(' ', '').replace('+', '')
-            if phone.startswith('05') or phone.startswith('07'):
-                return len(phone) >= 9 and len(phone) <= 10 and phone.isdigit()
-            if phone.startswith('5') or phone.startswith('7'):
-                return len(phone) == 9 and phone.isdigit()
-            if phone.startswith('972'):
-                return len(phone) >= 11 and len(phone) <= 12 and phone.isdigit()
-            return False
-
         for idx, row in data.iterrows():
             excel_row = idx + 2 if is_header else idx + 1
             row_errors = []
@@ -275,7 +294,7 @@ def web_process():
 
             if not phone:
                 row_errors.append(f"שורה {excel_row}, עמודה A: טלפון ריק")
-            elif not is_valid_phone(phone):
+            elif not is_valid_israeli_phone(phone):
                 row_errors.append(f"שורה {excel_row}, עמודה A: טלפון לא תקין '{phone}'")
 
             if not cal_name:
@@ -320,9 +339,9 @@ def web_process():
             result = {"phone_number": phone, "cal_name": cal_name}
             row_log = {}
 
-            try:
-                for provider in active_providers:
-                    pname = provider.name
+            for provider in active_providers:
+                pname = provider.name
+                try:
                     provider_data, api_called, from_cache = lookup(
                         provider, db, phone, cal_name, refresh_days,
                         cache_only=cache_only_flags.get(pname, False),
@@ -350,33 +369,37 @@ def web_process():
                     row_log[f"{pname}_api_call"] = api_called
                     row_log[f"{pname}_cache"] = from_cache
 
-                results.append(result)
-
-                log_event(
-                    user=log_username,
-                    action="process_file",
-                    phone=phone,
-                    filename=original_filename,
-                    me_api_call=row_log.get("me_api_call", False),
-                    sync_api_call=row_log.get("sync_api_call", False),
-                    me_cache=row_log.get("me_cache", False),
-                    sync_cache=row_log.get("sync_cache", False),
-                    me_result=row_log.get("me_result", ""),
-                    sync_result=row_log.get("sync_result", ""),
-                    datetime_str=datetime.now(timezone.utc).isoformat(),
-                )
-
-            except Exception as e:
-                for provider in active_providers:
+                except Exception:
                     primary_key = provider.get_primary_name_key()
-                    result[primary_key] = f"ERROR: {e}"
-                results.append(result)
+                    result[primary_key] = "ERROR: lookup failed"
+                    result[f"{pname}.matching"] = 0
+
+            results.append(result)
+
+            log_event(
+                user=log_username,
+                action="process_file",
+                phone=phone,
+                filename=original_filename,
+                me_api_call=row_log.get("me_api_call", False),
+                sync_api_call=row_log.get("sync_api_call", False),
+                me_cache=row_log.get("me_cache", False),
+                sync_cache=row_log.get("sync_cache", False),
+                me_result=row_log.get("me_result", ""),
+                sync_result=row_log.get("sync_result", ""),
+                datetime_str=datetime.now(timezone.utc).isoformat(),
+            )
 
         # Post-process: translations and matching scores
         for result in results:
             cal_name = str(result.get("cal_name", "") or "")
             for provider in active_providers:
                 translate_and_score(provider, result, cal_name, db)
+
+        # Sanitize result values to prevent Excel formula injection
+        for r in results:
+            for k, v in r.items():
+                r[k] = _sanitize_excel_value(v)
 
         # Build result columns
         result_df = pd.DataFrame(results).astype(str)
@@ -494,7 +517,7 @@ def web_process():
         wb.save(temp_path)
 
         # Sanitize download filename
-        safe_base = os.path.splitext(original_filename)[0] + file_suffix + ".xlsx"
+        safe_base = _secure_filename(os.path.splitext(original_filename)[0]) + file_suffix + ".xlsx"
 
         with processed_files_lock:
             PROCESSED_FILES[file_id] = {
@@ -515,6 +538,7 @@ def web_process():
         })
 
     except Exception:
+        logging.getLogger(__name__).exception("Error processing file")
         return jsonify({"success": False, "error": "שגיאה בעיבוד הקובץ"})
 
 

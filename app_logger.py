@@ -57,11 +57,24 @@ def get_audit_logger():
     return _audit_logger
 
 
+def _sanitize_field(value):
+    """Strip newlines from a field to prevent log injection."""
+    return str(value).replace('\n', ' ').replace('\r', ' ')
+
+
+def _mask_phone(phone):
+    """Mask all but the last 4 digits of a phone number to reduce PII in logs."""
+    s = str(phone or "")
+    if len(s) > 4:
+        return '*' * (len(s) - 4) + s[-4:]
+    return '****'
+
+
 def _format_csv_line(fields):
     """Format a list of fields as a CSV line."""
     buf = io.StringIO()
     writer = csv.writer(buf)
-    writer.writerow(fields)
+    writer.writerow([_sanitize_field(f) for f in fields])
     return buf.getvalue().rstrip("\r\n")
 
 
@@ -83,7 +96,7 @@ def log_event(user, action, phone, filename="",
         user,
         action,
         filename,
-        phone,
+        _mask_phone(phone),
         me_api_call,
         sync_api_call,
         me_cache,

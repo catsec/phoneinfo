@@ -1,5 +1,6 @@
 """REST API endpoints blueprint."""
 
+import logging
 from flask import Blueprint, request, jsonify
 from db import get_db, get_all_nicknames_for_name
 from config import limiter
@@ -7,6 +8,7 @@ from providers import get_provider
 from lookup import lookup
 from transliteration import transliterate_name
 from scoring import ScoreEngine
+from phone import validate_phone_numbers, convert_to_international
 
 api_bp = Blueprint("api", __name__)
 
@@ -43,6 +45,10 @@ def lookup_api(provider_name):
     if not phone:
         return jsonify({"error": "phone is required"}), 400
 
+    phone = convert_to_international([str(phone).strip()])[0]
+    if not validate_phone_numbers([phone]):
+        return jsonify({"error": "Invalid phone number format"}), 400
+
     try:
         db = get_db()
         result, _api_called, from_cache = lookup(
@@ -55,6 +61,7 @@ def lookup_api(provider_name):
         return jsonify(result)
 
     except Exception:
+        logging.getLogger(__name__).exception("Lookup failed for provider=%s", provider_name)
         return jsonify({"error": "Lookup failed"}), 500
 
 

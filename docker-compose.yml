@@ -4,7 +4,7 @@ services:
     container_name: phoneinfo
     restart: unless-stopped
     ports:
-      - "5001:5001"
+      - "127.0.0.1:5001:5001"
     env_file:
       - .env
     volumes:

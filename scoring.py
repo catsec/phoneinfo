@@ -20,7 +20,7 @@ Usage:
 
 import json
 import os
-from fuzzywuzzy import fuzz
+from rapidfuzz import fuzz
 from transliteration import transliterate_name, is_hebrew, detect_language
 from db import get_all_nicknames_for_name
 
@@ -30,13 +30,20 @@ from db import get_all_nicknames_for_name
 # ---------------------------------------------------------------------------
 
 _DEFAULT_CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "scoring_config.json")
+_cached_config = None
+_cached_config_path = None
 
 def load_config(config_path=None):
-    """Load scoring configuration from JSON file."""
+    """Load scoring configuration from JSON file, with module-level caching."""
+    global _cached_config, _cached_config_path
     path = config_path or _DEFAULT_CONFIG_PATH
+    if _cached_config is not None and _cached_config_path == path:
+        return _cached_config
     try:
         with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
+            _cached_config = json.load(f)
+            _cached_config_path = path
+            return _cached_config
     except FileNotFoundError:
         return _default_config()
 
@@ -230,7 +237,7 @@ class ScoreEngine:
         for i, cal_w in enumerate(cal_words):
             best = {"score": -1, "match_type": "no_match", "details": "", "api_word": ""}
             for api_w in api_all_words:
-                result = _match_word(cal_w, api_w, self.conn, self.config, use_nicknames=(i == 0))
+                result = _match_word(cal_w, api_w, self.conn, self.config, use_nicknames=True)
                 if result["score"] > best["score"]:
                     best = {**result, "api_word": api_w}
             best["score"] = max(0, best["score"])

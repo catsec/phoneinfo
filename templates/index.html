@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>חיפוש טלפונים</title>
-    <style>
+    <style nonce="{{ csp_nonce }}">
         * {
             box-sizing: border-box;
         }
@@ -291,7 +291,7 @@
         </div>
     </div>
 
-    <script>
+    <script nonce="{{ csp_nonce }}">
         // XSS Protection: Escape HTML special characters
         function escapeHTML(str) {
             if (str == null) return '';

@@ -26,7 +26,10 @@ class SyncProvider(BaseProvider):
     def call_api(self, phone: str):
         phone = phone.lstrip('+')
         payload = {"access_token": self._token, "phone_number": phone}
-        response = requests.post(self._api_url, json=payload, timeout=(5, 30), allow_redirects=False)
+        try:
+            response = requests.post(self._api_url, json=payload, timeout=(5, 30), allow_redirects=False)
+        except requests.RequestException:
+            raise ValueError("SYNC API request failed (connection error)")
 
         if response.status_code == 200:
             return response.json()

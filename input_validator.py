@@ -159,9 +159,6 @@ def sanitize_string(value: Any, max_length: int = MAX_STRING_LENGTH, field_type:
             # Remove SQL keywords instead of rejecting
             text = re.sub(re.escape(keyword), '', text, flags=re.IGNORECASE)
 
-    # HTML escape to prevent XSS
-    text = html.escape(text)
-
     return text.strip()
 
 

@@ -18,8 +18,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Create database and logs directories
-RUN mkdir -p db logs
+# Create non-root user
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+
+# Create database and logs directories with proper ownership
+RUN mkdir -p db logs && chown -R appuser:appgroup db logs
+
+# Switch to non-root user
+USER appuser
 
 # Expose port
 EXPOSE 5001

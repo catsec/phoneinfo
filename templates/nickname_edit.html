@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>עריכת כינוי</title>
-    <style>
+    <style nonce="{{ csp_nonce }}">
         * {
             box-sizing: border-box;
         }
@@ -224,7 +224,7 @@
         <a href="/web/nicknames" class="back-link">חזרה לניהול כינויים</a>
     </div>
 
-    <script>
+    <script nonce="{{ csp_nonce }}">
         const nameInput = document.getElementById('nameInput');
         const searchBtn = document.getElementById('searchBtn');
         const nicknamesSection = document.getElementById('nicknamesSection');

@@ -25,22 +25,29 @@ FILE_EXPIRY_MINUTES = int(os.environ.get("FILE_EXPIRY_MINUTES", "5"))
 CLEANUP_INTERVAL_SECONDS = int(os.environ.get("CLEANUP_INTERVAL_SECONDS", "60"))
 
 
-# Rate limiter key: use real client IP from Cloudflare header
+# Rate limiter key.
+# CF-Connecting-IP is only trustworthy when traffic is routed through Cloudflare.
+# Set TRUST_CF_IP=true in .env when deployed behind Cloudflare to use it;
+# otherwise fall back to the direct remote address (default for safety).
+_trust_cf_ip = os.environ.get("TRUST_CF_IP", "false").lower() == "true"
+
+
 def _get_client_ip():
     from flask import request
-    return (
-        request.headers.get("CF-Connecting-IP")
-        or request.headers.get("X-Forwarded-For", "").split(",")[0].strip()
-        or request.remote_addr
-    )
+    if _trust_cf_ip:
+        return request.headers.get("CF-Connecting-IP") or request.remote_addr
+    return request.remote_addr
 
 
 _rate_day = os.environ.get("RATE_LIMIT_DAY", "200 per day")
 _rate_hour = os.environ.get("RATE_LIMIT_HOUR", "50 per hour")
+# Use RATE_LIMIT_STORAGE_URI=redis://... in production so limits are shared
+# across gunicorn workers and survive restarts.  Defaults to in-memory (dev only).
+_storage_uri = os.environ.get("RATE_LIMIT_STORAGE_URI", "memory://")
 limiter = Limiter(
     key_func=_get_client_ip,
     default_limits=[_rate_day, _rate_hour],
-    storage_uri="memory://",
+    storage_uri=_storage_uri,
     strategy="fixed-window"
 )
 

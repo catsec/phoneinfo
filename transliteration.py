@@ -69,10 +69,13 @@ _common_names_cache = None
 _structured_names_cache = None
 
 
-def load_common_names_json(json_path="names.json"):
+_NAMES_JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "names.json")
+
+def load_common_names_json(json_path=None):
     """Load structured name mappings from JSON file."""
+    path = json_path or _NAMES_JSON_PATH
     try:
-        with open(json_path, 'r', encoding='utf-8') as f:
+        with open(path, 'r', encoding='utf-8') as f:
             structured_data = json.load(f)
 
         flat_lookup = {}
@@ -94,7 +97,7 @@ def get_common_names():
     global _common_names_cache, _structured_names_cache
 
     if _common_names_cache is None:
-        flat_lookup, structured_data = load_common_names_json("names.json")
+        flat_lookup, structured_data = load_common_names_json()
         _common_names_cache = flat_lookup if flat_lookup else {}
         _structured_names_cache = structured_data if structured_data else {}
 

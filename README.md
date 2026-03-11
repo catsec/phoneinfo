@@ -158,16 +158,53 @@ The processed file includes:
 
 ```
 phoneinfo/
-  server.py           Flask web server
-  functions.py        Core utility functions
-  api_me.py           ME API client
+  server.py           Flask entry point (middleware, auth, blueprints)
+  config.py           Configuration and rate limiter
+  lookup.py           Core cache→API→DB pipeline
+  db.py               SQLite operations
+  scoring.py          Name matching engine
+  transliteration.py  Hebrew/Arabic/Russian transliteration
+  phone.py            Phone number utilities
+  app_logger.py       CSV audit logging
+  input_validator.py  Input sanitization
+  providers/          API provider modules (ME, SYNC)
+  routes/             Flask blueprints (api, web, nicknames)
   templates/          HTML templates
-  db/                 SQLite database
-  nicknames.xlsx      Nickname mappings
+  db/                 SQLite database (must not be web-accessible)
+  logs/               Audit logs (restrict filesystem read access)
   .env                Configuration (not in git)
   Dockerfile          Docker image definition
   docker-compose.yml  Docker Compose configuration
 ```
+
+## Production Deployment
+
+### Security checklist before going live
+
+| Item | Setting | Notes |
+|------|---------|-------|
+| `DEBUG` | `false` | Never run debug mode in production |
+| `TRUST_CF_IP` | `true` | Required when behind Cloudflare — enables correct IP-based rate limiting |
+| `GUNICORN_WORKERS` | `1` (or set `RATE_LIMIT_STORAGE_URI=redis://...`) | In-memory rate limits are per-worker; with multiple workers use Redis |
+| `db/` directory | Not web-accessible | Nginx/Caddy must not serve this path |
+| `logs/` directory | OS permissions: readable only by the app user | Audit logs contain masked phone data |
+
+### Shared folder permissions (Linux/Docker)
+
+If you mount `db/` and `logs/` as Docker volumes or NFS shares, ensure only the app user can read them:
+
+```bash
+# On the host, after creating the directories:
+chown -R 1000:1000 db/ logs/      # match the UID inside the container
+chmod 750 db/ logs/               # owner rwx, group rx, others nothing
+chmod 640 db/db.db                # owner rw, group r, others nothing
+```
+
+For NFS mounts, add `no_root_squash` only if your security policy requires it; otherwise keep default squash settings and map the app UID explicitly via `anonuid`/`anongid`.
+
+### Cloudflare Access
+
+The app authenticates users via the `Cf-Access-Authenticated-User-Email` header injected by Cloudflare Access. **Do not expose port 5001 directly to the internet** — traffic must flow through the Cloudflare tunnel. Verify your tunnel policy allows only authenticated users with approved email domains.
 
 ## License
 

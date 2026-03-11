@@ -16,14 +16,28 @@ def convert_to_local(phone):
     return phone_str
 
 
+def is_valid_israeli_phone(phone):
+    """Check if a phone string looks like a valid Israeli phone number (pre-conversion)."""
+    if not phone:
+        return False
+    cleaned = str(phone).strip().replace('-', '').replace(' ', '').replace('+', '')
+    if cleaned.startswith('05') or cleaned.startswith('07'):
+        return 9 <= len(cleaned) <= 10 and cleaned.isdigit()
+    if cleaned.startswith('5') or cleaned.startswith('7'):
+        return len(cleaned) == 9 and cleaned.isdigit()
+    if cleaned.startswith('972'):
+        return 11 <= len(cleaned) <= 12 and cleaned.isdigit()
+    return False
+
+
 def convert_to_international(phone_numbers):
     """Convert local Israeli phone numbers to international format."""
     converted_numbers = []
     for phone in phone_numbers:
-        phone_str = str(phone).strip()
+        phone_str = str(phone).strip().replace('+', '')
         if len(phone_str) == 10 and phone_str.startswith("0"):
             phone_str = "972" + phone_str[1:]
-        elif len(phone_str) == 9 and phone_str.startswith("5"):
+        elif len(phone_str) == 9 and (phone_str.startswith("5") or phone_str.startswith("7")):
             phone_str = "972" + phone_str
         converted_numbers.append(phone_str)
     return converted_numbers

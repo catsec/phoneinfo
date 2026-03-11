@@ -97,7 +97,17 @@ def load_nicknames_from_json(conn, json_path="nicknames.json"):
 def get_all_nicknames_for_name(conn, name):
     """Given a name (formal or nickname), return all related names."""
     cursor = conn.cursor()
-    cursor.execute("SELECT formal_name, all_names FROM nicknames")
+    # Use SQL to filter instead of full table scan.
+    # Match formal_name exactly, or name as a token in the comma-separated all_names.
+    # Escape LIKE metacharacters (%, _) in the user-supplied name so they are treated
+    # as literals and cannot match unintended rows.
+    like_name = name.replace('\\', '\\\\').replace('%', r'\%').replace('_', r'\_')
+    cursor.execute(
+        """SELECT formal_name, all_names FROM nicknames
+           WHERE formal_name = ?
+              OR ',' || all_names || ',' LIKE '%,' || ? || ',%' ESCAPE '\\'""",
+        (name, like_name)
+    )
 
     results = set()
     results.add(name)
@@ -106,9 +116,8 @@ def get_all_nicknames_for_name(conn, name):
         formal_name = row[0].strip()
         all_names = [n.strip() for n in row[1].split(',')]
 
-        if name == formal_name or name in all_names:
-            results.add(formal_name)
-            results.update(all_names)
+        results.add(formal_name)
+        results.update(all_names)
 
     return list(results)
 

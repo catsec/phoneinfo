@@ -1,16 +1,21 @@
 """Nicknames management routes blueprint."""
 
 import json
+import logging
 import os
 import tempfile
+from datetime import datetime, timezone
 
 import pandas as pd
 from io import BytesIO
 from flask import Blueprint, request, jsonify, render_template, send_file
 from werkzeug.utils import secure_filename
 from db import get_db
-from config import allowed_file
-from input_validator import validate_nicknames_data, validate_file_size, ValidationError
+from config import allowed_file, get_cf_user
+from input_validator import validate_nicknames_data, validate_file_size, ValidationError, sanitize_string
+from app_logger import log_audit
+
+logger = logging.getLogger(__name__)
 
 nicknames_bp = Blueprint("nicknames", __name__)
 
@@ -140,6 +145,13 @@ def web_nicknames_upload():
 
         db.commit()
 
+        log_audit(
+            user=get_cf_user() or "",
+            action="nicknames_upload",
+            detail=f"mode={mode}, added={added}, updated={updated}, skipped={skipped}",
+            datetime_str=datetime.now(timezone.utc).isoformat(),
+        )
+
         return jsonify({
             "success": True,
             "added": added,
@@ -150,6 +162,7 @@ def web_nicknames_upload():
     except ValidationError as e:
         return jsonify({"success": False, "error": f"Validation error: {str(e)}"}), 400
     except Exception:
+        logger.exception("Error importing nicknames file")
         return jsonify({"success": False, "error": "שגיאה בייבוא הקובץ"})
 
 
@@ -205,6 +218,7 @@ def web_nicknames_backup():
         })
 
     except Exception:
+        logger.exception("Error creating nicknames backup")
         return jsonify({"success": False, "error": "שגיאה בגיבוי"})
 
 
@@ -231,21 +245,32 @@ def web_nicknames_restore():
         db = get_db()
         cursor = db.cursor()
 
-        cursor.execute("DELETE FROM nicknames")
+        try:
+            cursor.execute("DELETE FROM nicknames")
 
-        count = 0
-        for _, row in df.iterrows():
-            formal_name = str(row['formal_name']).strip() if pd.notna(row['formal_name']) else ""
-            all_names = str(row['all_names']).strip() if pd.notna(row['all_names']) else ""
+            count = 0
+            for _, row in df.iterrows():
+                formal_name = str(row['formal_name']).strip() if pd.notna(row['formal_name']) else ""
+                all_names = str(row['all_names']).strip() if pd.notna(row['all_names']) else ""
 
-            if formal_name and all_names:
-                cursor.execute(
-                    "INSERT INTO nicknames (formal_name, all_names) VALUES (?, ?)",
-                    (formal_name, all_names)
-                )
-                count += 1
+                if formal_name and all_names:
+                    cursor.execute(
+                        "INSERT INTO nicknames (formal_name, all_names) VALUES (?, ?)",
+                        (formal_name, all_names)
+                    )
+                    count += 1
 
-        db.commit()
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise
+
+        log_audit(
+            user=get_cf_user() or "",
+            action="nicknames_restore",
+            detail=f"Restored {count} nicknames from backup",
+            datetime_str=datetime.now(timezone.utc).isoformat(),
+        )
 
         return jsonify({
             "success": True,
@@ -254,6 +279,7 @@ def web_nicknames_restore():
         })
 
     except Exception:
+        logger.exception("Error restoring nicknames")
         return jsonify({"success": False, "error": "שגיאה בשחזור"})
 
 
@@ -295,8 +321,14 @@ def web_nicknames_save():
     if not data:
         return jsonify({"success": False, "error": "JSON body required"})
 
-    formal_name = data.get("formal_name", "").strip()
-    all_names = data.get("all_names", "").strip()
+    formal_name = sanitize_string(data.get("formal_name", ""), max_length=200, field_type='name')
+    # Sanitize each comma-separated nickname individually so commas are preserved
+    raw_all_names = data.get("all_names", "").strip()
+    all_names_parts = [
+        sanitize_string(n.strip(), max_length=100, field_type='name')
+        for n in raw_all_names.split(',')
+    ]
+    all_names = ','.join(n for n in all_names_parts if n)
 
     if not formal_name:
         return jsonify({"success": False, "error": "שם רשמי נדרש"})
@@ -324,9 +356,17 @@ def web_nicknames_save():
 
         db.commit()
 
+        log_audit(
+            user=get_cf_user() or "",
+            action="nicknames_save",
+            detail=f"{'Updated' if existing else 'Created'} nickname: {formal_name}",
+            datetime_str=datetime.now(timezone.utc).isoformat(),
+        )
+
         return jsonify({"success": True})
 
     except Exception:
+        logger.exception("Error saving nickname")
         return jsonify({"success": False, "error": "שגיאה בשמירה"})
 
 
@@ -349,9 +389,16 @@ def web_nicknames_delete():
         db.commit()
 
         if cursor.rowcount > 0:
+            log_audit(
+                user=get_cf_user() or "",
+                action="nicknames_delete",
+                detail=f"Deleted nickname: {formal_name}",
+                datetime_str=datetime.now(timezone.utc).isoformat(),
+            )
             return jsonify({"success": True})
         else:
             return jsonify({"success": False, "error": "שם לא נמצא"})
 
     except Exception:
+        logger.exception("Error deleting nickname")
         return jsonify({"success": False, "error": "שגיאה במחיקה"})

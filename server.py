@@ -1,4 +1,6 @@
+import logging
 import os
+import secrets
 import threading
 import time
 from datetime import datetime, timedelta
@@ -30,6 +32,11 @@ app.register_blueprint(web_bp)
 app.register_blueprint(nicknames_bp)
 
 
+@app.context_processor
+def inject_csp_nonce():
+    return dict(csp_nonce=getattr(g, 'csp_nonce', ''))
+
+
 # Ensure API routes always return JSON, never HTML error pages
 @app.errorhandler(Exception)
 def handle_exception(e):
@@ -48,8 +55,23 @@ def add_security_headers(response):
     response.headers['X-Frame-Options'] = 'DENY'
     response.headers['X-Content-Type-Options'] = 'nosniff'
     response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
-    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
-    response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
+    nonce = getattr(g, 'csp_nonce', '')
+    response.headers['Content-Security-Policy'] = (
+        f"default-src 'self'; "
+        f"script-src 'self' 'nonce-{nonce}'; "
+        f"style-src 'self' 'nonce-{nonce}'; "
+        f"object-src 'none'; "
+        f"base-uri 'none'; "
+        f"form-action 'self'; "
+        f"frame-ancestors 'none'"
+    )
+    response.headers['Permissions-Policy'] = (
+        "camera=(), microphone=(), geolocation=(), payment=()"
+    )
+
+    # Only set HSTS when the connection is actually HTTPS
+    if request.is_secure or request.headers.get('X-Forwarded-Proto') == 'https':
+        response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'
 
     if request.path.startswith('/web/'):
         response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, private'
@@ -60,15 +82,45 @@ def add_security_headers(response):
 
 
 @app.before_request
+def set_csp_nonce():
+    g.csp_nonce = secrets.token_urlsafe(16)
+
+
+@app.before_request
 def enforce_cf_auth():
     """Require Cloudflare Access authentication on all requests."""
     if request.endpoint == "static" or request.path == "/health":
         return None
-    if os.environ.get("DISABLE_AUTH", "false").lower() == "true":
-        return None
     if not get_cf_user():
         app.logger.warning("CF auth failed: path=%s method=%s endpoint=%s", request.path, request.method, request.endpoint)
         return jsonify({"error": "Access denied"}), 403
+
+
+@app.before_request
+def check_csrf():
+    """CSRF protection for state-changing non-JSON requests (e.g. multipart uploads)."""
+    if request.method not in ('POST', 'PUT', 'PATCH', 'DELETE'):
+        return None
+    if request.path == '/health':
+        return None
+    # JSON requests are inherently CSRF-safe: browsers enforce the Content-Type preflight
+    if request.is_json:
+        return None
+    # For form/multipart requests validate that Origin or Referer matches our Host
+    from urllib.parse import urlparse
+    host = request.headers.get('Host', '')
+    origin = request.headers.get('Origin')
+    referer = request.headers.get('Referer')
+    if origin:
+        if urlparse(origin).netloc != host:
+            app.logger.warning("CSRF check failed: origin=%s host=%s path=%s", origin, host, request.path)
+            return jsonify({"error": "CSRF check failed"}), 403
+    elif referer:
+        if urlparse(referer).netloc != host:
+            app.logger.warning("CSRF check failed: referer=%s host=%s path=%s", referer, host, request.path)
+            return jsonify({"error": "CSRF check failed"}), 403
+    # No Origin/Referer: allow — direct API/script callers won't have these headers
+    # and CF Access auth already guards the endpoint
 
 
 @app.teardown_appcontext
@@ -103,10 +155,10 @@ def cleanup_old_files():
                             try:
                                 os.remove(file_path)
                             except Exception:
-                                pass
+                                logging.getLogger(__name__).warning("Failed to remove temp file: %s", file_path, exc_info=True)
 
         except Exception:
-            pass
+            logging.getLogger(__name__).error("Error in cleanup thread", exc_info=True)
 
 
 cleanup_thread = threading.Thread(target=cleanup_old_files, daemon=True)
