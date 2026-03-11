@@ -1,3 +1,4 @@
+import base64
 import csv
 import io
 import logging
@@ -62,12 +63,38 @@ def _sanitize_field(value):
     return str(value).replace('\n', ' ').replace('\r', ' ')
 
 
-def _mask_phone(phone):
-    """Mask all but the last 4 digits of a phone number to reduce PII in logs."""
-    s = str(phone or "")
-    if len(s) > 4:
-        return '*' * (len(s) - 4) + s[-4:]
-    return '****'
+def _encrypt_phone(phone: str) -> str:
+    """Encrypt phone number with AES-256-ECB using LOG_KEY env var (base64).
+
+    Phone bytes are PKCS7-padded to one AES block (16 bytes), encrypted,
+    then base64-encoded.  The result is deterministic for the same phone,
+    so log entries for the same number are linkable without revealing the
+    plaintext.
+
+    Falls back to last-4-digit masking when LOG_KEY is not configured.
+
+    Decrypt (Python):
+        import base64, os
+        from Crypto.Cipher import AES
+        from Crypto.Util.Padding import unpad
+        key = base64.b64decode(os.environ["LOG_KEY"])
+        ct  = base64.b64decode("<ciphertext from log>")
+        phone = unpad(AES.new(key, AES.MODE_ECB).decrypt(ct), AES.block_size).decode()
+    """
+    key_b64 = os.environ.get("LOG_KEY", "").strip()
+    if not key_b64:
+        s = str(phone or "")
+        return ('*' * (len(s) - 4) + s[-4:]) if len(s) > 4 else '****'
+    try:
+        from Crypto.Cipher import AES
+        from Crypto.Util.Padding import pad
+        key = base64.b64decode(key_b64)
+        plaintext = str(phone or "").encode("ascii")
+        encrypted = AES.new(key, AES.MODE_ECB).encrypt(pad(plaintext, AES.block_size))
+        return base64.b64encode(encrypted).decode("ascii")
+    except Exception:
+        s = str(phone or "")
+        return ('*' * (len(s) - 4) + s[-4:]) if len(s) > 4 else '****'
 
 
 def _format_csv_line(fields):
@@ -96,7 +123,7 @@ def log_event(user, action, phone, filename="",
         user,
         action,
         filename,
-        _mask_phone(phone),
+        _encrypt_phone(phone),
         me_api_call,
         sync_api_call,
         me_cache,

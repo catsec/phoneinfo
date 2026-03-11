@@ -202,6 +202,25 @@ chmod 640 db/db.db                # owner rw, group r, others nothing
 
 For NFS mounts, add `no_root_squash` only if your security policy requires it; otherwise keep default squash settings and map the app UID explicitly via `anonuid`/`anongid`.
 
+### Log phone decryption
+
+Phone numbers in `logs/app.log` are AES-256-ECB encrypted and base64-encoded using the `LOG_KEY` from `.env`. To recover a plaintext phone from a log entry:
+
+```python
+import base64, os
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+
+key = base64.b64decode(os.environ["LOG_KEY"])
+ct  = base64.b64decode("<ciphertext column from log>")
+phone = unpad(AES.new(key, AES.MODE_ECB).decrypt(ct), AES.block_size).decode()
+print(phone)
+```
+
+- Encryption is **deterministic** — all log rows for the same phone number produce the same ciphertext, so you can `grep` for a specific number without decrypting the entire log.
+- If `LOG_KEY` is not set, the phone is masked to `*****1234` (last 4 digits only).
+- **Back up `LOG_KEY` securely** — if it is lost, the encrypted phones in existing logs cannot be recovered.
+
 ### Cloudflare Access
 
 The app authenticates users via the `Cf-Access-Authenticated-User-Email` header injected by Cloudflare Access. **Do not expose port 5480 directly to the internet** — traffic must flow through the Cloudflare tunnel. Verify your tunnel policy allows only authenticated users with approved email domains.
