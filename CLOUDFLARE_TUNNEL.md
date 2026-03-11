@@ -33,7 +33,7 @@ phoneinfo:
   container_name: phoneinfo
   restart: unless-stopped
   ports:
-    - "5432:5432"
+    - "5480:5480"
   environment:
     - PRODUCTION=true
 ```
@@ -103,7 +103,7 @@ This ensures session cookies are only sent over HTTPS, preventing session hijack
 
 5. **Access the application:**
    - External: https://phoneinfo.catsec.com
-   - Local: http://localhost:5432
+   - Local: http://localhost:5480
 
 ---
 
@@ -116,7 +116,7 @@ Internet → Cloudflare Edge → Cloudflare Tunnel (cloudflared)
     ↓
     → Cloudflare Tunnel Container (docker network)
     ↓
-    → PhoneInfo App Container (port 5432)
+    → PhoneInfo App Container (port 5480)
 ```
 
 **Benefits:**
@@ -132,7 +132,7 @@ Internet → Cloudflare Edge → Cloudflare Tunnel (cloudflared)
 
 ### Tunnel Details
 - **Domain:** phoneinfo.catsec.com
-- **Service:** http://phoneinfo:5432 (internal docker network)
+- **Service:** http://phoneinfo:5480 (internal docker network)
 - **Token:** Stored in .env (CLOUDFLARE_TUNNEL_TOKEN)
 
 ### Cloudflare Dashboard Settings
@@ -147,7 +147,7 @@ To view/modify tunnel settings:
 ```yaml
 Public Hostname:
   Domain: phoneinfo.catsec.com
-  Service: http://phoneinfo:5432
+  Service: http://phoneinfo:5480
 
 Security:
   - HTTPS: Enabled (automatic)
@@ -185,7 +185,7 @@ docker-compose logs phoneinfo
 
 **Verify health check:**
 ```bash
-docker exec phoneinfo python -c "import requests; print(requests.get('http://localhost:5432/health').text)"
+docker exec phoneinfo python -c "import requests; print(requests.get('http://localhost:5480/health').text)"
 ```
 
 **Expected output:**
@@ -212,18 +212,18 @@ If session cookies aren't working over HTTPS:
 
 ### Port Conflicts
 
-If port 5432 is already in use:
+If port 5480 is already in use:
 
 1. **Option 1: Change port in docker-compose.yml:**
    ```yaml
    ports:
-     - "5002:5432"  # External:Internal
+     - "5002:5480"  # External:Internal
    ```
 
 2. **Option 2: Stop conflicting service:**
    ```bash
-   # Find process using port 5432
-   netstat -ano | findstr :5432
+   # Find process using port 5480
+   netstat -ano | findstr :5480
    # Stop it
    taskkill /PID <PID> /F
    ```
@@ -319,7 +319,7 @@ SESSION_COOKIE_SAMESITE = 'Lax' # CSRF protection
 Docker compose includes health checks:
 ```yaml
 healthcheck:
-  test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5432/health', timeout=5)"]
+  test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5480/health', timeout=5)"]
   interval: 30s
   timeout: 10s
   retries: 3
@@ -371,7 +371,7 @@ docker-compose restart phoneinfo
 
 ✅ **Access:**
 - External: https://phoneinfo.catsec.com
-- Local: http://localhost:5432
+- Local: http://localhost:5480
 
 ✅ **Management:**
 - Start: `docker-compose up -d`

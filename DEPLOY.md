@@ -77,7 +77,7 @@ docker-compose logs -f phoneinfo
 
 Look for:
 ```
-Starting phoneinfo server on http://0.0.0.0:5432
+Starting phoneinfo server on http://0.0.0.0:5480
  * Running on all addresses (0.0.0.0)
 ```
 
@@ -123,7 +123,7 @@ SYNC_API_TOKEN=1e9ggW1nGEO37025RwJDAC2wqM9xWPcvxKVI8nResc1N
 
 # Server Configuration
 HOST=0.0.0.0
-PORT=5432
+PORT=5480
 DEBUG=false
 
 # Cloudflare Tunnel
@@ -141,7 +141,7 @@ CLOUDFLARE_TUNNEL_TOKEN=eyJhIjoiZTA3Y2FjZTdjM2Q2ZDlkOWVlNjYzYjY0NjYyMTNjNDkiLCJ0
 **cloudflared:**
 - Cloudflare Tunnel client
 - Connects to Cloudflare edge
-- Routes https://phoneinfo.catsec.com → http://phoneinfo:5432
+- Routes https://phoneinfo.catsec.com → http://phoneinfo:5480
 - Automatic reconnection on failure
 
 ---
@@ -303,7 +303,7 @@ docker-compose logs phoneinfo
 **Common issues:**
 - Missing .env file
 - Invalid API credentials
-- Port 5432 already in use
+- Port 5480 already in use
 
 **Solution:**
 ```bash
@@ -311,7 +311,7 @@ docker-compose logs phoneinfo
 ls -la .env
 
 # Check port usage
-netstat -tulpn | grep 5432
+netstat -tulpn | grep 5480
 
 # Restart with rebuild
 docker-compose down

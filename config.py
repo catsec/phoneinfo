@@ -10,7 +10,7 @@ DATABASE = os.environ.get("DATABASE", "db/db.db")
 
 # Server configuration
 SERVER_HOST = os.environ.get("HOST", "0.0.0.0")
-SERVER_PORT = int(os.environ.get("PORT", "5432"))
+SERVER_PORT = int(os.environ.get("PORT", "5480"))
 
 # File upload security
 ALLOWED_EXTENSIONS = {'xlsx', 'csv'}
