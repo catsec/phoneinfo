@@ -8,26 +8,26 @@ Comprehensive input validation protects against malicious file uploads and data 
 
 ## Security Threats Mitigated
 
-### 1. **SQL Injection** ✅
+### 1. **SQL Injection**
 - Detects SQL keywords in user input
 - Blocks: `DROP TABLE`, `DELETE FROM`, `UNION SELECT`, etc.
 - All database queries use parameterized statements (already implemented)
 
-### 2. **Cross-Site Scripting (XSS)** ✅
+### 2. **Cross-Site Scripting (XSS)**
 - Detects dangerous HTML/JavaScript patterns
 - Blocks: `<script>`, `javascript:`, `<iframe>`, `onclick=`, etc.
 - HTML-escapes all user input before storage
 
-### 3. **Denial of Service (DoS)** ✅
+### 3. **Denial of Service (DoS)**
 - File size limit: 50MB
 - Row count limit: 100,000 rows
 - String length limits (200-1000 chars per field)
 
-### 4. **Path Traversal** ✅
+### 4. **Path Traversal**
 - Uses `werkzeug.secure_filename()` on all uploads
 - Validates file extensions with whitelist
 
-### 5. **Data Injection** ✅
+### 5. **Data Injection**
 - Schema validation for JSON/CSV/Excel files
 - Type validation (phone numbers must be digits)
 - Field sanitization before database insertion
@@ -129,7 +129,7 @@ Result:  Sanitized, sorted, deduplicated
   "all_names": "test"
 }
 ```
-**Result:** ❌ Rejected - "Suspicious SQL keyword detected: DROP TABLE"
+**Result:** Rejected - "Suspicious SQL keyword detected: DROP TABLE"
 
 ### Attack 2: XSS in Name Field
 ```json
@@ -138,13 +138,13 @@ Result:  Sanitized, sorted, deduplicated
   "all_names": "<script>alert(document.cookie)</script>"
 }
 ```
-**Result:** ❌ Rejected - "Dangerous pattern detected: <script>"
+**Result:** Rejected - "Dangerous pattern detected: <script>"
 
 ### Attack 3: DoS via Large File
 ```bash
 # Upload 200MB Excel file
 ```
-**Result:** ❌ Rejected - "File too large: 200MB (max 50MB)"
+**Result:** Rejected - "File too large: 200MB (max 50MB)"
 
 ### Attack 4: Schema Manipulation
 ```json
@@ -153,7 +153,7 @@ Result:  Sanitized, sorted, deduplicated
   {"unexpected_field": "malicious"}  # Unexpected structure
 ]
 ```
-**Result:** ❌ Rejected - "Missing 'all_names'" or "Entry must be a dict"
+**Result:** Rejected - "Missing 'all_names'" or "Entry must be a dict"
 
 ---
 
@@ -165,9 +165,9 @@ cd /path/to/phoneinfo
 python input_validator.py
 
 # Expected output:
-# ✅ PASS: XSS blocked
-# ✅ PASS: SQL injection blocked
-# ✅ PASS: Valid data accepted
+# PASS: XSS blocked
+# PASS: SQL injection blocked
+# PASS: Valid data accepted
 ```
 
 ### Integration Test
@@ -257,6 +257,6 @@ Consider adding:
 
 ---
 
-**Status:** ✅ **PROTECTED**
+**Status:** **PROTECTED**
 
 All file upload endpoints now validate and sanitize input to prevent malicious data injection.

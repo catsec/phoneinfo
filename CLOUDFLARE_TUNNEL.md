@@ -5,10 +5,10 @@
 PhoneInfo is accessible via **Cloudflare Tunnel** at https://phoneinfo.catsec.com
 
 This provides:
-- ✅ **HTTPS encryption** - Automatic SSL/TLS
-- ✅ **No port forwarding** - No firewall changes needed
-- ✅ **DDoS protection** - Cloudflare's network protection
-- ✅ **Access control** - Can add authentication at Cloudflare level
+- **HTTPS encryption** - Automatic SSL/TLS
+- **No port forwarding** - No firewall changes needed
+- **DDoS protection** - Cloudflare's network protection
+- **Access control** - Can add authentication at Cloudflare level
 
 ---
 
@@ -362,18 +362,18 @@ docker-compose restart phoneinfo
 
 ## Summary
 
-✅ **Setup Complete:**
+**Setup Complete:**
 - Cloudflare Tunnel configured
 - HTTPS enabled at phoneinfo.catsec.com
 - Production security flags active
 - Automatic SSL/TLS
 - DDoS protection included
 
-✅ **Access:**
+**Access:**
 - External: https://phoneinfo.catsec.com
 - Local: http://localhost:5480
 
-✅ **Management:**
+**Management:**
 - Start: `docker-compose up -d`
 - Stop: `docker-compose down`
 - Logs: `docker-compose logs -f`

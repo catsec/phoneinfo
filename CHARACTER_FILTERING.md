@@ -116,17 +116,17 @@ Output: "050123"
 
 ## Silent Cleaning Benefits
 
-### ✅ **User-Friendly**
+### **User-Friendly**
 - No cryptic error messages
 - Data is cleaned automatically
 - Users don't need to manually fix files
 
-### ✅ **Secure**
+### **Secure**
 - Malicious scripts removed
 - SQL injection prevented  
 - XSS attacks blocked
 
-### ✅ **Forgiving**
+### **Forgiving**
 - Copy-paste from Excel/WhatsApp works
 - Phone numbers with formatting accepted
 - Mixed language input handled
@@ -272,6 +272,6 @@ sanitize_string(value, max_length=500)  # Custom limit
 
 ---
 
-**Status:** ✅ **ACTIVE**
+**Status:** **ACTIVE**
 
 All file imports now silently strip unwanted characters - user-friendly and secure!
