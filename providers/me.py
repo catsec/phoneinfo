@@ -49,7 +49,7 @@ class MEProvider(BaseProvider):
     def call_api(self, phone: str):
         url = f"{self._api_url}?phone_number={phone}&sid={self._sid}&token={self._token}"
         try:
-            response = requests.get(url, timeout=(5, 30))
+            response = requests.get(url, timeout=(5, 30), allow_redirects=False)
         except requests.RequestException:
             raise ValueError("ME API request failed (connection error)")
         if response.status_code == 200:
