@@ -1044,21 +1044,27 @@ class TestSecurityVectors:
         d = r.get_json()
         assert len(d["names"]) < 20
 
-    # ── Phone masking in logs ────────────────────────────────────────────────
-    def test_mask_phone_hides_digits(self):
-        from app_logger import _mask_phone
-        masked = _mask_phone("972521234567")
-        assert masked.endswith("4567")
-        assert masked.startswith("*")
-        assert "972521" not in masked
+    # ── Phone encryption/masking in logs ─────────────────────────────────────
+    def test_encrypt_phone_without_key_masks(self):
+        from app_logger import _encrypt_phone
+        with patch.dict(os.environ, {"LOG_KEY": ""}):
+            masked = _encrypt_phone("972521234567")
+            assert masked.endswith("4567")
+            assert masked.startswith("*")
+            assert "972521" not in masked
 
-    def test_mask_phone_short(self):
-        from app_logger import _mask_phone
-        assert _mask_phone("1234") == "****"
-        assert _mask_phone("")    == "****"
-        assert _mask_phone(None)  == "****"
+    def test_encrypt_phone_short_masks(self):
+        from app_logger import _encrypt_phone
+        with patch.dict(os.environ, {"LOG_KEY": ""}):
+            assert _encrypt_phone("1234") == "****"
+            assert _encrypt_phone("")    == "****"
+            assert _encrypt_phone(None)  == "****"
 
-    def test_mask_phone_length_preserved(self):
-        from app_logger import _mask_phone
-        phone = "972521234567"
-        assert len(_mask_phone(phone)) == len(phone)
+    def test_encrypt_phone_with_key_encrypts(self):
+        from app_logger import _encrypt_phone
+        import base64 as b64
+        key = b64.b64encode(os.urandom(32)).decode()
+        with patch.dict(os.environ, {"LOG_KEY": key}):
+            encrypted = _encrypt_phone("972521234567")
+            assert encrypted != "972521234567"
+            assert "*" not in encrypted  # should be base64, not masked

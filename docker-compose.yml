@@ -13,6 +13,9 @@ services:
     environment:
       - DEBUG=false
       - PRODUCTION=true
+      - RATE_LIMIT_STORAGE_URI=redis://redis:6379
+    depends_on:
+      - redis
     healthcheck:
       test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5480/health', timeout=5)"]
       interval: 30s
@@ -38,6 +41,19 @@ services:
       - AUTOHEAL_INTERVAL=30
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+  redis:
+    image: redis:7-alpine
+    container_name: phoneinfo-redis
+    restart: unless-stopped
+    command: redis-server --maxmemory 32mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - phoneinfo-network
 
   cloudflared:
     image: cloudflare/cloudflared:latest
