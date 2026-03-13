@@ -151,7 +151,8 @@ def _check_magic_bytes(file_bytes: bytes, filename: str) -> bool:
 def _sanitize_excel_value(value) -> str:
     """Prevent formula injection: prefix formula-triggering characters."""
     s = str(value) if value is not None else ""
-    if s and s[0] in ('=', '+', '-', '@', '\t', '\r'):
+    stripped = s.lstrip()
+    if stripped and stripped[0] in ('=', '+', '-', '@', '\t', '\r'):
         return "'" + s
     return s
 

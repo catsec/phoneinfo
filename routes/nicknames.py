@@ -78,14 +78,20 @@ def web_nicknames_upload():
 
         if filename_lower.endswith('.json'):
             content = file.read().decode('utf-8')
-            nicknames_list = json.loads(content)
+            try:
+                nicknames_list = json.loads(content)
+            except RecursionError:
+                return jsonify({"success": False, "error": "מבנה JSON עמוק מדי"}), 400
             nicknames_list = validate_nicknames_data(nicknames_list)
             df = pd.DataFrame(nicknames_list)
 
         elif filename_lower.endswith('.csv'):
             df = pd.read_csv(file, dtype=str)
         elif filename_lower.endswith('.xlsx'):
-            df = pd.read_excel(file, dtype=str)
+            file_bytes = file.read()
+            if file_bytes[:4] != b'PK\x03\x04':
+                return jsonify({"success": False, "error": "קובץ XLSX לא תקין"}), 400
+            df = pd.read_excel(BytesIO(file_bytes), dtype=str)
         else:
             return jsonify({"success": False, "error": "פורמט קובץ לא נתמך. השתמש ב-.json, .xlsx או .csv"})
 
