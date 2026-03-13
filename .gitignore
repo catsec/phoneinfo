@@ -29,6 +29,7 @@ db/
 test/
 tests/
 *.test.py
+.pytest_cache/
 
 # Project Specific
 CLAUDE.md
